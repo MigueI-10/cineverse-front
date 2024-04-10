@@ -1,0 +1,26 @@
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  .text-center {
+    text-align: center;
+  }
+  .imagenCont {
+    margin-top: 20px;
+    width: 200px; 
+    margin-bottom: 20px;/* Espacio entre el texto y la imagen */
+  }
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  @media (max-width: 768px) {
+    .col-md-8 {
+      width: 100%; /* Ajuste del ancho para dispositivos móviles */
+    }
+  }
+  

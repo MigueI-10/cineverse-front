@@ -1,0 +1,28 @@
+:host ::ng-deep .p-menubar {
+    padding-top: 20px;
+    background-color: #141414;
+    border: none;
+    border-radius: 0;
+  }
+
+  :host ::ng-deep .p-menuitem-link:hover {
+    color: #ffffff;
+  }
+
+  :host ::ng-deep .p-menuitem-link {
+    text-decoration: none;
+  }
+
+  @media (max-width: 800px) {
+    :host #navbarNav{
+      margin-left: 0.5em;
+    }
+  }
+
+
+  @media (max-width: 500px) {
+    :host #navbarNav{
+      margin-left: 1em;
+    }
+  }
+  
