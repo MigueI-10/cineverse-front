@@ -13,7 +13,7 @@ export class MediaService {
     getPeliculas():Observable<Media[]>{
         return this.http.get<Media[]>(this.urlBackEnd+"/media/films").pipe(
           catchError(error=>{
-            console.log("Error al obtener la lista de tareas. " + error);
+            console.log("Error al obtener la lista de peliculas. " + error);
             return of ([])
           })
         );

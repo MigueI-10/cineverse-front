@@ -1,6 +1,19 @@
-<h2>Top Rated</h2>
+<h2>Top Rated Films</h2>
 <hr>
 
-<div class="film-slider" (touchstart)="startSwipe($event)" (touchend)="endSwipe($event)">
-  <img *ngFor="let media of aMedia" [src]="media.imagen" [alt]="media.titulo">
-</div>
+  <swiper-container init="false">
+
+    @for (item of aMedia; track $index) {
+      @if (item.puntuacion > 8) {
+      <swiper-slide>
+        <div class="slide-custom"><img [src]="item.imagen" alt=""></div>
+      </swiper-slide>
+      }
+    }
+
+  </swiper-container>
+  <div *ngIf="!listAvailable">
+    <p>No se encontraron fotos.</p>
+  </div>
+
+
