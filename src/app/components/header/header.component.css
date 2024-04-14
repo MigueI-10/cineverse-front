@@ -5,6 +5,10 @@
     border-radius: 0;
   }
 
+  .cursor{
+    cursor: pointer;
+  }
+
   :host ::ng-deep .p-menuitem-link:hover {
     color: #ffffff;
   }

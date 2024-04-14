@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../../prime-ng/prime-ng/prime-ng.module';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -9,76 +11,53 @@ import { PrimeNgModule } from '../../prime-ng/prime-ng/prime-ng.module';
   standalone: true,
   imports: [
     CommonModule,
-    PrimeNgModule
+    RouterLink, RouterLinkActive
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
 
-  public menuItems: MenuItem[] | undefined;
-  public userItems: MenuItem[] | undefined;
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ){
+
+  }
+
+
+  public nomUsuario:string = '';
+  public isLoggedIn: boolean = false;
 
   ngOnInit() {
-    this.menuItems = [
-      {
-        label: 'Inicio',
-        icon: 'pi pi-home',
-        routerLink: '/'
-      },
-      {
-        label: 'Productos',
-        icon: 'pi pi-briefcase',
-        routerLink: '/productos'
-      },
-      {
-        label: 'Servicios',
-        icon: 'pi pi-cog',
-        routerLink: '/servicios'
-      },
-      {
-        label: 'Contacto',
-        icon: 'pi pi-envelope',
-        routerLink: '/contacto'
-      }
-    ];
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => {
+      
+      const {...user}= this.authService.usrActual();
+     
+      this.nomUsuario = user.name
+      
+      this.isLoggedIn = isLoggedIn;
+    });
 
-    this.userItems = [
-      {
-          label:'Users',
-          icon:'pi pi-fw pi-user',
-          items:[
-              {
-                  label:'New',
-                  icon:'pi pi-fw pi-user-plus',
-              },
-              {
-                  label:'Delete',
-                  icon:'pi pi-fw pi-user-minus',
-              },
-              {
-                  label:'Search',
-                  icon:'pi pi-fw pi-users',
-                  items:[
-                  {
-                      label:'Filter',
-                      icon:'pi pi-fw pi-filter',
-                      items:[
-                          {
-                              label:'Print',
-                              icon:'pi pi-fw pi-print'
-                          }
-                      ]
-                  },
-                  {
-                      icon:'pi pi-fw pi-bars',
-                      label:'List'
-                  }
-                  ]
-              }
-          ]
-      },
-  ];
+    //chequeamos el status, porque al hacer reload de la pagina se pierden esos dtatos
+    this.authService.checkAuthStatus().subscribe(
+      res => {
+        this.isLoggedIn = res
+
+        const {...user}= this.authService.usrActual();
+        
+        this.nomUsuario = user.name
+        
+        
+      }
+    )
+  }
+
+  onLogout(){
+    this.nomUsuario=""
+    this.isLoggedIn = false
+    this.authService.logout();
+    this.router.navigateByUrl('/home')
   }
 
 

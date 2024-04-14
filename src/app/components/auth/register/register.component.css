@@ -1,0 +1,47 @@
+.background-image {
+    background-image: url('../../../../assets/images/register.jpg'); /* Ruta de tu imagen de fondo */
+    background-size: cover;
+    background-position:  right;
+    background-repeat: no-repeat;
+    height: 100vh; /* Ajusta la altura como desees */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form-container {
+    max-width: 400px; /* Ancho máximo del formulario */
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente para el formulario */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra para el formulario */
+  }
+  
+  /* Estilos para hacer el formulario responsive */
+  @media screen and (max-width: 500px) {
+    .form-container {
+        max-width: 90%; /* Ancho máximo del formulario en pantallas pequeñas */
+    }
+  
+  
+    .background-image{
+      background-size: cover;
+      background-position: right;
+      background-repeat: no-repeat;
+    }
+  }
+  
+  @media screen and (max-width: 900px) {
+    .form-container {
+        max-width: 50%; /* Ancho máximo del formulario en pantallas pequeñas */
+    }
+  
+  
+    .background-image{
+      background-size: cover;
+      background-position: right;
+      background-repeat: no-repeat;
+    }
+  }
+  
