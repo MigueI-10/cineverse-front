@@ -28,7 +28,10 @@ export const routes: Routes = [
         path: 'register',
         loadComponent: () => import('./components/auth/register/register.component').then(c => c.RegisterComponent)
     },
-
+    {
+        path: 'activate-account/:token',
+        loadComponent: () => import('./components/auth/activate-account/activate-account.component').then(c => c.ActivateAccountComponent)
+    },
     {
         path: '',
         redirectTo: '/home',

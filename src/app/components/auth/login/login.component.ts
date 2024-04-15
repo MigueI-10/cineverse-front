@@ -4,24 +4,23 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
 import { MessageService } from 'primeng/api';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, PrimeNgModule],
+  imports: [ReactiveFormsModule, FormsModule, PrimeNgModule, CommonModule],
   providers: [MessageService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
-  public form !: FormGroup //| undefined;
-  // private fb = inject(FormBuilder);
-  // private _authService = inject(AuthService)
-  // private _toastService = inject(ToastService)
-  // private router = inject(Router)
+  //declaramos formgroup
+  public form !: FormGroup 
 
 
+  //constructor con los servicios necesarios
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -32,7 +31,7 @@ export class LoginComponent {
 
   ngOnInit() {
 
-    //validaciones
+    //validaciones del formulario
     this.form = this.fb.group({
 
       email: ['mibaca27@gmail.com', [Validators.required, Validators.email]],
@@ -41,6 +40,7 @@ export class LoginComponent {
     })
   }
 
+  //metodo para hacer login si el formulario es valido, si falla salta una alerta
   login() {
     if (this.form.valid) {
       
@@ -62,6 +62,7 @@ export class LoginComponent {
     return this.form.get('password') as FormControl
   }
 
+  //mensajes con estilo
   success(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }

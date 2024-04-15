@@ -8,6 +8,8 @@
                 <input type="email" id="email" name="email" class="form-control" formControlName="email" >
                 @if (email.errors?.['required'] && email.dirty) {
                     <small class="text-danger font-italic">El email es obligatorio</small>
+                }@else if(email.errors?.['email']){
+                    <small class="text-danger font-italic">El email no tiene un formato válido</small>
                 }
             </div>
             <div class="form-group">
@@ -19,7 +21,13 @@
                     <small class="text-danger font-italic">La contraseña debe tener mínimo 8 caracteres</small>
                 }
             </div>
-            <button type="submit" class="btn btn-primary mt-4" [disabled]="form.invalid">Iniciar sesión</button>
+            
+            <div class="cuadroRegis">
+
+                <button type="submit" class="btn btn-primary mt-4" [disabled]="form.invalid">Iniciar sesión</button>
+
+                <a class="registration" routerLink="/register">¿No tienes cuenta? Registrate</a>
+            </div>
         </form>
     </div>
 </div>
