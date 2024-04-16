@@ -48,7 +48,12 @@ export class LoginComponent {
       this.authService.login(email, password).subscribe({
         next:() => this.router.navigateByUrl('/home'),
         error:(message) =>{
-          this.errorToast(message)
+          
+          if(message !== undefined){
+            this.errorToast(message)
+          }else{
+            this.errorToast('El servidor no está disponible')
+          }
         }  
       })
 

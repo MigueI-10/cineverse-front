@@ -35,9 +35,23 @@
 }
 
 .registration{
-  padding-top: 0.8em;
+  padding-bottom: 0em;
 }
 
+.enlaces{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.forgot-password{
+  margin-top: 1em;
+  text-decoration: none;
+}
+
+.forgot{
+  margin-bottom: 0.5em;
+}
 
 /* Estilos para hacer el formulario responsive */
 @media (min-width: 500px) and (max-width: 800px){
@@ -56,6 +70,12 @@
     gap: 10px;
     place-items: center;
   }
+
+  .enlaces{
+    padding-top: 0.8em;
+    flex-direction: row;
+  }
+
 }
 
 @media (min-width: 900px) and (max-width: 1400px) {
@@ -72,6 +92,14 @@
     display: flex;
     gap: 10px;
     place-items: center;
+  }
+
+  .enlaces{
+    padding-top: 0.8em;
+    flex-direction: row;
+  }
+  hr{
+    display: none;
   }
 }
 
@@ -90,5 +118,13 @@
     display: flex;
     gap: 10px;
     place-items: center;
+  }
+  .enlaces{
+    padding-top: 1.8em;
+    flex-direction: row;
+  }
+
+  .enlaces a{
+    padding-right: 1em;
   }
 }

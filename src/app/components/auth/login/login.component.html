@@ -14,19 +14,27 @@
             </div>
             <div class="form-group">
                 <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" class="form-control" formControlName="password">
+                <input type="password" id="password" name="password" class="form-control forgot" formControlName="password">
                 @if (password.errors?.['required'] && password.dirty) {
                     <small class="text-danger font-italic">La contraseña es obligatoria</small>
                 }@else if(password.errors?.['minlength']){
                     <small class="text-danger font-italic">La contraseña debe tener mínimo 8 caracteres</small>
                 }
+                <a class="forgot-password" routerLink="/change-password">¿Te olvidaste de la contraseña?</a>
             </div>
             
             <div class="cuadroRegis">
 
                 <button type="submit" class="btn btn-primary mt-4" [disabled]="form.invalid">Iniciar sesión</button>
 
-                <a class="registration" routerLink="/register">¿No tienes cuenta? Registrate</a>
+                <div class="enlaces">
+                    <hr>
+                    <a class="registration" routerLink="/register">¿No tienes cuenta? Registrate</a>
+                    <hr>
+                    <a class="registration" routerLink="/home">Inicio</a>
+
+                    
+                </div>
             </div>
         </form>
     </div>

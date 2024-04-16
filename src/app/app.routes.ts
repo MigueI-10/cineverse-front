@@ -26,11 +26,23 @@ export const routes: Routes = [
     },
     {
         path: 'register',
+        canActivate: [isNotAuthenticatedGuard],
         loadComponent: () => import('./components/auth/register/register.component').then(c => c.RegisterComponent)
     },
     {
         path: 'activate-account/:token',
+        canActivate: [isNotAuthenticatedGuard],
         loadComponent: () => import('./components/auth/activate-account/activate-account.component').then(c => c.ActivateAccountComponent)
+    },
+    {
+        path: 'change-password',
+        canActivate: [isNotAuthenticatedGuard],
+        loadComponent: () => import('./components/auth/change-password/change-password.component').then(c => c.ChangePasswordComponent)
+    },
+    {
+        path: 'reset-password/:token',
+        canActivate: [isNotAuthenticatedGuard],
+        loadComponent: () => import('./components/auth/confirm-password/confirm-password.component').then(c => c.ConfirmPasswordComponent)
     },
     {
         path: '',

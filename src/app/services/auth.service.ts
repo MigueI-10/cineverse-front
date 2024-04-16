@@ -56,16 +56,52 @@ export class AuthService {
 
   }
 
-  register(email: string, name: string, password: string): Observable<boolean> {
+  register(tokenCaptcha: string, email: string, name: string, password: string): Observable<boolean> {
     const url = `${this.baseUrl}/auth/register`;
     //construir el body
-    const body = { email, name, password };
+    const body = { email, name, password, tokenCaptcha };
 
     return this.http.post<LoginResponse>(url, body)
       .pipe(
         map(res => { //si todo es correcto
           console.log(res);
           return true;
+        }),
+        catchError(error => {
+          return throwError(() => error.error.message)
+        })
+      )
+
+  }
+
+  sendEmailChangePassword(email: string): Observable<boolean> {
+    const url = `${this.baseUrl}/auth/renew-password`;
+    //construir el body
+    const body = { email };
+
+    return this.http.patch<LoginResponse>(url, body)
+      .pipe(
+        map(res => { //si todo es correcto
+          
+          return true;
+        }),
+        catchError(error => {
+          return throwError(() => error.error.message)
+        })
+      )
+
+  }
+
+  confirmChangePassword(token:string, password: string): Observable<any> {
+    const url = `${this.baseUrl}/auth/verify-password`;
+    //construir el body
+    const body = { token, password };
+
+    return this.http.patch<LoginResponse>(url, body)
+      .pipe(
+        map(res => { //si todo es correcto
+          console.log(res);
+          return res;
         }),
         catchError(error => {
           return throwError(() => error.error.message)

@@ -69,16 +69,12 @@ export class RegisterComponent implements OnInit {
       this.recaptchaV3Service.execute('importantAction')
       .subscribe((token: string) => {
         this.tokenCaptcha = token
-        // console.log(this.tokenCaptcha);
       });
 
-       
-
-
-
+      
       const {email, name, password} = this.registerForm.value
 
-      this.authService.register(email, name, password).subscribe({
+      this.authService.register(this.tokenCaptcha, email, name, password).subscribe({
         next:(res) => {
           if(res === true){
             this.success(`Comprueba la direccion ${email} para activar tu cuenta.`) 
@@ -89,7 +85,11 @@ export class RegisterComponent implements OnInit {
           }
         },
         error:(message) =>{
-          this.errorToast(message)
+          if(message !== undefined){
+            this.errorToast(message)
+          }else{
+            this.errorToast('El servidor no está disponible')
+          }
         }  
       })
 
