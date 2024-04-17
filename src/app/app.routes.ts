@@ -16,6 +16,10 @@ export const routes: Routes = [
                 path: 'home',
                 loadComponent: () => import('./components/home/home.component').then(c => c.HomeComponent)
             },
+            {
+                path: 'media/:id',
+                loadComponent: () => import('./components/media/media.component').then(c => c.MediaComponent)
+            },
             // Tus otras rutas aquí
         ]
     },

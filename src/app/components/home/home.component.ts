@@ -4,6 +4,7 @@ import { Media } from '../../interfaces/media.interface';
 import { CommonModule } from '@angular/common';
 import { SwiperOptions } from 'swiper/types';
 import { SwiperContainer, register } from 'swiper/element/bundle';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 // register Swiper custom elements
 register();
 
@@ -11,55 +12,34 @@ register();
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeComponent implements OnInit {
-  
 
-  private _mediaService = inject(MediaService);
+
+  
   public aMedia: Media[] = [];
+  public aSeries: Media[] = []
   public listAvailable: boolean = false
 
   swiperElement: SwiperContainer | null = null
 
   //swiperElement = signal<SwiperContainer | null>(null)
 
+  constructor(private _mediaService :MediaService){
+
+  }
+
   //oninit
   ngOnInit(): void {
     this.getFilmsList()
 
-    // const swiperElemConstructor = document.querySelector('swiper-container')
-    // console.log(swiperElemConstructor);
-    // const swiperOptions: SwiperOptions = {
-    //   slidesPerView: 2,
-    //   breakpoints: {
-    //     550: {
-    //       slidesPerView: 2
-    //     },
-    //     800: {
-    //       slidesPerView: 3
-    //     },
-    //     1300: {
-    //       slidesPerView: 5
-    //     }
-    //   }
-    // }
+    this.getSeriesList()
 
-    // if(swiperElemConstructor){
-    //   Object.assign(swiperElemConstructor!, swiperOptions)
-    //   this.swiperElement = swiperElemConstructor as SwiperContainer;
-  
-    //   if (this.swiperElement) {
-    //     this.swiperElement.initialize();
-    //   }
-    // }else{
-    //   console.log("no vieno");
-    // }
 
-  
   }
 
   // ngAfterViewInit(): void {
@@ -69,13 +49,31 @@ export class HomeComponent implements OnInit {
   getFilmsList() {
     this._mediaService.getPeliculas().subscribe(
       res => {
-        console.log(res);
+
         this.aMedia = res
         //this.listAvailable = true
         
-        if(this.aMedia.length > 0){
+        if (this.aMedia.length > 0) {
+          console.log(this.aSeries);
           this.listAvailable = true
           this.inicializarSwiper()
+        }
+      }
+    )
+  }
+
+  getSeriesList(){
+    this._mediaService.getSeries().subscribe(
+      res => {
+
+        this.aSeries = res
+        //this.listAvailable = true
+
+        if (this.aSeries.length > 0) {
+
+          console.log(this.aSeries);
+          this.listAvailable = true
+          // this.inicializarSwiper()
         }
       }
     )
