@@ -1,17 +1,66 @@
-<h2>Top Rated Films</h2>
+<h1 class="mt-4">Best of 2024</h1>
 <hr>
 
-<swiper-container init="false">
+<swiper-container id="cont24" init="false">
 
   @for (item of aMedia; track $index) {
-  @if (item.puntuacion > 8) {
+  @if (item.anyo === 2024) {
   <swiper-slide>
     <div class="slide-custom">
       <!-- <a [routerLink]="'/media/' + item._id" class="imagenPost"><img [src]="item.imagen" alt=""></a> -->
       <a [routerLink]="'/media/' + item._id" class="movie-link">
         <img [src]="item.imagen" alt="" class="movie-image">
         <div class="movie-title">{{ item.titulo }}</div>
-    </a>
+      </a>
+    </div>
+  </swiper-slide>
+  }
+  }
+
+</swiper-container>
+<div *ngIf="!listAvailable">
+  <p>No se encontraron fotos.</p>
+</div>
+
+
+<h1 class="mt-4">Top Rated Films</h1>
+<hr>
+
+<swiper-container id="contFilms"init="false">
+
+  @for (item of aFilms; track $index) {
+      @if (item.puntuacion > 8) {
+        <swiper-slide>
+            <div class="slide-custom">
+              <!-- <a [routerLink]="'/media/' + item._id" class="imagenPost"><img [src]="item.imagen" alt=""></a> -->
+                <a [routerLink]="'/media/' + item._id" class="movie-link">
+                  <img [src]="item.imagen" alt="" class="movie-image">
+                  <div class="movie-title">{{ item.titulo }}</div>
+                </a>
+            </div>
+        </swiper-slide>
+      }
+  }
+
+</swiper-container>
+<div *ngIf="!listAvailable">
+  <p>No se encontraron fotos.</p>
+</div>
+
+<h1 class="mt-4">Top Rated Series</h1>
+<hr>
+
+<swiper-container id="contSeries" init="false">
+
+  @for (item of aSeries; track $index) {
+  @if (item.puntuacion > 8.7) {
+  <swiper-slide>
+    <div class="slide-custom">
+      <!-- <a [routerLink]="'/media/' + item._id" class="imagenPost"><img [src]="item.imagen" alt=""></a> -->
+      <a [routerLink]="'/media/' + item._id" class="movie-link">
+        <img [src]="item.imagen" alt="" class="movie-image">
+        <div class="movie-title">{{ item.titulo }}</div>
+      </a>
     </div>
   </swiper-slide>
   }

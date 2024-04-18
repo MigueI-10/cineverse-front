@@ -19,5 +19,5 @@ export const appConfig: ApplicationConfig = {
   {
     provide: RECAPTCHA_V3_SITE_KEY,
     useValue: environment.siteKey,
-  },]
+  }, provideAnimationsAsync(),]
 };

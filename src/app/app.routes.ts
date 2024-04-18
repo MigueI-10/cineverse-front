@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { isNotAuthenticatedGuard } from './guards/isNotAuthenticated.guard';
+import { isAuthenticatedGuard } from './guards/isAuthenticated.guard';
 
 export const routes: Routes = [
 
@@ -18,7 +19,32 @@ export const routes: Routes = [
             },
             {
                 path: 'media/:id',
-                loadComponent: () => import('./components/media/media.component').then(c => c.MediaComponent)
+                loadComponent: () => import('./components/media/media/media.component').then(c => c.MediaComponent)
+            },
+            {
+                path: 'media-crud',
+                loadComponent: () => import('./components/media/media-crud/media-crud.component').then(c => c.MediaCrudComponent)
+            },
+            { //para añadir normal
+                path:'media-frm', 
+                loadComponent: ()=>import('./components/media/media-frm/media-frm.component').then(c=>c.MediaFrmComponent)
+            },
+            { //para añadir normal
+                path:'media-frm/:id', 
+                loadComponent: ()=>import('./components/media/media-frm/media-frm.component').then(c=>c.MediaFrmComponent)
+            },
+            //Rutas de Actores Admin
+            {
+                path: 'actores-crud',
+                loadComponent: () => import('./components/actores/act-crud/act-crud.component').then(c => c.ActCrudComponent)
+            },
+            { //para añadir normal
+                path:'actores-frm', 
+                loadComponent: ()=>import('./components/actores/act-form/act-form.component').then(c=>c.ActFormComponent)
+            },
+            { //para añadir normal
+                path:'actores-frm/:id', 
+                loadComponent: ()=>import('./components/actores/act-form/act-form.component').then(c=>c.ActFormComponent)
             },
             // Tus otras rutas aquí
         ]

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MenuItem} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../../prime-ng/prime-ng/prime-ng.module';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -18,24 +18,29 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderComponent {
 
+
+  public mainRole: string = ""
+
+
   constructor(
     private authService: AuthService,
     private router: Router,
-  ){
+  ) {
 
   }
 
 
-  public nomUsuario:string = '';
+  public nomUsuario: string = '';
   public isLoggedIn: boolean = false;
 
   ngOnInit() {
     this.authService.isLoggedIn$.subscribe(isLoggedIn => {
-      
-      const {...user}= this.authService.usrActual();
-     
+
+      const { ...user } = this.authService.usrActual();
+
       this.nomUsuario = user.name
-      
+
+
       this.isLoggedIn = isLoggedIn;
     });
 
@@ -43,18 +48,21 @@ export class HeaderComponent {
     this.authService.checkAuthStatus().subscribe(
       res => {
         this.isLoggedIn = res
+        console.log(this.isLoggedIn);
+        if (this.isLoggedIn) {
+          const { ...user } = this.authService.usrActual();
 
-        const {...user}= this.authService.usrActual();
-        
-        this.nomUsuario = user.name
-        
-        
+          this.nomUsuario = user.name
+
+          this.mainRole = user.roles[0]
+        }
+
       }
     )
   }
 
-  onLogout(){
-    this.nomUsuario=""
+  onLogout() {
+    this.nomUsuario = ""
     this.isLoggedIn = false
     this.authService.logout();
     this.router.navigateByUrl('/home')

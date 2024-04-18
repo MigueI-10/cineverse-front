@@ -24,6 +24,25 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/login" href="#">Búsqueda</a>
         </li>
+
+        @if(mainRole === "admin"){
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i> Admin
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#" routerLink="/media-crud">Media</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" routerLink="/actores-crud" >Actores</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Comentarios</a></li>
+              </ul>
+            </li>
+          </ul>
+        }
+
+        
       </ul>
      
       @if (isLoggedIn) {
@@ -31,10 +50,10 @@
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person-circle"></i> {{nomUsuario}}
+              <i class="bi bi-person-circle"></i> {{nomUsuario | titlecase}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Perfil</a></li>
+              <li><a class="dropdown-item" href="#">Favoritos</a></li>
               
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item cursor" (click)="onLogout()">Cerrar sesión</a></li>

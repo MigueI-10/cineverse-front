@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
-import { Media } from '../../interfaces';
-import { MediaService } from '../../services/media.service';
+import { Media } from '../../../interfaces';
+import { MediaService } from '../../../services/media.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-media',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './media.component.html',
   styleUrl: './media.component.css'
 })
 export class MediaComponent implements OnInit {
 
   private idMedia: string = ""
-  private objMedia!: Media 
+  public  objMedia!: Media 
 
 
   constructor(private _activatedRouter: ActivatedRoute, private _mediaService :MediaService) {
@@ -36,6 +37,7 @@ export class MediaComponent implements OnInit {
     this._mediaService.getMediaById(this.idMedia).subscribe(
       res => {
         console.log(res);
+        this.objMedia = res
       }
     )
   }

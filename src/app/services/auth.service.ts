@@ -151,6 +151,7 @@ export class AuthService {
         map(res => { //si todo es correcto
           this._usrActual.set(res.user); //asignar el usuario
           this._authStatus.set(AuthStatus.authenticated); //establecer el valor autenticado
+          //console.log(this._usrActual());
           //almacenar el token en localStorage
           localStorage.setItem('token', res.token);
           return true;
