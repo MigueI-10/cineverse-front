@@ -9,6 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 @NgModule({
@@ -19,6 +20,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   exports: [MatFormFieldModule, MatInputModule, 
     MatIconModule, MatButtonModule, MatCardModule,
     MatTableModule, MatPaginatorModule, MatSortModule,
-    MatTooltipModule,MatTableModule ]
+    MatTooltipModule,MatTableModule, MatChipsModule ]
 })
 export class MaterialModule { }

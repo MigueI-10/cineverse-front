@@ -23,5 +23,41 @@ export class ActorService {
   }
 
   
+  getActorById(id:string):Observable<Actor>{
+    return this.http.get<Actor>(`${this.urlBackEnd}/actor/${id}`).pipe(
+      map(res=>{
+          return res;
+      }),
+      catchError(error=>{
+        console.log("Error al obtener los actores. " + error);
+        return of ({} as Actor)
+      })
+    );
+  }
+
+  addActor(actor:Actor):Observable<boolean>{
+    
+    return this.http.post(`${this.urlBackEnd}/actor`, actor).pipe(
+      map(()=>true),
+      catchError(error=>{
+        console.log("Error al añadir al actor. " + error);
+        return of (false)
+      })
+    );
+  }
+
+  delActor(id:string):Observable<boolean>{//va a devolver un boolean
+    return this.http.delete(`${this.urlBackEnd}/actor/${id}`).pipe(
+      map(()=>true), //se devuelve cuando es correcto
+      catchError(error=>{ //por si falla
+        console.log("Error al eliminar el actor. " + error);
+        return of (false)
+      })
+    );
+  }
+
+
+
+  
 
 }

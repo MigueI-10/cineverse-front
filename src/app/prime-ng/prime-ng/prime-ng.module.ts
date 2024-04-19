@@ -5,6 +5,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { MessageService } from 'primeng/api';
     MenubarModule,
     ButtonModule,
     InputTextModule,
-    ToastModule
+    ToastModule,
+    ConfirmDialogModule
   ]
 })
 export class PrimeNgModule { }
