@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
 
   //swiperElement = signal<SwiperContainer | null>(null)
 
-  constructor(private _mediaService :MediaService){
+  constructor(private _mediaService: MediaService) {
 
   }
 
@@ -51,59 +51,95 @@ export class HomeComponent implements OnInit {
   }
 
   getFilmsList() {
-    this._mediaService.getPeliculas().subscribe(
-      res => {
 
-        this.aFilms = res
-        //this.listAvailable = true
-        
-        if (this.aFilms.length > 0) {
-          console.log(this.aFilms);
-          this.listAvailable = true
-          this.inicializarSwiper()
-        }
+    const saveFilms = localStorage.getItem('films')
+
+    if (saveFilms) {
+
+      this.aFilms = JSON.parse(saveFilms);
+
+      if (this.aFilms.length > 0) {
+        this.listAvailable = true;
+        this.inicializarSwiper();
       }
-    )
+
+    } else {
+      this._mediaService.getPeliculas().subscribe(
+        res => {
+          this.aFilms = res
+
+          localStorage.setItem('films', JSON.stringify(res));
+          if (this.aFilms.length > 0) {
+
+            this.listAvailable = true;
+            this.inicializarSwiper();
+          }
+        }
+      );
+    }
   }
 
-  getSeriesList(){
-    this._mediaService.getSeries().subscribe(
-      res => {
+  getSeriesList() {
 
-        this.aSeries = res
-        //this.listAvailable = true
+    const saveSeries = localStorage.getItem('series')
 
-        if (this.aSeries.length > 0) {
+    if (saveSeries) {
 
-          console.log(this.aSeries);
-          this.listAvailable = true
-           this.carruselSeries()
-        }
+      this.aSeries = JSON.parse(saveSeries);
+
+      if (this.aSeries.length > 0) {
+        this.listAvailable = true;
+        this.carruselSeries();
       }
-    )
+
+    } else {
+      this._mediaService.getSeries().subscribe(
+        res => {
+          this.aSeries = res
+
+          localStorage.setItem('series', JSON.stringify(res));
+          if (this.aSeries.length > 0) {
+
+            this.listAvailable = true;
+            this.carruselSeries();
+          }
+        }
+      );
+    }
   }
 
-  getAllMedia(){
-    this._mediaService.getAllMedia().subscribe(
-      res => {
+  getAllMedia() {
+    const saveMedia = localStorage.getItem('media')
 
-        this.aMedia = res
-        //this.listAvailable = true
-
-        if (this.aMedia.length > 0) {
-          console.log(this.aMedia);
-          this.listAvailable = true
-          this.carruselActual()
-        }
+    if (saveMedia) {
+      this.aMedia = JSON.parse(saveMedia);
+      console.log(saveMedia);
+      if (this.aMedia.length > 0) {
+        console.log(this.aMedia);
+        this.listAvailable = true;
+        this.carruselActual();
       }
-    )
+    } else {
+      this._mediaService.getAllMedia().subscribe(
+        res => {
+          this.aMedia = res;
+
+          localStorage.setItem('media', JSON.stringify(res));
+          if (this.aMedia.length > 0) {
+            console.log(this.aMedia);
+            this.listAvailable = true;
+            this.carruselActual();
+          }
+        }
+      );
+    }
   }
 
   inicializarSwiper(): void {
 
     const swiperElemConstructor = document.querySelector('#contFilms');
     if (swiperElemConstructor) {
-      
+
       Object.assign(swiperElemConstructor, this.swiperOptions);
       const swiperElement = swiperElemConstructor as SwiperContainer;
       if (swiperElement) {
@@ -114,10 +150,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  carruselSeries(): void{
+  carruselSeries(): void {
     const swiperElemConstructor = document.querySelector('#contSeries');
     if (swiperElemConstructor) {
-      
+
       Object.assign(swiperElemConstructor, this.swiperOptions);
       const swiperElement = swiperElemConstructor as SwiperContainer;
       if (swiperElement) {
@@ -132,7 +168,7 @@ export class HomeComponent implements OnInit {
 
     const swiperElemConstructor = document.querySelector('#cont24');
     if (swiperElemConstructor) {
-      
+
       Object.assign(swiperElemConstructor, this.swiperOptions);
       const swiperElement = swiperElemConstructor as SwiperContainer;
       if (swiperElement) {

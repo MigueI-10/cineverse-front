@@ -4,28 +4,29 @@ import { MaterialModule } from '../../../material/material/material.module';
 import { ActorService } from '../../../services/actor.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Actor } from '../../../interfaces';
 import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
 
 @Component({
   selector: 'app-act-form',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MaterialModule, CommonModule, PrimeNgModule],
-  providers: [MessageService],
+  imports: [FormsModule, ReactiveFormsModule, MaterialModule, CommonModule, PrimeNgModule, DatePipe],
+  providers: [MessageService, DatePipe],
   templateUrl: './act-form.component.html',
   styleUrl: './act-form.component.css'
 })
 export class ActFormComponent implements OnInit {
 
   public frmCrud!: FormGroup
-  public idActor?: string
+  public idActor!: string
 
   constructor(private fb: FormBuilder,
     private _actorService: ActorService,
     private _router: Router,
     private _activeRouter: ActivatedRoute,
-    private messageService: MessageService
+    private messageService: MessageService,
+   private datePipe: DatePipe
   ) { }
 
   public moviesActor: FormControl = new FormControl('', [Validators.required])
@@ -38,11 +39,9 @@ export class ActFormComponent implements OnInit {
       biografia: ['Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final', [Validators.required, Validators.minLength(20)]],
       imagen: ['https://image.tmdb.org/t/p/w500//kNyTXGkiSP8W4Gs60hF7UoxZnWN.jpg', [Validators.required]],
       nacionalidad: ['Inglaterra', Validators.required],
-      fechaNacimiento: ['', [Validators.required, this.fechaNacimientoValidator]],
+      fechaNacimiento: ['1982-09-19', [Validators.required, this.fechaNacimientoValidator]],
       actuaciones: this.fb.array([], [Validators.required, Validators.minLength(3)]),
     })
-
-
 
     this._activeRouter.params.subscribe(
       params => {
@@ -101,8 +100,6 @@ export class ActFormComponent implements OnInit {
       this.actualizarActor();
     }
 
-    
-   
   }
 
   fechaNacimientoValidator(control: any) {
@@ -119,14 +116,11 @@ export class ActFormComponent implements OnInit {
     
       this._actorService.addActor(this.frmCrud.value).subscribe(
         res => {
-          console.log(res);
           if(res){
-            console.log("bien");
             this.success('Actor añadido correctamente')
-            console.log("bien2");
           }else{
             this.errorToast('Fallo al añadir el actor')
-          }console.log("bie222n");
+          }
 
           setTimeout(() => {
             this.frmCrud.reset(); //se resetea el formulario
@@ -139,11 +133,60 @@ export class ActFormComponent implements OnInit {
     }
   }
   cargarActor() {
+    this._actorService.getActorById(this.idActor).subscribe(
+      res => {
 
+        if (res) {
+          console.log(res);
+          //seteamos los campos del form que vengan del objeto
+          this.frmCrud.controls['id'].setValue(res._id);
+           this.frmCrud.controls['nombre'].setValue(res.nombre);
+           this.frmCrud.controls['biografia'].setValue(res.biografia);
+           this.frmCrud.controls['imagen'].setValue(res.imagen);
+           this.frmCrud.controls['nacionalidad'].setValue(res.nacionalidad);
+            // this.frmCrud.controls['actuaciones'].setValue(res.actuaciones);
+          let newFecha = this.datePipe.transform(res.fechaNacimiento, 'yyyy-MM-dd');
+          this.frmCrud.controls['fechaNacimiento'].setValue(newFecha);
+
+
+          this.actuaciones.clear();
+
+          // cogemos la peliculas del actor y las vamos poniendo
+          res.actuaciones.forEach(pelicula => {
+            this.actuaciones.push(this.fb.control(pelicula, Validators.required));
+          });
+
+        } else {
+          this.errorToast('El actor no existe')
+          this._router.navigate(['/actores-crud']);
+        }
+      }
+    )
   }
 
   actualizarActor() {
+    
+    const id = this.frmCrud.controls['id'].value;
 
+    this._actorService.updateActor(this.frmCrud.value, id).subscribe(
+      res => {
+
+        console.log(res);
+        if (res) {
+          this.success('El cliente ha sido actualizado');
+          
+        } else {
+          this.errorToast('El cliente no ha sido actualizado');
+        }
+
+        setTimeout(() => {
+          this.frmCrud.reset(); //se resetea el formulario
+         this._router.navigate(['/actores-crud']);//cargar el crud
+        }, 1500);
+      }
+    );
+    
+   
   }
 
   addActuacion() {

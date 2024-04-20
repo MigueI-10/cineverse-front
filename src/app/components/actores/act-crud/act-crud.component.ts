@@ -21,47 +21,54 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   templateUrl: './act-crud.component.html',
   styleUrl: './act-crud.component.css'
 })
-export class ActCrudComponent implements OnInit{
+export class ActCrudComponent implements OnInit {
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('input') inputElement!: ElementRef;
 
-  constructor(private _actorService: ActorService, private _routerService: Router,
-    private confirmationService: ConfirmationService, private messageService: MessageService
-  ){
+  constructor(private _actorService: ActorService,
+              private _routerService: Router,
+              private confirmationService: ConfirmationService,
+              private messageService: MessageService
+  ) {
 
   }
 
-  
+
 
   public displayedColumns: string[] = ['id', 'nombre', 'fechaNacimiento', 'nacionalidad', 'acciones'];
   public dataSource = new MatTableDataSource<Actor>;
 
   ngOnInit(): void {
-   
+
     this.cargarActores()
   }
 
-  
+  cargarActores() {
 
-  cargarActores(){
+
     this._actorService.getAllActors().subscribe(
       res => {
         console.log(res);
+        if (!localStorage.getItem('actores')) {
+          console.log("a guardar");
+          localStorage.setItem('actores', JSON.stringify(res));
+        }
+
         this.dataSource = new MatTableDataSource(res)
 
-      //paginacion
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+        //paginacion
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       }
     )
   }
-  cargarFormulario(){
+  cargarFormulario() {
     this._routerService.navigate(['/actores-frm'])
   }
 
-  updateActor(id:string){
+  updateActor(id: string) {
     this._routerService.navigate([`/actores-frm/${id}`])
   }
 
@@ -70,38 +77,38 @@ export class ActCrudComponent implements OnInit{
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  borrarActor(id:string, event: Event){
+  borrarActor(id: string, event: Event) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Seguro que quieres borrar el actor?',
       header: 'Accion Importante',
       icon: 'pi pi-exclamation-triangle',
-      acceptIcon:"none",
-      rejectIcon:"none",
-      rejectButtonStyleClass:"p-button-text",
+      acceptIcon: "none",
+      rejectIcon: "none",
+      rejectButtonStyleClass: "p-button-text",
       acceptLabel: "Si",
       rejectLabel: "No",
       accept: () => {
 
         this._actorService.delActor(id).subscribe(
           res => {
-            if(res == true){
+            if (res == true) {
               this.messageService.add({ severity: 'success', summary: 'Confirmed', detail: 'Actor borrado correctamente' });
               this.reiniciarForm()
 
-            }else{
+            } else {
               this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al borrar el actor', life: 3000 });
             }
           }
-        ) 
+        )
       },
       reject: () => {
-          this.messageService.add({ severity: 'info', summary: 'Informacion', detail: 'No se ha borrado el actor', life: 3000 });
+        this.messageService.add({ severity: 'info', summary: 'Informacion', detail: 'No se ha borrado el actor', life: 3000 });
       }
-  });
+    });
   }
 
-  reiniciarForm(){
+  reiniciarForm() {
     this.dataSource = new MatTableDataSource(([] as Actor[]))
     this.cargarActores()
     this.inputElement.nativeElement.value = '';

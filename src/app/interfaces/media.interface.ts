@@ -5,7 +5,7 @@ export interface Media{
     tipo:        string;
     imagen:      string;
     titulo:      string;
-    actores:     string[] | Actor[];
+    actores:      Actor[];
     director:    string;
     anyo:        number;
     genero:      string;

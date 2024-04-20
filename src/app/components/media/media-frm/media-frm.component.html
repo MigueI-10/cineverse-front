@@ -1,1 +1,182 @@
-<p>media-frm works!</p>
+<h1>
+    @if (!idMedia) {
+        Añadir Pelicula
+    }@else {
+        Actualizar Pelicula
+    }
+</h1>
+
+<div class="grid">
+    <div class="col-12 sm:col-6">
+        <mat-card-content>
+
+            <p-toast></p-toast>
+        <form [formGroup]="frmMedia" (submit)="saveMedia()">
+            <mat-form-field class="m-2 col-12">
+                <mat-label>Id</mat-label>
+                <input matInput formControlName="id">
+            </mat-form-field>
+
+            <mat-form-field class="m-2 col-12">
+                <mat-label>Titulo de la película</mat-label>
+                <input type="text" matInput placeholder="Introduzca el titulo de la pelicula" formControlName="titulo" required>
+                @if (titulo.errors?.['required']) {
+                    <mat-error class="text-danger font-italic">El titulo es obligatorio</mat-error>
+                }@else if(titulo.errors?.['minlength']){
+                    <mat-error class="text-danger font-italic">Minimo 3 letras</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="m-2 col-12">
+                <mat-label>Introduzca la imagen</mat-label>
+                <input type="text" matInput placeholder="Imagen del Actor" formControlName="imagen" required>
+
+                @if (imagen.errors?.['required']) {
+                    <mat-error class="text-danger font-italic">La imagen es obligatoria</mat-error>
+                }
+                
+            </mat-form-field>
+
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Añade 3 actores</label>
+                <div class="col-sm-9">
+                  <div class="mb-1">
+                    <div class="input-group">
+                      <select class="form-control" [formControl]="actorList">
+                        @for (actor of actLocal; track $index) {
+                            <option [value]="actor._id">{{actor.nombre}}</option>
+                        }
+                      </select>
+                      <button class="btn btn-outline-primary" type="button" (click)="onAddMovie()">Agregar actor</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="actores.controls.length < 3" class="text-danger">
+                Debes añadir al menos 3 actores.
+              </div>
+              
+              <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Películas</label>
+                <div class="col-sm-9" formArrayName="actores">
+                  <div class="mb-1" *ngFor="let item of actores.controls | keyvalue; let i = index">
+                    <div class="input-group">
+                      <input class="form-control" [formControlName]="i" [disabled]="true">
+                      <button class="btn btn-outline-danger" type="button" (click)="onDeleteMovie(i)">Eliminar</button>
+                    </div>
+                    @if(isValidFieldInArray(actores, i)){
+                      <span class="form-text text-danger">Este campo es requerido</span>
+                    }
+                  </div>
+                </div>
+              </div>
+
+
+
+
+            <mat-form-field class="m-2 col-12">
+                <mat-label>Tipo de Insercion</mat-label>
+                <mat-select formControlName="tipo" placeholder="Selecciona el tipo" >
+                    <mat-option value="pelicula" (click)="clickTipo('pelicula')">Pelicula</mat-option>
+                    <mat-option value="serie" (click)="clickTipo('serie')">Serie</mat-option>
+                </mat-select>
+                @if (tipo.errors?.['required']) {
+                    <mat-error class="text-danger font-italic">El tipo es obligatorio</mat-error>
+                }
+                <!-- <mat-error *ngIf="frmCrud.get('tipo')?.invalid">Tipo es requerido</mat-error> -->
+            </mat-form-field>
+
+            <mat-form-field class="m-2 col-12">
+                <mat-label>Director de la película</mat-label>
+                <input type="text" matInput placeholder="Introduzca el director de la pelicula" formControlName="director" required>
+                @if (director.errors?.['required']) {
+                    <mat-error class="text-danger font-italic">El director es obligatorio</mat-error>
+                }@else if(director.errors?.['minlength']){
+                    <mat-error class="text-danger font-italic">Minimo 5 letras</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="m-2 col-12">
+                <mat-label>Año de la pelicula</mat-label>
+                <input type="number" matInput placeholder="Introduzca el año de la pelicula" formControlName="anyo" required>
+                @if (anyo.errors?.['required']) {
+                    <mat-error class="text-danger font-italic">El año es obligatorio</mat-error>
+                }@else if(anyo.errors?.['min']){
+                    <mat-error class="text-danger font-italic">El año minimo es 1920</mat-error>
+                }@else if(anyo.errors?.['max']){
+                    <mat-error class="text-danger font-italic">El año maximo es 2028</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="m-2 col-12">
+                <mat-label>Puntuacion de la pelicula</mat-label>
+                <input type="number" matInput placeholder="Introduzca la puntuacion de la pelicula" formControlName="puntuacion" required>
+                @if (puntuacion.errors?.['required']) {
+                    <mat-error class="text-danger font-italic">La puntuacion es obligatoria</mat-error>
+                }@else if(puntuacion.errors?.['min']){
+                    <mat-error class="text-danger font-italic">El valor minimo es 0</mat-error>
+                }@else if(puntuacion.errors?.['max']){
+                    <mat-error class="text-danger font-italic">El valor maximo es 10</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="m-2 col-12">
+                <mat-label>Genero de la película</mat-label>
+                <input type="text" matInput placeholder="Introduzca el genero de la pelicula" formControlName="genero" required>
+                @if (genero.errors?.['required']) {
+                    <mat-error class="text-danger font-italic">El genero es obligatorio</mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="m-2 col-12">
+                <mat-label>Argumento de la película</mat-label>
+                <input type="text" matInput placeholder="Introduzca el argumento de la pelicula" formControlName="descripcion" required>
+                @if (descripcion.errors?.['required']) {
+                    <mat-error class="text-danger font-italic">El argumento es obligatorio</mat-error>
+                }@else if(descripcion.errors?.['minlength']){
+                    <mat-error class="text-danger font-italic">Minimo 30 caracteres</mat-error>
+                }
+            </mat-form-field>
+
+            @if(isPelicula){
+                <mat-form-field class="m-2 col-12">
+                    <mat-label>Duracion de la pelicula</mat-label>
+                    <input type="number" matInput placeholder="Introduzca la duracion de la pelicula" formControlName="duracion" required>
+                    @if (duracion.errors?.['required']) {
+                        <mat-error class="text-danger font-italic">La duracion es obligatoria</mat-error>
+                    }@else if(duracion.errors?.['min']){
+                        <mat-error class="text-danger font-italic">El valor minimo es 0</mat-error>
+                    }@else if(duracion.errors?.['max']){
+                        <mat-error class="text-danger font-italic">El valor maximo es 500</mat-error>
+                    }
+                </mat-form-field>
+            }
+
+            @if(isSerie){
+                <mat-form-field class="m-2 col-12">
+                    <mat-label>Episodios de la serie</mat-label>
+                    <input type="number" matInput placeholder="Introduzca la duracion de la pelicula" formControlName="episodios" required>
+                    @if (episodios.errors?.['required']) {
+                        <mat-error class="text-danger font-italic">Los episodios son obligatoria</mat-error>
+                    }@else if(episodios.errors?.['min']){
+                        <mat-error class="text-danger font-italic">El valor minimo es 0</mat-error>
+                    }@else if(episodios.errors?.['max']){
+                        <mat-error class="text-danger font-italic">El valor maximo es 5000</mat-error>
+                    }
+                </mat-form-field>
+            }
+
+           
+
+            <button mat-flat-button color="primary" [disabled]="frmMedia.invalid">
+                <mat-icon>save</mat-icon> 
+                Grabar
+            </button>
+      
+        </form>
+
+    </mat-card-content>
+    </div>
+</div>
+

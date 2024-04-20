@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { isNotAuthenticatedGuard } from './guards/isNotAuthenticated.guard';
 import { isAuthenticatedGuard } from './guards/isAuthenticated.guard';
+import { isAdminGuard } from './guards/isAdmin.guard';
 
 export const routes: Routes = [
 
@@ -23,27 +24,33 @@ export const routes: Routes = [
             },
             {
                 path: 'media-crud',
+                canActivate: [isAdminGuard],
                 loadComponent: () => import('./components/media/media-crud/media-crud.component').then(c => c.MediaCrudComponent)
             },
             { //para añadir normal
                 path:'media-frm', 
+                canActivate: [isAdminGuard],
                 loadComponent: ()=>import('./components/media/media-frm/media-frm.component').then(c=>c.MediaFrmComponent)
             },
             { //para añadir normal
                 path:'media-frm/:id', 
+                canActivate: [isAdminGuard],
                 loadComponent: ()=>import('./components/media/media-frm/media-frm.component').then(c=>c.MediaFrmComponent)
             },
             //Rutas de Actores Admin
             {
                 path: 'actores-crud',
+                canActivate: [isAdminGuard],
                 loadComponent: () => import('./components/actores/act-crud/act-crud.component').then(c => c.ActCrudComponent)
             },
             { //para añadir normal
                 path:'actores-frm', 
+                canActivate: [isAdminGuard],
                 loadComponent: ()=>import('./components/actores/act-form/act-form.component').then(c=>c.ActFormComponent)
             },
             { //para añadir normal
                 path:'actores-frm/:id', 
+                canActivate: [isAdminGuard],
                 loadComponent: ()=>import('./components/actores/act-form/act-form.component').then(c=>c.ActFormComponent)
             },
             // Tus otras rutas aquí

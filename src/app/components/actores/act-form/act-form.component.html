@@ -73,7 +73,7 @@
                 <div class="col-sm-9" formArrayName="actuaciones">
                   <div class="mb-1" *ngFor="let item of actuaciones.controls | keyvalue; let i = index">
                     <div class="input-group">
-                      <input class="form-control" [formControlName]="i">
+                      <input class="form-control" [formControlName]="i" [disabled]="true">
                       <button class="btn btn-outline-danger" type="button" (click)="onDeleteMovie(i)">Eliminar</button>
                     </div>
                     @if(isValidFieldInArray(actuaciones, i)){

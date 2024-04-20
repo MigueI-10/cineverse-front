@@ -55,15 +55,21 @@ export class HeaderComponent {
           this.nomUsuario = user.name
 
           this.mainRole = user.roles[0]
+
+          console.log(this.authService.authStatus());
+          console.log(this.authService.usrActual());
         }
 
       }
     )
+
+    
   }
 
   onLogout() {
     this.nomUsuario = ""
     this.isLoggedIn = false
+    this.mainRole = ""
     this.authService.logout();
     this.router.navigateByUrl('/home')
   }
