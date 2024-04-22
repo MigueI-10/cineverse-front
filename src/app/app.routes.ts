@@ -53,7 +53,12 @@ export const routes: Routes = [
                 canActivate: [isAdminGuard],
                 loadComponent: ()=>import('./components/actores/act-form/act-form.component').then(c=>c.ActFormComponent)
             },
-            // Tus otras rutas aquí
+            { //para añadir normal
+                path:'comentarios', 
+                // canActivate: [isAdminGuard],
+                loadComponent: ()=>import('./components/comentarios/comentarios.component').then(c=>c.ComentariosComponent)
+            },
+            
         ]
     },
     {

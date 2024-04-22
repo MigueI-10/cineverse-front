@@ -1,0 +1,44 @@
+<h1>Peliculas / Series</h1>
+
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<p-dropdown [options]="aMedia" [(ngModel)]="selectedMedia" optionLabel="titulo" [filter]="true" filterBy="titulo"
+    [showClear]="true" placeholder="Selecciona uno de la lista" (onChange)="onMediaChange()">
+    <ng-template pTemplate="selectedItem" let-media>
+        <div class="flex align-items-center gap-2">
+
+            <div>{{ media.titulo }}</div>
+        </div>
+    </ng-template>
+    <ng-template let-media pTemplate="item">
+        <div class="flex align-items-center gap-2">
+
+            <div>{{ media.titulo }}</div>
+        </div>
+    </ng-template>
+</p-dropdown>
+<hr>
+
+@if (aComments.length > 0) {
+<div class="comentarios">
+    @for (comment of aComments; track $index) {
+
+    <p-card header="{{comment.idUsuario.name}} - {{comment.fecha | date: 'dd/MM/yyyy' }}">
+        <p class="m-0">
+            {{comment.contenido}}
+        </p>
+
+        <ng-template pTemplate="footer">
+            <p-button label="Borrar" icon="pi pi-trash" severity="danger" (onClick)="borrarComentario(comment._id, $event)"></p-button>
+            <p-button label="Banear Usuario" icon="pi pi-ban" severity="help" 
+            (onClick)="banearUsuario(comment.idUsuario._id, comment._id, $event)"
+            [style]="{ 'margin-left': '.5em' }"></p-button>
+        </ng-template>
+    </p-card>
+
+
+
+    }
+</div>
+}

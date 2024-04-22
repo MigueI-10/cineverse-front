@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
 import { Media } from '../interfaces/media.interface';
+import { CommentResponse } from '../interfaces/comments-response.interface';
 
 @Injectable({ providedIn: 'root' })
 export class MediaService {
@@ -90,6 +91,18 @@ export class MediaService {
       catchError(error=>{
         console.log("Error al obtener el objeto media. " + error);
         return of ({} as Media)
+      })
+    );
+  }
+
+  getCommentsOfAFilm(id: string): Observable<CommentResponse[]> {
+    return this.http.get<CommentResponse[]>(`${this.urlBackEnd}/media/${id}/comments`).pipe(
+      map(res=>{
+          return res;
+      }),
+      catchError(error=>{
+        console.log("Error al obtener los comentarios. " + error);
+        return of ([] as CommentResponse[])
       })
     );
   }

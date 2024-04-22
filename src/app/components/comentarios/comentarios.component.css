@@ -1,0 +1,9 @@
+:ng-deep p-dropdown{
+    background: black;
+}
+
+.comentarios{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;  
+}
