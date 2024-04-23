@@ -113,9 +113,9 @@ export class HomeComponent implements OnInit {
 
     if (saveMedia) {
       this.aMedia = JSON.parse(saveMedia);
-      console.log(saveMedia);
+    
       if (this.aMedia.length > 0) {
-        console.log(this.aMedia);
+        
         this.listAvailable = true;
         this.carruselActual();
       }
@@ -126,7 +126,7 @@ export class HomeComponent implements OnInit {
 
           localStorage.setItem('media', JSON.stringify(res));
           if (this.aMedia.length > 0) {
-            console.log(this.aMedia);
+            
             this.listAvailable = true;
             this.carruselActual();
           }

@@ -3,11 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
 import { Media } from '../interfaces/media.interface';
 import { Actor } from '../interfaces';
+import { environment } from '../../environments/environments';
 
 @Injectable({ providedIn: 'root' })
 export class ActorService {
 
-  private urlBackEnd = "http://localhost:3000";
+  private urlBackEnd = environment.baseUrl;
   //inyectar el http cliente
   constructor(private http :HttpClient){
 

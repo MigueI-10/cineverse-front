@@ -20,7 +20,7 @@ export class HeaderComponent {
 
 
   public mainRole: string = ""
-
+  public idUser:string = ""
 
   constructor(
     private authService: AuthService,
@@ -39,7 +39,7 @@ export class HeaderComponent {
       const { ...user } = this.authService.usrActual();
 
       this.nomUsuario = user.name
-
+      this.idUser = user._id
 
       this.isLoggedIn = isLoggedIn;
     });

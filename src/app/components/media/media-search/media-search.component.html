@@ -1,0 +1,23 @@
+<h2>Búsqueda de Películas y Series</h2>
+<mat-form-field style="width: 100%;">
+    <mat-label>Busca series o películas</mat-label>
+    <input type="text" matInput [formControl]="searchInput" (keyup)="searchMedia()" />
+</mat-form-field>
+
+    @if(aMedia.length > 0 || aMedia == null){
+        <div class="resultados" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" 
+        (scrolled)="loadMoreResults()">
+            @for (media of aMedia; track $index) {
+                <div class="cartaImagen">
+                    <a [routerLink]="'/media/' + media._id"><img [src]="media.imagen" [alt]="media.titulo" class="imagenMedia"></a>
+                </div>
+            }
+        </div>
+    }@else {
+        @if (showMessage) {
+            <p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages>
+        }
+            
+        
+    }
+    

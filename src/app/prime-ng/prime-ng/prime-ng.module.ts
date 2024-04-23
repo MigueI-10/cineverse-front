@@ -8,6 +8,8 @@ import { MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
 import { CardModule } from 'primeng/card';
+import { MessagesModule } from 'primeng/messages';
+
 
 
 
@@ -30,7 +32,8 @@ import { CardModule } from 'primeng/card';
     ToastModule,
     ConfirmDialogModule,
     DropdownModule, 
-    CardModule
+    CardModule,
+    MessagesModule
   ]
 })
 export class PrimeNgModule { }

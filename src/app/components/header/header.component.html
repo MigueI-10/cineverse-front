@@ -22,7 +22,7 @@
           <a class="nav-link" href="#">Series</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/login" href="#">Búsqueda</a>
+          <a class="nav-link" routerLink="/busqueda" href="#">Búsqueda</a>
         </li>
 
         @if(mainRole === "admin"){
@@ -53,7 +53,7 @@
               <i class="bi bi-person-circle"></i> {{nomUsuario | titlecase}}
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Favoritos</a></li>
+              <li><a class="dropdown-item" href="#" [routerLink]="'favoritos/'+idUser">Favoritos</a></li>
               
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item cursor" (click)="onLogout()">Cerrar sesión</a></li>

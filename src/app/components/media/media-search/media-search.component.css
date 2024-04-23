@@ -1,0 +1,37 @@
+.resultados{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    gap: 1em;
+    place-items: center;
+    margin-bottom: 1em;
+}
+
+.cartaImagen {
+    width: 100%;  
+    border-radius: 8px; 
+    overflow: hidden; 
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1); 
+}
+
+.imagenMedia {
+    width: 100%; 
+    
+}
+
+@media (min-width: 500px) and (max-width: 800px){
+    .resultados{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 801px) and (max-width: 1400px){
+    .resultados{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media (min-width: 1401px){
+    .resultados{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+}

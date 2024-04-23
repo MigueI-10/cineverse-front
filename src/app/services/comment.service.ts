@@ -3,14 +3,25 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
 import { Media } from '../interfaces/media.interface';
 import { CommentResponse } from '../interfaces/comments-response.interface';
+import { environment } from '../../environments/environments';
 
 @Injectable({ providedIn: 'root' })
 export class CommentService {
 
-  private urlBackEnd = "http://localhost:3000";
+  private urlBackEnd = environment.baseUrl;
   //inyectar el http cliente
   constructor(private http :HttpClient){
 
+  }
+
+  getFavoritesAndMarks(filters: {search: string[], limit: number, skip: number}): Observable<Media[]> {
+
+    return this.http.get<Media[]>(`${this.urlBackEnd}/favorite/filter`, {params: filters}).pipe(
+      catchError(error => {
+        console.log("Error al obtener la lista de favoritos. " + error);
+        return of([])
+      })
+    );
   }
 
   

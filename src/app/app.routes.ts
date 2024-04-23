@@ -19,6 +19,14 @@ export const routes: Routes = [
                 loadComponent: () => import('./components/home/home.component').then(c => c.HomeComponent)
             },
             {
+                path: 'busqueda',
+                loadComponent: () => import('./components/media/media-search/media-search.component').then(c => c.MediaSearchComponent)
+            },
+            {
+                path: 'favoritos/:id',
+                loadComponent: () => import('./components/favorites/favorites.component').then(c => c.FavoritesComponent)
+            },
+            {
                 path: 'media/:id',
                 loadComponent: () => import('./components/media/media/media.component').then(c => c.MediaComponent)
             },
@@ -55,7 +63,7 @@ export const routes: Routes = [
             },
             { //para añadir normal
                 path:'comentarios', 
-                // canActivate: [isAdminGuard],
+                 canActivate: [isAdminGuard],
                 loadComponent: ()=>import('./components/comentarios/comentarios.component').then(c=>c.ComentariosComponent)
             },
             
