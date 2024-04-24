@@ -108,7 +108,7 @@ export class ComentariosComponent implements OnInit {
           
         },
         reject: () => {
-          this.messageService.add({ severity: 'info', summary: 'Informacion', detail: 'No se ha borrado el actor', life: 3000 });
+          this.messageService.add({ severity: 'info', summary: 'Informacion', detail: 'No se ha borrado el comentario', life: 3000 });
         }
       });
    
