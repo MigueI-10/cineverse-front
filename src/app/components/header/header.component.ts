@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../../prime-ng/prime-ng/prime-ng.module';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink, RouterLinkActive
+    RouterLink, RouterLinkActive, TranslateModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
@@ -25,6 +26,7 @@ export class HeaderComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private translate: TranslateService
   ) {
 
   }
@@ -64,6 +66,11 @@ export class HeaderComponent {
     )
 
     
+  }
+
+  switchLanguage(language: string){
+    this.translate.use(language)
+    localStorage.setItem('selectedLang', language);
   }
 
   onLogout() {

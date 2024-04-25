@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { SwiperOptions } from 'swiper/types';
 import { SwiperContainer, register } from 'swiper/element/bundle';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 // register Swiper custom elements
 register();
 
@@ -12,13 +13,12 @@ register();
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive, TranslateModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeComponent implements OnInit {
-
 
   public aMedia: Media[] = [];
   public aFilms: Media[] = [];

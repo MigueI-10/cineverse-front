@@ -1,4 +1,4 @@
-<h1 class="mt-4">Best of 2024</h1>
+<h1 class="mt-4">{{'mejor2024' | translate}}</h1>
 <hr>
 
 <swiper-container id="cont24" init="false">
@@ -19,11 +19,11 @@
 
 </swiper-container>
 <div *ngIf="!listAvailable">
-  <p>No se encontraron fotos.</p>
+  <p>{{'noFotos' | translate}}</p>
 </div>
 
 
-<h1 class="mt-4">Top Rated Films</h1>
+<h1 class="mt-4">{{'mejorPelis' | translate}}</h1>
 <hr>
 
 <swiper-container id="contFilms"init="false">
@@ -44,10 +44,10 @@
 
 </swiper-container>
 <div *ngIf="!listAvailable">
-  <p>No se encontraron fotos.</p>
+  <p>{{'noFotos' | translate}}</p>
 </div>
 
-<h1 class="mt-4">Top Rated Series</h1>
+<h1 class="mt-4">{{'mejorSeries' | translate}}</h1>
 <hr>
 
 <swiper-container id="contSeries" init="false">
@@ -68,5 +68,5 @@
 
 </swiper-container>
 <div *ngIf="!listAvailable">
-  <p>No se encontraron fotos.</p>
+  <p>{{'noFotos' | translate}}</p>
 </div>

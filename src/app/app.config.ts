@@ -7,10 +7,12 @@ import { registerLocaleData } from '@angular/common';
 //localizacion y configuracion
 import localeES from '@angular/common/locales/es';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environments';
 
 import { RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 registerLocaleData(localeES, 'es');
 
 export const appConfig: ApplicationConfig = {
@@ -19,5 +21,16 @@ export const appConfig: ApplicationConfig = {
   {
     provide: RECAPTCHA_V3_SITE_KEY,
     useValue: environment.siteKey,
-  }, provideAnimationsAsync(),]
+  }, provideAnimationsAsync(), 
+  importProvidersFrom(TranslateModule.forRoot({
+    loader: {
+      provide: TranslateLoader,
+      useFactory: HttpLoaderFactory,
+      deps: [HttpClient]
+    }
+  }))]
 };
+
+export function HttpLoaderFactory(http: HttpClient){
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json')
+}
