@@ -133,7 +133,7 @@ export class AuthService {
     const url = `${this.baseUrl}/auth/check-token`;
     //Leer el token en la cookie
     const token = localStorage.getItem('token');
-    console.log({ token });
+    // console.log({ token });
     if (!token) {
       this.logout(); //reestablecer el estado
       return of(false);
@@ -164,8 +164,8 @@ export class AuthService {
   banUser(id:string):Observable<boolean>{
 
     const token = localStorage.getItem('token');
-    console.log(token);
-    console.log(id);
+    // console.log(token);
+    // console.log(id);
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     
     return this.http.patch(`${this.baseUrl}/auth/ban-user/${id}`, null, { headers }).pipe(

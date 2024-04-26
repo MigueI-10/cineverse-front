@@ -1,3 +1,52 @@
 @if(objMedia){
-    <img [src]="objMedia.imagen" alt="">
+<div class="mainContent">
+    <div class="imagenPoster mx-auto">
+        <img [src]="objMedia.imagen" [alt]="objMedia" class="img-fluid poster">
+    </div>
+
+    <div class="mediaData">
+
+        <h1 class="tituloMovie">{{objMedia.titulo | titlecase}}</h1>
+
+        <div class="otherData container">
+            <div class="generalPunt">
+                <i class="pi pi-star-fill" style="font-size: 1.5rem"></i>
+                <span><b>{{objMedia.puntuacion}}</b>/10</span>
+            </div> 
+
+            <div class="genero">
+                <span>{{objMedia.genero}}</span>
+            </div>
+
+            <div class="puntuarMedia">
+                <i class="pi pi-star" style="font-size: 1.5rem"></i>
+                <span>Puntuar</span>
+            </div>
+        </div>
+
+        
+
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint tempore repellat magnam? Vero maxime, nam
+            delectus aperiam aut repellendus esse velit. Expedita vitae, tenetur harum consequatur nisi doloremque
+            necessitatibus quae?</p>
+
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint tempore repellat magnam? Vero maxime, nam
+            delectus aperiam aut repellendus esse velit. Expedita vitae, tenetur harum consequatur nisi doloremque
+            necessitatibus quae?</p>
+
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint tempore repellat magnam? Vero maxime, nam
+            delectus aperiam aut repellendus esse velit. Expedita vitae, tenetur harum consequatur nisi doloremque
+            necessitatibus quae?</p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+}@else {
+<!-- <p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages> -->
 }

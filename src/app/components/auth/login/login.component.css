@@ -74,6 +74,7 @@
   .enlaces{
     padding-top: 0.8em;
     flex-direction: row;
+    gap: 10px;
   }
 
 }

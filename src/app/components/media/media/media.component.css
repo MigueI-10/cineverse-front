@@ -1,0 +1,90 @@
+.mainContent{
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.imagenPoster{
+    max-width: 40vh;
+    overflow: hidden;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.poster{
+    width: auto;
+    max-height: 100%;
+}
+
+.mediaData{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.tituloMovie{
+    font-size: 2.4em;
+    text-align: center;
+}
+
+.otherData{
+    display: flex;
+    justify-content: space-around;
+}
+
+.generalPunt{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.generalPunt i{
+    font-size: 1em;
+    color: #ffd700; /* Color de fondo amarillo */
+    background-color: transparent;
+}
+
+.generalPunt span{
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.genero{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.genero span{
+    display: inline-block;
+    padding: 0.4rem 1rem; 
+    background-color: red; 
+    color: white; 
+    border-radius: 20px; 
+    padding-top: 0.5em;
+}
+
+.puntuarMedia{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.puntuarMedia i{
+    font-size: 1em;
+    color: #5799EF; /* Color de fondo amarillo */
+    background-color: transparent;
+}
+
+.puntuarMedia span{
+    font-size: 1.2em;
+    text-align: center;
+    color: #5799EF;
+}
+
+
+@media (min-width: 1401px){
+    .mainContent{
+        flex-direction: row;
+    }
+}
