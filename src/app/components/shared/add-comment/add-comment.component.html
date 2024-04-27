@@ -1,0 +1,14 @@
+<div class="cajaComentario">
+    <h3><strong>{{userName | titlecase}}</strong></h3>
+
+    <mat-form-field class="w-100">
+        <textarea matInput [placeholder]="'Deja un comentario'" formControlName="comentario"></textarea>
+        
+    </mat-form-field>
+
+    <p-button label="Enviar" icon="pi pi-send" (click)="addComentario()">
+        <!-- <i class="pi pi-send" style="font-size: 1.5rem"></i> -->
+
+    </p-button>
+
+</div>

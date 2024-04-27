@@ -1,7 +1,7 @@
 @if(objMedia){
 <div class="mainContent">
     <div class="imagenPoster mx-auto">
-        <img [src]="objMedia.imagen" [alt]="objMedia" class="img-fluid poster">
+        <img [src]="objMedia.imagen" [alt]="objMedia.titulo" class="img-fluid poster">
     </div>
 
     <div class="mediaData">
@@ -12,7 +12,7 @@
             <div class="generalPunt">
                 <i class="pi pi-star-fill" style="font-size: 1.5rem"></i>
                 <span><b>{{objMedia.puntuacion}}</b>/10</span>
-            </div> 
+            </div>
 
             <div class="genero">
                 <span>{{objMedia.genero}}</span>
@@ -22,31 +22,91 @@
                 <i class="pi pi-star" style="font-size: 1.5rem"></i>
                 <span>Puntuar</span>
             </div>
+
+            <div class="puntuarMedia">
+                <i class="pi pi-heart" id="heartFav" style="font-size: 1.5rem"></i>
+
+            </div>
+
+
         </div>
 
-        
+        <div class="mediaDesc">
+            <p>{{objMedia.descripcion}}</p>
+        </div>
 
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint tempore repellat magnam? Vero maxime, nam
-            delectus aperiam aut repellendus esse velit. Expedita vitae, tenetur harum consequatur nisi doloremque
-            necessitatibus quae?</p>
+        <h1 class="text-left">Reparto</h1>
 
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint tempore repellat magnam? Vero maxime, nam
-            delectus aperiam aut repellendus esse velit. Expedita vitae, tenetur harum consequatur nisi doloremque
-            necessitatibus quae?</p>
+        <div class="reparto mx-auto">
 
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint tempore repellat magnam? Vero maxime, nam
-            delectus aperiam aut repellendus esse velit. Expedita vitae, tenetur harum consequatur nisi doloremque
-            necessitatibus quae?</p>
+            <div class="actor-carousel">
+                <!-- Utilizamos ngFor para iterar sobre los actores -->
+                @for (actor of objMedia.actores; track $index) {
+                @if ($index < 3) { <div class="actor-item">
+                    <div class="slide-custom">
+                        <!-- <a [routerLink]="'/media/' + actor._id" class="movie-link"> -->
+                        <!-- Aplicamos la clase "actor-image" a la imagen -->
+                        <div class="actor-image-container">
+                            <img [src]="actor.imagen" alt="" class="actor-image">
+                            <!-- Mostramos el nombre del actor en el footer de la imagen -->
+                            <div class="actor-name">{{ actor.nombre }}</div>
+                        </div>
+                        <!-- </a> -->
+                    </div>
+            </div>
+            }
+            }
+
+        </div>
+
+        @if (objMedia.actores.length > 3) {
+        <button *ngIf="objMedia.actores.length > 3" class="seeMore mx-auto">Ver más</button>
+        }
+
     </div>
+
+
+    <h1 class="mt-2 text-left">Comentarios</h1>
+
+    @if (aComments.length > 0) {
+    <div class="comentarios">
+        @for (comment of aComments; track $index) {
+
+        <p-card header="{{comment.idUsuario.name | titlecase}} - {{comment.fecha | date: 'dd/MM/yyyy' }}">
+            <p class="m-0">
+                {{comment.contenido}}
+            </p>
+
+        </p-card>
+        }
+    </div>
+    }@else {
+    <p-messages [(value)]="noComentMessage" [enableService]="false" [closable]="false"></p-messages>
+    }
+
+    <hr>
+
+    @if (isLoggedIn) {
+
+        <app-add-comment [idUsuario]="idUser" [userName]="userName"></app-add-comment>
+
+
+    }
+
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint tempore repellat magnam? Vero maxime, nam
+        delectus aperiam aut repellendus esse velit. Expedita vitae, tenetur harum consequatur nisi doloremque
+        necessitatibus quae?</p>
+
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint tempore repellat magnam? Vero maxime, nam
+        delectus aperiam aut repellendus esse velit. Expedita vitae, tenetur harum consequatur nisi doloremque
+        necessitatibus quae?</p>
+</div>
 </div>
 
 
-
-
-
-
-
-
 }@else {
-<!-- <p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages> -->
+@if (showMessage) {
+    <p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages>
+}
+
 }

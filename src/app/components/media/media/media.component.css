@@ -1,90 +1,160 @@
-.mainContent{
+.mainContent {
     display: flex;
     flex-direction: column;
     gap: 2em;
 }
 
-.imagenPoster{
+.imagenPoster {
     max-width: 40vh;
     overflow: hidden;
     margin: 0 auto;
     text-align: center;
 }
 
-.poster{
+.poster {
     width: auto;
     max-height: 100%;
 }
 
-.mediaData{
+.mediaData {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
-.tituloMovie{
+.tituloMovie {
     font-size: 2.4em;
     text-align: center;
 }
 
-.otherData{
+.otherData {
     display: flex;
     justify-content: space-around;
+    margin-bottom: 0.5em;
 }
 
-.generalPunt{
+.generalPunt {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.generalPunt i{
+.generalPunt i {
     font-size: 1em;
-    color: #ffd700; /* Color de fondo amarillo */
+    color: #ffd700;
+    /* Color de fondo amarillo */
     background-color: transparent;
 }
 
-.generalPunt span{
+.generalPunt span {
     font-size: 1.2em;
     text-align: center;
 }
 
-.genero{
+.genero {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 5px;
 }
 
-.genero span{
+.genero span {
     display: inline-block;
-    padding: 0.4rem 1rem; 
-    background-color: red; 
-    color: white; 
-    border-radius: 20px; 
+    padding: 0.4rem 1rem;
+    background-color: red;
+    color: white;
+    border-radius: 20px;
     padding-top: 0.5em;
 }
 
-.puntuarMedia{
+.puntuarMedia {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
-.puntuarMedia i{
+.puntuarMedia i {
     font-size: 1em;
-    color: #5799EF; /* Color de fondo amarillo */
+    color: #5799EF;
+    /* Color de fondo amarillo */
     background-color: transparent;
 }
 
-.puntuarMedia span{
+#heartFav{
+    font-size: 1em;
+    color: red;
+    background-color: transparent;
+}
+
+.puntuarMedia span {
     font-size: 1.2em;
     text-align: center;
     color: #5799EF;
 }
 
+.mediaDesc p {
+    text-align: justify;
+    font-size: 16px;
+}
 
-@media (min-width: 1401px){
-    .mainContent{
+.reparto{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+   
+}
+
+.actor-carousel .actor-item {
+    display: inline-block; /* Para que los elementos estén en una fila */
+    margin-right: 10px; /* Espacio entre las imágenes */
+  }
+  
+  .actor-carousel .actor-image {
+    width: 100px; /* Ancho de la imagen */
+    height: auto; /* Altura automática para mantener la proporción */
+  }
+
+  .seeMore{
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background-color: red;
+    color: white;
+    border-radius: 20px;
+    padding-top: 0.5em;
+  }
+
+  .actor-image-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .actor-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    color: white; 
+    text-align: center; 
+    padding: 5px; 
+  }
+
+  .comentarios{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;  
+}
+
+.cajaComentario p-button{
+    background-color: #8abaee;
+}
+
+
+
+
+@media (min-width: 1401px) {
+    .mainContent {
         flex-direction: row;
     }
 }
