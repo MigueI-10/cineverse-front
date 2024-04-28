@@ -1,5 +1,6 @@
 @if(objMedia){
 <div class="mainContent">
+    <p-toast></p-toast>
     <div class="imagenPoster mx-auto">
         <img [src]="objMedia.imagen" [alt]="objMedia.titulo" class="img-fluid poster">
     </div>
@@ -59,8 +60,24 @@
 
         </div>
 
-        @if (objMedia.actores.length > 3) {
-        <button *ngIf="objMedia.actores.length > 3" class="seeMore mx-auto">Ver más</button>
+        @if (actores.length > 3) {
+        <button *ngIf="actores.length > 3" class="seeMore mx-auto" (click)="seeMoreActors()">Ver más</button>
+
+        <p-dialog header="Resto de Actores" [(visible)]="visibleModal" [style]="{width: '80vw'}">
+            <div class="restoAct">
+                @for (actor of actores; track $index) {
+
+                <div class="actorImage">
+
+                    <img [src]="actor.imagen" alt="" class="actor-image">
+
+                    <div class="actorTitle">{{ actor.nombre }}</div>
+
+                </div>
+
+                }
+            </div>
+        </p-dialog>
         }
 
     </div>
@@ -88,7 +105,8 @@
 
     @if (isLoggedIn) {
 
-        <app-add-comment [idUsuario]="idUser" [userName]="userName"></app-add-comment>
+    <app-add-comment [idUsuario]="idUser" [userName]="userName" [idPelicula]="idMedia"
+        (addedComment)="checkAddedComment($event)"></app-add-comment>
 
 
     }
@@ -106,7 +124,7 @@
 
 }@else {
 @if (showMessage) {
-    <p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages>
+<p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages>
 }
 
 }

@@ -1,41 +1,74 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { MaterialModule } from '../../../material/material/material.module';
 import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
 import { CommentService } from '../../../services/comment.service';
+import { Comment } from '../../../interfaces/comment.interface';
 
 @Component({
   selector: 'app-add-comment',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule, 
+  imports: [RouterLink, RouterLinkActive, CommonModule,
     PrimeNgModule, MaterialModule, FormsModule, ReactiveFormsModule],
   templateUrl: './add-comment.component.html',
   styleUrl: './add-comment.component.css'
 })
-export class AddCommentComponent {
+export class AddCommentComponent implements OnInit{
 
-  @Input() idUsuario !:string 
-  @Input() userName !:string 
+  @Input() idUsuario !: string
+  @Input() userName !: string
+  @Input() idPelicula !: string
 
+  @Output() addedComment = new EventEmitter<boolean>()
 
+  public formComment!: FormGroup
+  public objComentario !: Comment
 
   constructor(
-              private _commentService: CommentService
-  ){
-    
+    private _commentService: CommentService,
+    private fb: FormBuilder,
+  ) {
+
   }
 
-  addComentario(){
+  ngOnInit(): void {
+    this.formComment = this.fb.group({
+      contenido: ['', Validators.required],
+    })
+  }
 
-    // if (this.comentarioControl.valid) {
-    //   // Agrega tu lógica aquí
-    //   console.log('Comentario válido:', this.inputComentario);
-    // } else {
-    //   // El formulario no es válido, puedes mostrar un mensaje de error o hacer algo más
-    //   console.log('Formulario inválido');
-    // }
+  addComentario() {
+
+    if(this.formComment.valid){
+      console.log(this.contenido.value);
+
+      this.objComentario = {
+        idUsuario: this.idUsuario,
+        idPelicula: this.idPelicula,
+        contenido: this.contenido.value,
+        fecha: new Date()
+      };
+
+      this._commentService.addComment(this.objComentario).subscribe(
+        res => {
+          if(res){
+            this.addedComment.emit(true)
+          }else{
+            this.addedComment.emit(false)
+          }
+          this.contenido.setValue(' ')
+        }
+      )
+
+
+
+    }
+  }
+
+  get contenido() {
+    return this.formComment.get('contenido') as FormControl
   }
 
 
