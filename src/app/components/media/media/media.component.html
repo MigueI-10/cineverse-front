@@ -5,7 +5,7 @@
         <img [src]="objMedia.imagen" [alt]="objMedia.titulo" class="img-fluid poster">
     </div>
 
-    <div class="mediaData">
+    <div class="mediaData container">
 
         <h1 class="tituloMovie">{{objMedia.titulo | titlecase}}</h1>
 
@@ -25,7 +25,8 @@
             </div>
 
             <div class="puntuarMedia">
-                <i class="pi pi-heart" id="heartFav" style="font-size: 1.5rem"></i>
+                <i class="pi" id="heartFav" style="font-size: 1.5rem" (click)="addFavoriteMedia()"
+                    [ngClass]="{'pi-heart-fill': isFavorite, 'pi-heart': !isFavorite}"></i>
 
             </div>
 
@@ -48,7 +49,8 @@
                         <!-- <a [routerLink]="'/media/' + actor._id" class="movie-link"> -->
                         <!-- Aplicamos la clase "actor-image" a la imagen -->
                         <div class="actor-image-container">
-                            <img [src]="actor.imagen" alt="" class="actor-image">
+                            <a [routerLink]="'/actor/' + actor._id"><img [src]="actor.imagen" alt=""
+                                    class="actor-image"></a>
                             <!-- Mostramos el nombre del actor en el footer de la imagen -->
                             <div class="actor-name">{{ actor.nombre }}</div>
                         </div>
@@ -60,16 +62,18 @@
 
         </div>
 
-        @if (actores.length > 3) {
-        <button *ngIf="actores.length > 3" class="seeMore mx-auto" (click)="seeMoreActors()">Ver más</button>
+        @if (objMedia.actores.length > 3) {
+        <button *ngIf="objMedia.actores.length > 3" class="seeMore mx-auto" (click)="seeMoreActors()">Ver más</button>
 
-        <p-dialog header="Resto de Actores" [(visible)]="visibleModal" [style]="{width: '80vw'}">
+        <p-dialog header="Resto de Actores" [(visible)]="visibleModal" [style]="{width: '80vw'}" [blockScroll]="true">
             <div class="restoAct">
-                @for (actor of actores; track $index) {
+                @for (actor of objMedia.actores; track $index) {
 
                 <div class="actorImage">
 
-                    <img [src]="actor.imagen" alt="" class="actor-image">
+                    <a [routerLink]="'/actor/' + actor._id">
+                        <img [src]="actor.imagen" alt="" class="actor-image">
+                    </a>
 
                     <div class="actorTitle">{{ actor.nombre }}</div>
 
@@ -104,20 +108,11 @@
     <hr>
 
     @if (isLoggedIn) {
-
     <app-add-comment [idUsuario]="idUser" [userName]="userName" [idPelicula]="idMedia"
         (addedComment)="checkAddedComment($event)"></app-add-comment>
-
-
     }
 
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint tempore repellat magnam? Vero maxime, nam
-        delectus aperiam aut repellendus esse velit. Expedita vitae, tenetur harum consequatur nisi doloremque
-        necessitatibus quae?</p>
 
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint tempore repellat magnam? Vero maxime, nam
-        delectus aperiam aut repellendus esse velit. Expedita vitae, tenetur harum consequatur nisi doloremque
-        necessitatibus quae?</p>
 </div>
 </div>
 

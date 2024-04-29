@@ -42,7 +42,7 @@ export class AddCommentComponent implements OnInit{
   addComentario() {
 
     if(this.formComment.valid){
-      console.log(this.contenido.value);
+
 
       this.objComentario = {
         idUsuario: this.idUsuario,

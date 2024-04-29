@@ -3,5 +3,6 @@ export interface FavoriteResponse {
     idPelicula: string;
     titulo:     string;
     imagen:     string;
+    esFavorito:     boolean;
     notaUsuario?: number;
 }

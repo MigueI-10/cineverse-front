@@ -61,6 +61,10 @@ export const routes: Routes = [
                 canActivate: [isAdminGuard],
                 loadComponent: ()=>import('./components/actores/act-form/act-form.component').then(c=>c.ActFormComponent)
             },
+            {
+                path: 'actor/:id',
+                loadComponent: () => import('./components/actores/actor/actor.component').then(c => c.ActorComponent)
+            },
             { //para añadir normal
                 path:'comentarios', 
                  canActivate: [isAdminGuard],
