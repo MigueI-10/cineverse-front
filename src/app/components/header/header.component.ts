@@ -57,6 +57,7 @@ export class HeaderComponent {
           this.nomUsuario = user.name
 
           this.mainRole = user.roles[0]
+          this.idUser = user._id
 
           console.log(this.authService.authStatus());
           console.log(this.authService.usrActual());

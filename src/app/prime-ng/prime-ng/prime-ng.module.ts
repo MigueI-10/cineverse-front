@@ -11,6 +11,7 @@ import { CardModule } from 'primeng/card';
 import { MessagesModule } from 'primeng/messages';
 import { CarouselModule } from 'primeng/carousel';
 import { DialogModule } from 'primeng/dialog';
+import { RatingModule } from 'primeng/rating';
 
 
 
@@ -35,7 +36,10 @@ import { DialogModule } from 'primeng/dialog';
     ConfirmDialogModule,
     DropdownModule, 
     CardModule,
-    MessagesModule, CarouselModule, DialogModule
+    MessagesModule, 
+    CarouselModule, 
+    DialogModule,
+    RatingModule
   ]
 })
 export class PrimeNgModule { }

@@ -71,7 +71,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    cursor: pointer;
 }
 
 .puntuarMedia i {
@@ -152,8 +152,11 @@
 }
 
 .restoAct{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    /* grid-template-columns: 1fr 1fr; */
+    /* grid-template-rows: 1fr; */
+    gap: 1em;
 
 }
 
@@ -178,8 +181,57 @@
     padding: 5px; 
   }
 
+.puntuaciones{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+.imagenPuntos{
+    max-width: 40vh;
+    
+}
+
+.imagenPuntos img{
+    width: 100%;
+    text-align: center;
+}
+
+.peliculaModal{
+    width: 60em;
+}
+
+.rounded-button {
+    border-radius: 10px; /* Ajusta este valor según el radio deseado */
+    background-color: #007bff; /* Azul predeterminado de Bootstrap */
+    color: white; /* Color del texto */
+    padding: 10px 15px; /* Espaciado interno del botón */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    font-size: 16px; /* Tamaño de la fuente */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+.rounded-button:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el ratón sobre el botón */
+}
+
+
+
 @media (min-width: 900px) {
     .mainContent {
         flex-direction: row;
     }
+
+    .peliculaModal{
+        width: 80vh;
+    }
+    
+
+    /* .restoAct{
+        display: grid;
+        grid-template-rows: 1fr;
+    
+    } */
 }

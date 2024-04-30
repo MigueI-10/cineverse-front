@@ -40,11 +40,14 @@ export class MediaComponent implements OnInit {
   public userName = ""
   public idUser = ""
   public inputComentario = ""
-  public visibleModal = false 
+  public visibleModal = false
+  public visiblePuntuacion = false
 
-  private objFavorite?: Favorite
-  public isFavorite ?: boolean
-  private idFavorite ?: string = ""
+  public notaPelicula?: number
+
+  public objFavorite?: Favorite
+  public isFavorite?: boolean
+  private idFavorite?: string = ""
 
   constructor(
     private _activatedRouter: ActivatedRoute,
@@ -56,38 +59,38 @@ export class MediaComponent implements OnInit {
 
   }
 
-//   public actores = [
-//     {
-//         "_id": "661415ef804eda4f6a1f320a",
-//         "nombre": "Vin Diesel",
-//         "imagen": "http://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/Vin_Diesel.jpg"
-//     },
-//     {
-//         "_id": "661415ef804eda4f6a1f320b",
-//         "nombre": "Jason Momoa",
-//         "imagen": "http://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/Jason_Momoa.jpg"
-//     },
-//     {
-//         "_id": "661415ef804eda4f6a1f320c",
-//         "nombre": "Michelle Rodriguez",
-//         "imagen": "http://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/Michelle_Rodriguez.jpg"
-//     },
-//     {
-//         "_id": "661415ef804eda4f6a1f320c",
-//         "nombre": "Michelle Rodriguez",
-//         "imagen": "http://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/Michelle_Rodriguez.jpg"
-//     },
-//     {
-//         "_id": "661415ef804eda4f6a1f320c",
-//         "nombre": "Michelle Rodriguez",
-//         "imagen": "http://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/Michelle_Rodriguez.jpg"
-//     },
-//     {
-//         "_id": "661415ef804eda4f6a1f320c",
-//         "nombre": "Michelle Rodriguez",
-//         "imagen": "http://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/Michelle_Rodriguez.jpg"
-//     }
-// ]
+  public actores = [
+    {
+      "_id": "661415ef804eda4f6a1f320a",
+      "nombre": "Vin Diesel",
+      "imagen": "http://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/Vin_Diesel.jpg"
+    },
+    {
+      "_id": "661415ef804eda4f6a1f320b",
+      "nombre": "Jason Momoa",
+      "imagen": "http://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/Jason_Momoa.jpg"
+    },
+    {
+      "_id": "661415ef804eda4f6a1f320c",
+      "nombre": "Michelle Rodriguez",
+      "imagen": "http://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/Michelle_Rodriguez.jpg"
+    },
+    {
+      "_id": "661415ef804eda4f6a1f320c",
+      "nombre": "Michelle Rodriguez",
+      "imagen": "http://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/Michelle_Rodriguez.jpg"
+    },
+    {
+      "_id": "661415ef804eda4f6a1f320c",
+      "nombre": "Michelle Rodriguez",
+      "imagen": "http://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/Michelle_Rodriguez.jpg"
+    },
+    {
+      "_id": "661415ef804eda4f6a1f320c",
+      "nombre": "Michelle Rodriguez",
+      "imagen": "http://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/Michelle_Rodriguez.jpg"
+    }
+  ]
 
   ngOnInit(): void {
 
@@ -129,7 +132,7 @@ export class MediaComponent implements OnInit {
           this.objMedia = res
           this.setearMensajes()
           this.cargarComentarios(this.idMedia)
-          
+
 
         } else {
           this.showMessage = true;
@@ -138,23 +141,24 @@ export class MediaComponent implements OnInit {
     )
   }
 
-  checkExistanceFavorite(idUser: string, idMedia: string){
+  checkExistanceFavorite(idUser: string, idMedia: string) {
     this._favoriteService.checkFavoriteUserMedia(idUser, idMedia)
-    .pipe(
-      catchError((error) => {
-        return of(error.message)
-      })
-    )
-    .subscribe(
-      res => { 
-        if(Object.keys(res).length > 0){
-          this.objFavorite = res
-          console.log(this.objFavorite);
-          this.isFavorite = this.objFavorite?.esFavorito
-          this.idFavorite = this.objFavorite?._id
+      .pipe(
+        catchError((error) => {
+          return of(error.message)
+        })
+      )
+      .subscribe(
+        res => {
+          if (Object.keys(res).length > 0) {
+            this.objFavorite = res
+            console.log(this.objFavorite);
+            this.isFavorite = this.objFavorite?.esFavorito
+            this.idFavorite = this.objFavorite?._id
+            this.notaPelicula = this.objFavorite?.notaUsuario
+          }
         }
-      }
-    )
+      )
   }
 
   cargarComentarios(id: string) {
@@ -181,58 +185,58 @@ export class MediaComponent implements OnInit {
 
   }
 
-  addFavoriteMedia(){
-    if(this.isLoggedIn){
-      
+  addFavoriteMedia() {
+    if (this.isLoggedIn) {
+
       console.log(this.isFavorite);
 
       //caso de actualizar
-      if(this.objFavorite !== undefined){
-        
+      if (this.objFavorite !== undefined) {
+
         this.isFavorite = !this.isFavorite
         //guardamos el result
         this.objFavorite.esFavorito = this.isFavorite
         console.log("actualizado a " + this.isFavorite);
 
-        if(this.idFavorite !== undefined){
+        if (this.idFavorite !== undefined) {
 
-           delete this.objFavorite._id
-           delete this.objFavorite.__v
+          delete this.objFavorite._id
+          delete this.objFavorite.__v
 
           this._favoriteService.updateFavorite(this.idFavorite, this.objFavorite).subscribe(
             res => {
-              if(res){
+              if (res) {
                 this.success('Favorito actualizado con éxito')
 
                 console.log(this.objFavorite);
 
-              }else{
+              } else {
                 this.errorToast('Fallo al actualizar el favorito')
                 this.isFavorite = !this.isFavorite
-                
+
               }
             }
           )
         }
 
-      }else{
+      } else {
         console.log("añadir");
         this.isFavorite = !this.isFavorite
         this.objFavorite = {
-          idPelicula : this.idMedia,
+          idPelicula: this.idMedia,
           idUsuario: this.idUser,
           esFavorito: this.isFavorite
         }
 
         this._favoriteService.addFavorite(this.objFavorite).subscribe(
-          res =>{
-            if(Object.keys(res).length > 0){
+          res => {
+            if (Object.keys(res).length > 0) {
               this.success('Favorito actualizado con éxito')
               this.objFavorite = res
-            }else{
+            } else {
               this.errorToast('Fallo al actualizar el favorito')
               this.isFavorite = !this.isFavorite
-              
+
             }
           }
         )
@@ -241,12 +245,95 @@ export class MediaComponent implements OnInit {
       }
 
 
-    }else{
+    } else {
       this.messageService.add({ severity: 'info', summary: 'Info', detail: `Para añadir esta película a favoritos, debes estar logueado` });
     }
   }
 
-  seeMoreActors(){
+  addMarkFavorite() {
+    if (this.isLoggedIn) {
+      this.visiblePuntuacion = true
+
+    } else {
+      this.messageService.add({ severity: 'info', summary: 'Info', detail: `Para añadir esta película a favoritos, debes estar logueado` });
+    }
+
+  }
+
+  savePuntuacion() {
+    console.log("la puntuacion puesta es " + this.notaPelicula);
+
+    if (this.notaPelicula !== undefined) {
+
+
+      //caso de actualizar
+      if (this.objFavorite !== undefined) {
+        console.log("actualizar");
+
+       
+
+        if (this.idFavorite !== undefined) {
+          this.objFavorite.notaUsuario = this.notaPelicula
+          delete this.objFavorite._id
+          delete this.objFavorite.__v
+
+          this._favoriteService.updateFavorite(this.idFavorite, this.objFavorite).subscribe(
+            res => {
+              if (res) {
+                this.success('Favorito actualizado con éxito')
+
+                console.log(this.objFavorite);
+                
+              } else {
+                this.errorToast('Fallo al actualizar el favorito')
+                this.notaPelicula = 0
+
+              }
+            }
+          )
+        }
+
+
+
+
+
+      } else {
+        console.log("añadir");
+
+        this.objFavorite = {
+          idPelicula: this.idMedia,
+          idUsuario: this.idUser,
+          notaUsuario: this.notaPelicula
+        }
+
+        this._favoriteService.addFavorite(this.objFavorite).subscribe(
+          res => {
+            if (Object.keys(res).length > 0) {
+              this.success('Favorito actualizado con éxito')
+              this.objFavorite = res
+
+              this.notaPelicula = res.notaUsuario
+
+            } else {
+              this.errorToast('Fallo al actualizar el favorito')
+              this.notaPelicula = 0
+            }
+          }
+        )
+
+
+      }
+
+
+      this.visiblePuntuacion = false
+
+
+    } else {
+      this.errorToast('Debes marcar una puntuación del 0 al 10')
+    }
+  }
+
+  seeMoreActors() {
     this.visibleModal = true;
   }
 

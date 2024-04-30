@@ -41,7 +41,8 @@
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#" routerLink="/actores-crud" >Actores</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#" routerLink="/comentarios" >Comentarios</a></li>
+                <li><a class="dropdown-item" href="#" routerLink="/comentarios" >Comentarios</a></li><li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#" routerLink="/comentarios" >Usuarios</a></li>
               </ul>
             </li>
           </ul>
@@ -59,7 +60,8 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="#" [routerLink]="'favoritos/'+idUser">Favoritos</a></li>
-              
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#" [routerLink]="'ratings/'+idUser">Mis Valoraciones</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item cursor" (click)="onLogout()">Cerrar sesión</a></li>
             </ul>

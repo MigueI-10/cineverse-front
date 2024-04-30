@@ -24,7 +24,13 @@ export const routes: Routes = [
             },
             {
                 path: 'favoritos/:id',
+                canActivate: [isAuthenticatedGuard],
                 loadComponent: () => import('./components/favorites/favorites.component').then(c => c.FavoritesComponent)
+            },
+            {
+                path: 'ratings/:id',
+                // canActivate: [isAuthenticatedGuard],
+                loadComponent: () => import('./components/ratings/ratings.component').then(c => c.RatingsComponent)
             },
             {
                 path: 'media/:id',

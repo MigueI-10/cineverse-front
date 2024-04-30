@@ -31,6 +31,20 @@ export class FavoriteService {
     );
   }
 
+  findRatingsFromUser(id: string): Observable<FavoriteResponse[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<FavoriteResponse[]>(`${this.urlBackEnd}/favorite/user-ratings/${id}`, { headers }).pipe(
+      map(res => {
+        return res;
+      }),
+      catchError(error => {
+        return of([] as FavoriteResponse[])
+      })
+    );
+  }
+
   checkFavoriteUserMedia(idUser: string, idMedia: string): Observable<FavoriteResponse> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
