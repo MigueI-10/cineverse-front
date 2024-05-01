@@ -17,6 +17,25 @@
     text-decoration: none;
   }
 
+
+.banderas{
+  display: flex;
+  gap: 1em;
+}
+
+  .language{
+    cursor: pointer;
+  }
+
+  .language:hover{
+    box-shadow: 0 0 8px #007bff;
+  }
+ 
+  .language img{
+    height: 32px;
+  }
+
+
   @media (max-width: 800px) {
     :host #navbarNav{
       margin-left: 0.5em;

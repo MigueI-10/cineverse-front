@@ -76,6 +76,11 @@ export const routes: Routes = [
                  canActivate: [isAdminGuard],
                 loadComponent: ()=>import('./components/comentarios/comentarios.component').then(c=>c.ComentariosComponent)
             },
+            { //para añadir normal
+                path:'user-list', 
+                //  canActivate: [isAdminGuard],
+                loadComponent: ()=>import('./components/auth/user-list/user-list.component').then(c=>c.UserListComponent)
+            },
             
         ]
     },

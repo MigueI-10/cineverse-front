@@ -22,13 +22,15 @@
           <a class="nav-link" routerLink="/busqueda" href="#">Filtros</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link" (click)="switchLanguage('es')">Español</a>
-        </li>
+        <div class="banderas">
+          <li class="nav-item">
+            <a class="nav-link" (click)="switchLanguage('es')" class="language"><img src="https://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/spain.png" alt=""></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="switchLanguage('en')" class="language"><img src="https://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/uk.png" alt=""></a>
+          </li>
+        </div>
 
-        <li class="nav-item">
-          <a class="nav-link"  (click)="switchLanguage('en')">Ingles</a>
-        </li>
 
         @if(mainRole === "admin"){
           <ul class="navbar-nav">
@@ -42,7 +44,7 @@
                 <li><a class="dropdown-item" href="#" routerLink="/actores-crud" >Actores</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="#" routerLink="/comentarios" >Comentarios</a></li><li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#" routerLink="/comentarios" >Usuarios</a></li>
+                <li><a class="dropdown-item" href="#" routerLink="/user-list" >Usuarios</a></li>
               </ul>
             </li>
           </ul>

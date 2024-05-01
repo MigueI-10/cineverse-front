@@ -1,0 +1,70 @@
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.imagenPoster {
+    max-width: 40vh;
+    overflow: hidden;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.poster {
+    width: auto;
+    max-height: 100%;
+}
+
+.actorData {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.nameActor {
+    font-size: 2.4em;
+    text-align: center;
+}
+
+.mediaDesc p {
+    text-align: justify;
+    font-size: 16px;
+}
+
+.otherData {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    gap: 1.6em;
+}
+
+.gridAct {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    /* Espacio entre los elementos */
+}
+
+.tituloAct {
+    background-color: #afc8f0;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(139, 162, 230, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.tituloAct:hover{
+    transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+  }
+
+@media (min-width: 900px) {
+    .mainContent {
+        flex-direction: row;
+    }
+
+    .otherData {
+        flex-direction: row;
+    }
+}

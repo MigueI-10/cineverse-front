@@ -1,0 +1,9 @@
+<h1>Lista de Usuarios</h1>
+
+<mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color">
+    <mat-button-toggle (click)="getBanned(false)">Usuarios Sin Baneo</mat-button-toggle>
+    <mat-button-toggle (click)="getBanned(true)">Usuarios Baneados</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <p-toast></p-toast>
+ <hr> 

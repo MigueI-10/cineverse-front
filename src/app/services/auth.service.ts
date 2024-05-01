@@ -177,6 +177,42 @@ export class AuthService {
     );
   }
 
+  listAllUsers():Observable<User[]>{
+
+    const token = localStorage.getItem('token');
+    // console.log(token);
+    // console.log(id);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<User[]>(`${this.baseUrl}/auth`, { headers }).pipe(
+      map(res=>{
+          return res;
+      }),
+      catchError(error=>{
+        console.log("Error al obtener los usuarios. " + error);
+        return of ([] as User[])
+      })
+    );
+  }
+
+  getUsersByBan(ban:boolean):Observable<User[]>{
+
+    const token = localStorage.getItem('token');
+    // console.log(token);
+    // console.log(id);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get<User[]>(`${this.baseUrl}/auth/user-list/${ban}`, { headers }).pipe(
+      map(res=>{
+          return res;
+      }),
+      catchError(error=>{
+        console.log("Error al obtener los usuarios. " + error);
+        return of ([] as User[])
+      })
+    );
+  }
+
 
   logout() {
     localStorage.removeItem('token');

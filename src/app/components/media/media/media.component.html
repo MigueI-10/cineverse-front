@@ -21,16 +21,16 @@
 
             <div class="puntuarMedia" (click)="addMarkFavorite()">
                 @if (objFavorite && objFavorite.notaUsuario) {
-                    <!-- @if (objFavorite.notaUsuario) { -->
-                        <i class="pi pi-star-fill" style="font-size: 1.5rem"></i>
-                        <span><b>{{objFavorite.notaUsuario}}</b>/10</span>
-                    <!-- }@else {
+                <!-- @if (objFavorite.notaUsuario) { -->
+                <i class="pi pi-star-fill" style="font-size: 1.5rem"></i>
+                <span><b>{{objFavorite.notaUsuario}}</b>/10</span>
+                <!-- }@else {
                         <i class="pi pi-star" style="font-size: 1.5rem"></i>
                         <span>Puntuar</span>
                     } -->
                 }@else {
-                    <i class="pi pi-star" style="font-size: 1.5rem"></i>
-                    <span>Puntuar</span>
+                <i class="pi pi-star" style="font-size: 1.5rem"></i>
+                <span>Puntuar</span>
                 }
             </div>
 
@@ -56,14 +56,6 @@
                 </button>
             </div>
 
-
-
-            <!-- 
-            <p-rating [(ngModel)]="notaPelicula" [cancel]="false" [stars]="10"></p-rating>
-            <button (click)="savePuntuacion()" class="rounded-button">
-                <i class="pi pi-send" style="font-size: 1rem"></i>
-                Guardar
-            </button> -->
 
         </p-dialog>
 

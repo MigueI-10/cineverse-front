@@ -1,1 +1,67 @@
-<img [src]="objActor.imagen" alt="">
+@if(objActor){
+
+
+
+    <div class="mainContent">
+        <div class="imagenPoster mx-auto">
+                <img [src]="objActor.imagen" [alt]="objActor.nombre" class="img-fluid poster">
+        </div>
+
+        <div class="actorData container">
+
+            <h1 class="nameActor">{{objActor.nombre | titlecase}}</h1>
+
+
+            <div class="mediaDesc">
+                <h1>Biografia</h1>
+                <p>{{objActor.biografia}}</p>
+            </div>
+
+            <div class="otherData">
+                
+                <div class="fecha"> 
+                   <h2>Fecha de Nacimiento</h2>
+                    <h3>{{objActor.fechaNacimiento | date: 'dd/MM/yyyy' }}</h3>
+                </div> 
+                    <div class="nacionalidad">
+                        <h2>Nacionalidad</h2>
+                        <h3>{{objActor.nacionalidad }}</h3>
+                    </div>
+                
+            </div>   
+            <h1>Otras Actuaciones</h1>
+            <div class="actuaciones">
+
+
+                <div class="gridAct">
+
+                    @for (item of objActor.actuaciones; track $index) {
+
+                        <div class="tituloAct">{{item}}</div>
+
+
+                    }
+                
+                </div>
+             
+            </div>  
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+    <!-- <img [src]="objActor.imagen" alt=""> -->
+}@else {
+    @if (showMessage) {
+        <p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages>
+    }
+
+}
