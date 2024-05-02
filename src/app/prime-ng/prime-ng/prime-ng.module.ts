@@ -12,6 +12,9 @@ import { MessagesModule } from 'primeng/messages';
 import { CarouselModule } from 'primeng/carousel';
 import { DialogModule } from 'primeng/dialog';
 import { RatingModule } from 'primeng/rating';
+import { PanelModule } from 'primeng/panel';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 
@@ -39,7 +42,10 @@ import { RatingModule } from 'primeng/rating';
     MessagesModule, 
     CarouselModule, 
     DialogModule,
-    RatingModule
+    RatingModule,
+    PanelModule,
+    ToggleButtonModule,
+    MultiSelectModule
   ]
 })
 export class PrimeNgModule { }

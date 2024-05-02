@@ -177,6 +177,22 @@ export class AuthService {
     );
   }
 
+  unBanUser(id:string):Observable<boolean>{
+
+    const token = localStorage.getItem('token');
+    // console.log(token);
+    // console.log(id);
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    
+    return this.http.patch(`${this.baseUrl}/auth/unban-user/${id}`, null, { headers }).pipe(
+      map(()=>true),
+      catchError(error=>{
+        console.log(error);
+        return of (false)
+      })
+    );
+  }
+
   listAllUsers():Observable<User[]>{
 
     const token = localStorage.getItem('token');

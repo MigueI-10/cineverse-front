@@ -1,1 +1,41 @@
-<p>media-filters works!</p>
+<mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Filtros de búsqueda
+        </mat-panel-title>
+        <mat-panel-description>
+          
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+
+      <div class="cuadroFiltros">
+        <div class="tipo">
+            <h3>Pelicula/Serie</h3>
+            <mat-button-toggle-group name="tipo" class="custom-button-group" multiple>
+                <mat-button-toggle value="pelicula" class="custom-button">Película</mat-button-toggle>
+                <mat-button-toggle value="serie" class="custom-button">Serie</mat-button-toggle>
+              </mat-button-toggle-group>
+        </div>
+
+        <div class="tipo">
+            <h3>Nota</h3>
+            <mat-button-toggle-group name="tipo" class="custom-button-group" multiple>
+                <mat-button-toggle value="pelicula" class="custom-button">10</mat-button-toggle>
+                <mat-button-toggle value="serie" class="custom-button">9</mat-button-toggle>
+                <mat-button-toggle value="serie" class="custom-button">8</mat-button-toggle>
+              </mat-button-toggle-group>
+        </div>
+
+        <div class="tipo">
+            <h3>Genero</h3>
+            
+                <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" optionLabel="name"></p-multiSelect>
+        
+        </div>
+
+
+      </div>
+     </mat-expansion-panel>
+</mat-accordion>

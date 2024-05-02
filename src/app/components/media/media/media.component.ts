@@ -321,12 +321,9 @@ export class MediaComponent implements OnInit {
           }
         )
 
-
       }
 
-
       this.visiblePuntuacion = false
-
 
     } else {
       this.errorToast('Debes marcar una puntuación del 0 al 10')

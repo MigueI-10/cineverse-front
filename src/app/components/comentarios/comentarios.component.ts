@@ -114,52 +114,7 @@ export class ComentariosComponent implements OnInit {
    
     }
   }
-
-  banearUsuario(id: string, idComment: string,  event: Event) {
-    if (id !== "") {
-      this.confirmationService.confirm({
-        target: event.target as EventTarget,
-        message: 'Seguro que quieres banear al Usuario?',
-        header: 'Accion Importante',
-        icon: 'pi pi-exclamation-triangle',
-        acceptIcon: "none",
-        rejectIcon: "none",
-        rejectButtonStyleClass: "p-button-text",
-        acceptLabel: "Si",
-        rejectLabel: "No",
-        accept: () => {
-          this._authService.banUser(id).subscribe(
-            res => {
-              if (res) {
-                this.success('Usuario baneado correctamente')
-
-                this._commentService.delComment(idComment).subscribe(
-                  res => {
-                    if (res) {
-                      this.success('Comentario eliminado correctamente')
-                    } else {
-                      this.errorToast('Error al eliminar el comentario')
-                    } 
-                  }
-                )
-              } else {
-                this.errorToast('Error al banear el comentario')
-              }
-
-              this.aComments = []
-              this.onMediaChange()
-            }
-          )
-          
-        },
-        reject: () => {
-          this.messageService.add({ severity: 'info', summary: 'Informacion', detail: 'No se ha borrado el actor', life: 3000 });
-        }
-      }); 
-    }
-  }
-
-
+  
   success(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }

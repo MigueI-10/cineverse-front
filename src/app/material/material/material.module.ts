@@ -11,6 +11,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -20,6 +21,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
   exports: [MatFormFieldModule, MatInputModule, 
     MatIconModule, MatButtonModule, MatCardModule,
     MatTableModule, MatPaginatorModule, MatSortModule,
-    MatTooltipModule,MatTableModule, MatChipsModule, MatButtonToggleModule ]
+    MatTooltipModule,MatTableModule, MatChipsModule, MatButtonToggleModule, MatExpansionModule ]
 })
 export class MaterialModule { }

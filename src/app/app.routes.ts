@@ -23,6 +23,10 @@ export const routes: Routes = [
                 loadComponent: () => import('./components/media/media-search/media-search.component').then(c => c.MediaSearchComponent)
             },
             {
+                path: 'filtros',
+                loadComponent: () => import('./components/media/media-filters/media-filters.component').then(c => c.MediaFiltersComponent)
+            },
+            {
                 path: 'favoritos/:id',
                 canActivate: [isAuthenticatedGuard],
                 loadComponent: () => import('./components/favorites/favorites.component').then(c => c.FavoritesComponent)
@@ -78,7 +82,7 @@ export const routes: Routes = [
             },
             { //para añadir normal
                 path:'user-list', 
-                //  canActivate: [isAdminGuard],
+                 canActivate: [isAdminGuard],
                 loadComponent: ()=>import('./components/auth/user-list/user-list.component').then(c=>c.UserListComponent)
             },
             
