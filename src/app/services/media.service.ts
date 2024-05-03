@@ -108,6 +108,18 @@ export class MediaService {
     );
   }
 
+  getGenres(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.urlBackEnd}/media/genres`).pipe(
+      map(res=>{
+          return res;
+      }),
+      catchError(error=>{
+        console.log("Error al obtener los comentarios. " + error);
+        return of ([] as string[])
+      })
+    );
+  }
+
   getSearchResults(filters: {search: string, limit: number, skip: number}): Observable<Media[]> {
 
     return this.http.get<Media[]>(`${this.urlBackEnd}/media/search`, {params: filters}).pipe(

@@ -1,4 +1,4 @@
-<mat-accordion>
+<!-- <mat-accordion>
     <mat-expansion-panel hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -10,32 +10,77 @@
       </mat-expansion-panel-header>
 
 
-      <div class="cuadroFiltros">
-        <div class="tipo">
-            <h3>Pelicula/Serie</h3>
-            <mat-button-toggle-group name="tipo" class="custom-button-group" multiple>
-                <mat-button-toggle value="pelicula" class="custom-button">Película</mat-button-toggle>
-                <mat-button-toggle value="serie" class="custom-button">Serie</mat-button-toggle>
-              </mat-button-toggle-group>
-        </div>
-
-        <div class="tipo">
-            <h3>Nota</h3>
-            <mat-button-toggle-group name="tipo" class="custom-button-group" multiple>
-                <mat-button-toggle value="pelicula" class="custom-button">10</mat-button-toggle>
-                <mat-button-toggle value="serie" class="custom-button">9</mat-button-toggle>
-                <mat-button-toggle value="serie" class="custom-button">8</mat-button-toggle>
-              </mat-button-toggle-group>
-        </div>
-
-        <div class="tipo">
-            <h3>Genero</h3>
-            
-                <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" optionLabel="name"></p-multiSelect>
-        
-        </div>
+     
 
 
       </div>
      </mat-expansion-panel>
-</mat-accordion>
+</mat-accordion> -->
+<div class="filter-section">
+  <!-- Título -->
+  <div class="filter-section-title" (click)="toggleCollapse()" data-bs-toggle="collapse" href="#collapseExample">
+    <h3 class="my-2">Filtros de búsqueda</h3>
+    <span class="toggle-icon">
+      {{ isCollapsed ? '▼' : '▲' }}
+    </span>
+  </div>
+
+  <!-- Área de filtros  [ngClass]="{ 'show': !isCollapsed }" -->
+  <div class="filter-section-content collapse"  class="collapse" id="collapseExample">
+    <!-- Contenido de los filtros -->
+    <div class="cuadroFiltros card card-body">
+      <div class="tipo">
+          <h3>Pelicula/Serie</h3>
+          <mat-button-toggle-group name="tipo" class="custom-button-group" multiple>
+              <mat-button-toggle value="pelicula" class="custom-button">Película</mat-button-toggle>
+              <mat-button-toggle value="serie" class="custom-button">Serie</mat-button-toggle>
+            </mat-button-toggle-group>
+      </div>
+    
+      <div class="tipo">
+          <h3>Nota</h3>
+          <mat-button-toggle-group name="tipo" class="custom-button-group" multiple>
+              <mat-button-toggle value="pelicula" class="custom-button">+9</mat-button-toggle>
+              <mat-button-toggle value="serie" class="custom-button">+8</mat-button-toggle>
+              <mat-button-toggle value="serie" class="custom-button">+7</mat-button-toggle>
+              <mat-button-toggle value="serie" class="custom-button">+5</mat-button-toggle>
+            </mat-button-toggle-group>
+      </div>
+    
+      <div class="generos">
+          <h3>Genero</h3>    
+              <p-multiSelect [options]="aGeneros" [(ngModel)]="selectedGenre" 
+              optionLabel="" [maxSelectedLabels]="2" [selectedItemsLabel]="'{0}' + ' genres selected'">
+              </p-multiSelect>
+      </div>
+
+      <div class="tipo">
+        <h3>Años</h3>
+        <mat-button-toggle-group name="tipo" class="custom-button-group" multiple>
+            <mat-button-toggle value="pelicula" class="custom-button">2020</mat-button-toggle>
+            <mat-button-toggle value="serie" class="custom-button">2010</mat-button-toggle>
+            <mat-button-toggle value="serie" class="custom-button">2000</mat-button-toggle>
+          </mat-button-toggle-group>
+      </div>
+
+      <div class="tipo">
+        <h3>Episodios</h3>
+        <mat-button-toggle-group name="tipo" class="custom-button-group" multiple>
+            <mat-button-toggle value="pelicula" class="custom-button">+100</mat-button-toggle>
+            <mat-button-toggle value="serie" class="custom-button">Hasta 50</mat-button-toggle>
+            <mat-button-toggle value="serie" class="custom-button">Menos de 50</mat-button-toggle>
+          </mat-button-toggle-group>
+      </div>
+
+      <div class="tipo">
+        <h3>Duración</h3>
+        <mat-button-toggle-group name="tipo" class="custom-button-group" multiple>
+            <mat-button-toggle value="pelicula" class="custom-button">+3 horas</mat-button-toggle>
+            <mat-button-toggle value="serie" class="custom-button">+2 horas</mat-button-toggle>
+            <mat-button-toggle value="serie" class="custom-button">+1 hora</mat-button-toggle>
+          </mat-button-toggle-group>
+      </div>
+  </div>
+</div>
+
+
