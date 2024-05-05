@@ -45,7 +45,6 @@ export class AuthService {
           //almacenar el token en localStorage
           localStorage.setItem('token', res.token);
           this.isLoggedInSubject.next(true);
-          console.log('token grabado');
           return true;
         }),
         catchError(error => {

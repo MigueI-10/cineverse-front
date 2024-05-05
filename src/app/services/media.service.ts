@@ -1,9 +1,10 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, catchError, map, of } from 'rxjs';
 import { Media } from '../interfaces/media.interface';
 import { CommentResponse } from '../interfaces/comments-response.interface';
 import { environment } from '../../environments/environments';
+import { Filter } from '../interfaces/filter.interface';
 
 @Injectable({ providedIn: 'root' })
 export class MediaService {
@@ -129,6 +130,58 @@ export class MediaService {
       })
     );
   }
+
+  filterByQuery(filters: Partial<Filter>): Observable<Media[]> {
+
+    // let params = new HttpParams();
+    const params = this.getParamsFiltered(filters ?? {})
+    // Object.entries(filters).forEach(([key, value]) => {
+    //   if (value !== null && value !== undefined) {
+    //     if (Array.isArray(value)) {
+    //       // Para cada valor en el array, añade un nuevo parámetro con el mismo nombre de clave
+    //       value.forEach(val => {
+    //         params = params.append(key, val);
+    //       });
+    //     } else {
+    //       params = params.set(key, value);
+    //     }
+    //   }
+    // });
+
+    return this.http.get<Media[]>(`${this.urlBackEnd}/media/filter`, {params}).pipe(
+      catchError(error => {
+        console.log("Error al obtener la lista de peliculas. " + error);
+        return of([] as Media[])
+      })
+    );
+  }
+
+  protected getParamsFiltered(filters: { [param: string]: string | number | boolean | ReadonlyArray<string | number | boolean> }): HttpParams {
+    const params = Object.entries(filters)
+        .reduce((params, [key, value]) => {
+            if (typeof value === 'string' && value.trim().length) {
+                return params.set(key, value)
+            }
+
+            if (typeof value === 'number') {
+                return params.set(key, value.toString())
+            }
+
+            if (typeof value === 'boolean') {
+                return params.set(key, value.toString())
+            }
+
+            if (Array.isArray(value) && value.length) {
+                return value.reduce<HttpParams>((params, value) => {
+                    return params.append(key, value)
+                }, params)
+            }
+
+            return params
+        }, new HttpParams())
+
+    return params
+}
 
 
 
