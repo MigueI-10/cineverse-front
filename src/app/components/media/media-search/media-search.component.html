@@ -1,6 +1,6 @@
-<h2>Búsqueda de Películas y Series</h2>
+<h2>{{'searchTitle' | translate}}</h2>
 <mat-form-field style="width: 100%;">
-    <mat-label>Busca series o películas</mat-label>
+    <mat-label>{{'searchLabel' | translate}}</mat-label>
     <input type="text" matInput [formControl]="searchInput" (keyup)="searchMedia()" />
 </mat-form-field>
 
@@ -15,7 +15,10 @@
         </div>
     }@else {
         @if (showMessage) {
-            <p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages>
+            <!-- <p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages> -->
+            <div class="alert alert-warning" role="alert">
+                {{'noResultSearch' | translate}}
+              </div>
         }
             
         

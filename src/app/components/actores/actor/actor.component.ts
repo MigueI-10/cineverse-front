@@ -7,11 +7,12 @@ import { Message, MessageService } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../material/material/material.module';
 import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-actor',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule,PrimeNgModule, MaterialModule],
+  imports: [RouterLink, RouterLinkActive, CommonModule,PrimeNgModule, MaterialModule, TranslateModule],
   providers: [MessageService],
   templateUrl: './actor.component.html',
   styleUrl: './actor.component.css'
@@ -33,7 +34,14 @@ export class ActorComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.mensaje = [{ severity: 'error', summary: 'Error', detail: 'No hay respuesta del servidor compruebe su conexión' }];
+    
+    const lang = localStorage.getItem('selectedLang')
+
+    if(lang === "es"){
+      this.mensaje = [{ severity: 'error', summary: 'Error', detail: `No hay respuesta del servidor, compruebe su conexión` }];
+    }else{
+      this.mensaje = [{ severity: 'error', summary: 'Error', detail: `There is not response from the server. Check your connection` }];
+    }
 
     this._activatedRouter.params.subscribe(
       params => {

@@ -6,11 +6,12 @@ import { MaterialModule } from '../../../material/material/material.module';
 import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
 import { CommentService } from '../../../services/comment.service';
 import { Comment } from '../../../interfaces/comment.interface';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-comment',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule,
+  imports: [RouterLink, RouterLinkActive, CommonModule, TranslateModule,
     PrimeNgModule, MaterialModule, FormsModule, ReactiveFormsModule],
   templateUrl: './add-comment.component.html',
   styleUrl: './add-comment.component.css'

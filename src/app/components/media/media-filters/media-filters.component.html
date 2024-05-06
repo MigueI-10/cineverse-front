@@ -1,7 +1,7 @@
 <div class="filter-section">
   <!-- Título -->
   <div class="filter-section-title" (click)="toggleCollapse()" data-bs-toggle="collapse" href="#collapseExample">
-    <h3 class="my-2">Filtros de búsqueda</h3>
+    <h3 class="my-2">{{'filterTitle' | translate}}</h3>
     <span class="toggle-icon">
       {{ isCollapsed ? '▼' : '▲' }}
     </span>
@@ -10,60 +10,65 @@
   <!-- Área de filtros  [ngClass]="{ 'show': !isCollapsed }" -->
   <div class="filter-section-content collapse"  class="collapse" id="collapseExample">
     <!-- Contenido de los filtros -->
-    <div class="cuadroFiltros card card-body">
-      <div class="tipo">
-          <h3>Pelicula/Serie</h3>
-          <mat-button-toggle-group name="tipo" class="custom-button-group" 
-          multiple [(ngModel)]="filtros.tipo" (change)="changeFilter()">
-              <mat-button-toggle value="pelicula" class="custom-button">Película</mat-button-toggle>
-              <mat-button-toggle value="serie" class="custom-button">Serie</mat-button-toggle>
+      <div class="cuadroFiltros card card-body">
+        <div class="tipo">
+            <h3>{{'mediaSerie' | translate}}</h3>
+            <mat-button-toggle-group name="tipo" class="custom-button-group" 
+            multiple [(ngModel)]="filtros.tipo" (change)="changeFilter()">
+                <mat-button-toggle value="pelicula" class="custom-button">{{'film' | translate}}</mat-button-toggle>
+                <mat-button-toggle value="serie" class="custom-button">{{'series' | translate}}</mat-button-toggle>
+              </mat-button-toggle-group>
+        </div>
+      
+        <div class="tipo">
+            <h3>{{'nota' | translate}}</h3>
+            <mat-button-toggle-group name="nota" class="custom-button-group" [(ngModel)]="filtros.nota" (change)="changeFilter()">
+                <mat-button-toggle [value]="9" class="custom-button">+9</mat-button-toggle>
+                <mat-button-toggle [value]="8" class="custom-button">+8</mat-button-toggle>
+                <mat-button-toggle [value]="7" class="custom-button">+7</mat-button-toggle>
+                <mat-button-toggle [value]="5" class="custom-button">+5</mat-button-toggle>
+              </mat-button-toggle-group>
+        </div>
+      
+        <div class="generos">
+            <h3>{{'genero' | translate}}</h3>    
+                <p-multiSelect [options]="aGeneros" [(ngModel)]="filtros.generos" (onChange)="changeFilter()" 
+                optionLabel="" [maxSelectedLabels]="2" selectedItemsLabel="{0} {{'selectedGenres' | translate}}" placeholder="{{'selectGen' | translate}}">
+                </p-multiSelect>
+        </div>
+
+        <div class="tipo">
+          <h3>{{'anyo' | translate}}</h3>
+          <mat-button-toggle-group name="anyo" class="custom-button-group" multiple [(ngModel)]="filtros.anyo" (change)="changeFilter()" >
+              <mat-button-toggle [value]="2020" class="custom-button">2020</mat-button-toggle>
+              <mat-button-toggle [value]="2010" class="custom-button">2010</mat-button-toggle>
+              <mat-button-toggle [value]="2000" class="custom-button">2000</mat-button-toggle>
             </mat-button-toggle-group>
-      </div>
-    
-      <div class="tipo">
-          <h3>Nota</h3>
-          <mat-button-toggle-group name="nota" class="custom-button-group" [(ngModel)]="filtros.nota" (change)="changeFilter()">
-              <mat-button-toggle [value]="9" class="custom-button">+9</mat-button-toggle>
-              <mat-button-toggle [value]="8" class="custom-button">+8</mat-button-toggle>
-              <mat-button-toggle [value]="7" class="custom-button">+7</mat-button-toggle>
-              <mat-button-toggle [value]="5" class="custom-button">+5</mat-button-toggle>
+        </div>
+
+        <div class="tipo">
+          <h3>{{'episodios' | translate}}</h3>
+          <mat-button-toggle-group name="episodios" class="custom-button-group" [(ngModel)]="filtros.episodios" (change)="changeFilter()">
+              <mat-button-toggle value="+100" class="custom-button">+100</mat-button-toggle>
+              <mat-button-toggle value="+50" class="custom-button">+50</mat-button-toggle>
+              <mat-button-toggle value="-50" class="custom-button">{{'menos50' | translate}}</mat-button-toggle>
             </mat-button-toggle-group>
-      </div>
-    
-      <div class="generos">
-          <h3>Genero</h3>    
-              <p-multiSelect [options]="aGeneros" [(ngModel)]="filtros.generos" (onChange)="changeFilter()" 
-              optionLabel="" [maxSelectedLabels]="2" [selectedItemsLabel]="'{0}' + ' genres selected'" placeholder="Selecciona un genero">
-              </p-multiSelect>
-      </div>
+        </div>
 
-      <div class="tipo">
-        <h3>Años</h3>
-        <mat-button-toggle-group name="anyo" class="custom-button-group" multiple [(ngModel)]="filtros.anyo" (change)="changeFilter()" >
-            <mat-button-toggle [value]="2020" class="custom-button">2020</mat-button-toggle>
-            <mat-button-toggle [value]="2010" class="custom-button">2010</mat-button-toggle>
-            <mat-button-toggle [value]="2000" class="custom-button">2000</mat-button-toggle>
-          </mat-button-toggle-group>
-      </div>
+        <div class="tipo">
+          <h3>{{'duracion' | translate}}</h3>
+          <mat-button-toggle-group name="duracion" class="custom-button-group" [(ngModel)]="filtros.duracion" (change)="changeFilter()">
+              <mat-button-toggle [value]="3" class="custom-button">{{'mastres' | translate}}</mat-button-toggle>
+              <mat-button-toggle [value]="2" class="custom-button">{{'masdos' | translate}}</mat-button-toggle>
+              <mat-button-toggle [value]="1" class="custom-button">{{'masuna' | translate}}</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
 
-      <div class="tipo">
-        <h3>Episodios</h3>
-        <mat-button-toggle-group name="episodios" class="custom-button-group" multiple [(ngModel)]="filtros.episodios" (change)="changeFilter()">
-            <mat-button-toggle value="+100" class="custom-button">+100</mat-button-toggle>
-            <mat-button-toggle value="+50" class="custom-button">+50</mat-button-toggle>
-            <mat-button-toggle value="-50" class="custom-button">Menos de 50</mat-button-toggle>
-          </mat-button-toggle-group>
+        <div class="btnClean my-auto">
+            <button (click)="resetFull()" class="btn btn-success">{{'cleanFiltros' | translate}}</button>
+        </div>
       </div>
-
-      <div class="tipo">
-        <h3>Duración</h3>
-        <mat-button-toggle-group name="duracion" class="custom-button-group" [(ngModel)]="filtros.duracion" (change)="changeFilter()">
-            <mat-button-toggle [value]="3" class="custom-button">+3 horas</mat-button-toggle>
-            <mat-button-toggle [value]="2" class="custom-button">+2 horas</mat-button-toggle>
-            <mat-button-toggle [value]="1" class="custom-button">+1 hora</mat-button-toggle>
-          </mat-button-toggle-group>
-      </div>
-  </div>
+    </div>
 </div>
 
 @if(aMedia.length > 0 || aMedia == null){
@@ -76,9 +81,12 @@
       }
   </div>
 }@else {
-  <!-- @if (showMessage) {
-      <p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages>
-  } -->
+  @if (showMessage) {
+      <!-- <p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages> -->
+      <div class="alert alert-warning" role="alert">
+        {{'noResultsFilter' | translate}}
+      </div>
+  }
       
   
 }

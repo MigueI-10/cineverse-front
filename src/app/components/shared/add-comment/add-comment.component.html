@@ -2,15 +2,15 @@
     <h3><strong>{{userName | titlecase}}</strong></h3>
         <form [formGroup]="formComment">
         <mat-form-field class="w-100">
-            <textarea matInput [placeholder]="'Deja un comentario'" formControlName="contenido"></textarea>
+            <textarea matInput placeholder="{{'leaveComment' | translate}}" formControlName="contenido"></textarea>
             @if (contenido.errors?.['required']) {
-                <mat-error class="text-danger font-italic">El contenido del comentario es obligatorio</mat-error>
+                <mat-error class="text-danger font-italic">{{'requiredComment' | translate}}</mat-error>
             }
         </mat-form-field>
 
         <button (click)="addComentario()" class="rounded-button">
             <i class="pi pi-send" style="font-size: 1rem"></i>
-            Enviar
+            {{'enviar' | translate}}
         </button>
     </form>
 </div>

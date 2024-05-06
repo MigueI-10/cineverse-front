@@ -8,11 +8,12 @@ import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
 import { MediaService } from '../../../services/media.service';
 import { Filter } from '../../../interfaces/filter.interface';
 import { Media } from '../../../interfaces';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-media-filters',
   standalone: true,
-  imports: [CommonModule, PrimeNgModule, MaterialModule, ReactiveFormsModule, InfiniteScrollModule, RouterLink, RouterLinkActive, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, PrimeNgModule, MaterialModule, ReactiveFormsModule, InfiniteScrollModule, RouterLink, RouterLinkActive, ReactiveFormsModule, FormsModule, TranslateModule],
   templateUrl: './media-filters.component.html',
   styleUrl: './media-filters.component.css'
 })
@@ -23,6 +24,7 @@ export class MediaFiltersComponent implements OnInit {
   aGeneros: string[] = [];
   aMedia: Media[] = []
   isMaxSkip: boolean = false
+  public showMessage = false
 
   filtros!: Filter;
 
@@ -44,18 +46,29 @@ export class MediaFiltersComponent implements OnInit {
   }
 
   cargarGeneros() {
-    this._mediaService.getGenres().subscribe(
-      res => {
-        console.log(res);
-        this.aGeneros = res
-      }
-    )
+
+    const saveGenres = localStorage.getItem('genres')
+
+    if (saveGenres) {
+      this.aGeneros = JSON.parse(saveGenres);
+    }else{
+      this._mediaService.getGenres().subscribe(
+        res => {
+          this.aGeneros = res
+          localStorage.setItem('genres', JSON.stringify(res));
+        }
+      )
+    }
   }
 
   cargarMedia() {
     this._mediaService.filterByQuery(this.filtros).subscribe(
       res => {
-        console.log(res);
+        if(res.length > 0){
+          this.aMedia = this.aMedia.concat(res)
+        }else{
+          this.showMessage = true
+        }   
       }
     )
   }
@@ -67,13 +80,29 @@ export class MediaFiltersComponent implements OnInit {
       tipo: this.filtros?.tipo ?? [],
       nota: this.filtros?.nota ?? 0,
       generos: this.filtros?.generos ?? [],
-      anyo: this.filtros?.anyo ?? 0,
+      anyo: this.filtros?.anyo ?? [],
       episodios: this.filtros?.episodios ?? [],
-      duracion: this.filtros?.duracion ?? 0,
+      duracion: this.filtros?.duracion ?? '0',
 
     }
 
     this.isMaxSkip = false
+    this.aMedia = []
+  }
+
+  resetFull(){
+    this.filtros = {
+      limit: this.filtros?.limit ?? 10,
+      skip: this.filtros?.skip ?? 0,
+      tipo: [],
+      nota:  0,
+      generos: [],
+      anyo: [],
+      episodios: [],
+      duracion: 0,
+
+    }
+    this.showMessage = false
     this.aMedia = []
   }
 
@@ -82,39 +111,15 @@ export class MediaFiltersComponent implements OnInit {
 
 		this.filtros.skip += this.filtros.limit
 
-		// this.loadDomains2()
+		this.cargarMedia()
 
-    // if (this.maxSkip === null || this.filters.skip < this.maxSkip) {
-    //   this.filters.skip += this.filters.limit;
-    //   this.searchMedia();
-    // }
   }
 
   public changeFilter() {
 
-    // let {  skip, limit, activo, planes, sort, order, searchTerm } = this.filters
-
-    console.log(this.filtros);
     this.filtros.skip = 0
 
      this.resetFilters()
      this.cargarMedia()
   }
-
-  // resetFilters(filters?: Partial<Filter>): void {
-  // 	this.filters = {
-  // 		sort: filters?.sort ?? 'dominio',
-  // 		order: filters?.order ?? -1,
-  // 		limit: filters?.limit ?? 30,
-  // 		skip: filters?.skip ?? 0,
-  // 		activo: filters?.activo ?? [],
-  //     planes: filters?.planes ?? [],
-  //     searchTerm: filters?.searchTerm ?? ''
-  // 	}
-
-  //   this.isMaxSkip = false
-  // 	this.domains = []
-  // }
-
-
 }

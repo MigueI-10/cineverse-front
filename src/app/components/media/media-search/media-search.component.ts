@@ -9,12 +9,13 @@ import { Media } from '../../../interfaces';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Message } from 'primeng/api';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-media-search',
   standalone: true,
-  imports: [CommonModule, PrimeNgModule, MaterialModule, ReactiveFormsModule, InfiniteScrollModule,  RouterLink, RouterLinkActive],
+  imports: [CommonModule, PrimeNgModule, MaterialModule, ReactiveFormsModule, InfiniteScrollModule,  RouterLink, RouterLinkActive, TranslateModule],
   templateUrl: './media-search.component.html',
   styleUrl: './media-search.component.css'
 })
@@ -31,7 +32,7 @@ export class MediaSearchComponent implements OnInit, OnDestroy {
   }
   public aMedia: Media[] = []
   public maxSkip: number | null = null;
-  public mensaje : Message[] = []
+  // public mensaje : Message[] = []
   public showMessage = false
 
   constructor(private _mediaService: MediaService) {
@@ -40,7 +41,7 @@ export class MediaSearchComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    this.mensaje = [{ severity: 'info', summary: 'Info', detail: 'No hay resultados para este término de búsqueda' }];
+    // this.mensaje = [{ severity: 'info', summary: 'Info', detail: 'No hay resultados para este término de búsqueda' }];
 
     this.debouncerSubscription = this.debouncer
       .pipe(
@@ -48,16 +49,16 @@ export class MediaSearchComponent implements OnInit, OnDestroy {
         switchMap(value => this.sendValueBackend(value))
       )
       .subscribe(value => {
-       
+        console.log(value);
         if (value !== null) {
-
+          if(value.length === 0) this.showMessage = true
           this.aMedia = this.aMedia.concat(value)
 
           if (value.length < this.filters.limit) {
             this.maxSkip = this.filters.skip;
           }
         }else{
-          this.showMessage = true
+          this.showMessage = false
         }
       })
   }

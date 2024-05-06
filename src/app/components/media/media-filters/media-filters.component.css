@@ -87,10 +87,17 @@ mat-panel-title{
     .resultados {
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
+    .btnClean{
+        padding-top: 3em;
+    }
 }
 
 @media (min-width: 1401px) {
     .resultados {
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    .btnClean{
+        padding-top: 3em;
     }
 }

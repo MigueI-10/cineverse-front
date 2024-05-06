@@ -5,7 +5,7 @@ export interface Filter{
     tipo: string[],
     nota: number,
     generos: string[],
-    anyo: number,
+    anyo: number[],
     episodios: string[],
     duracion: number
 }

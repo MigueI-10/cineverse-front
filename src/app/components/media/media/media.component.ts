@@ -16,11 +16,12 @@ import { FavoriteResponse } from '../../../interfaces/favorite-response.interfac
 import { FavoriteService } from '../../../services/favorite.service';
 import { catchError, of } from 'rxjs';
 import { Favorite } from '../../../interfaces/create-favorite.interface';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-media',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule,
+  imports: [RouterLink, RouterLinkActive, CommonModule, TranslateModule,
     PrimeNgModule, MaterialModule, FormsModule, ReactiveFormsModule, AddCommentComponent],
   providers: [MessageService],
   templateUrl: './media.component.html',
@@ -120,20 +121,26 @@ export class MediaComponent implements OnInit {
   }
 
   setearMensajes() {
-    this.mensaje = [{ severity: 'error', summary: 'Error', detail: 'No hay respuesta del servidor compruebe su conexión' }];
-    this.noComentMessage = [{ severity: 'info', summary: '', detail: `Esta ${this.objMedia.tipo} no tiene ningún comentario` }];
+
+    const lang = localStorage.getItem('selectedLang')
+
+    if(lang === "es"){
+      this.mensaje = [{ severity: 'error', summary: 'Error', detail: `No hay respuesta del servidor compruebe su conexión` }];
+      this.noComentMessage = [{ severity: 'info', summary: '', detail: `Esta ${this.objMedia.tipo} no tiene comentarios` }];
+    }else{
+      this.mensaje = [{ severity: 'error', summary: 'Error', detail: `There is not response from the server` }];
+      this.noComentMessage = [{ severity: 'info', summary: '', detail: `This media/series has no comments` }];
+    }
   }
 
   cargarMedia() {
     this._mediaService.getMediaById(this.idMedia).subscribe(
       res => {
-        console.log(res);
+       
         if (Object.keys(res).length > 0) {
           this.objMedia = res
           this.setearMensajes()
           this.cargarComentarios(this.idMedia)
-
-
         } else {
           this.showMessage = true;
         }
@@ -152,7 +159,6 @@ export class MediaComponent implements OnInit {
         res => {
           if (Object.keys(res).length > 0) {
             this.objFavorite = res
-            console.log(this.objFavorite);
             this.isFavorite = this.objFavorite?.esFavorito
             this.idFavorite = this.objFavorite?._id
             this.notaPelicula = this.objFavorite?.notaUsuario

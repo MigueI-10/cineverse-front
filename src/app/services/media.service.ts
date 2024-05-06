@@ -135,18 +135,6 @@ export class MediaService {
 
     // let params = new HttpParams();
     const params = this.getParamsFiltered(filters ?? {})
-    // Object.entries(filters).forEach(([key, value]) => {
-    //   if (value !== null && value !== undefined) {
-    //     if (Array.isArray(value)) {
-    //       // Para cada valor en el array, añade un nuevo parámetro con el mismo nombre de clave
-    //       value.forEach(val => {
-    //         params = params.append(key, val);
-    //       });
-    //     } else {
-    //       params = params.set(key, value);
-    //     }
-    //   }
-    // });
 
     return this.http.get<Media[]>(`${this.urlBackEnd}/media/filter`, {params}).pipe(
       catchError(error => {
