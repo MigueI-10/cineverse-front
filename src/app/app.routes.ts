@@ -41,6 +41,18 @@ export const routes: Routes = [
                 loadComponent: () => import('./components/media/media/media.component').then(c => c.MediaComponent)
             },
             {
+                path: 'actor/:id',
+                loadComponent: () => import('./components/actores/actor/actor.component').then(c => c.ActorComponent)
+            },
+            {
+                path: 'about',
+                loadComponent: () => import('./components/about/about.component').then(c => c.AboutComponent)
+            },
+            {
+                path: 'help',
+                loadComponent: () => import('./components/help/help.component').then(c => c.HelpComponent)
+            },
+            {
                 path: 'media-crud',
                 canActivate: [isAdminGuard],
                 loadComponent: () => import('./components/media/media-crud/media-crud.component').then(c => c.MediaCrudComponent)
@@ -70,10 +82,6 @@ export const routes: Routes = [
                 path:'actores-frm/:id', 
                 canActivate: [isAdminGuard],
                 loadComponent: ()=>import('./components/actores/act-form/act-form.component').then(c=>c.ActFormComponent)
-            },
-            {
-                path: 'actor/:id',
-                loadComponent: () => import('./components/actores/actor/actor.component').then(c => c.ActorComponent)
             },
             { //para añadir normal
                 path:'comentarios', 

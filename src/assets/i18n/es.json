@@ -68,5 +68,10 @@
     "activeNow": "Tu cuenta se acaba de activar",
     "redirect": "Redirigiendo al login...",
     "activating": "Tu cuenta se está activando...",
-    "wait": "Espera unos segundos"
+    "wait": "Espera unos segundos",
+    "cambiarPass": "Cambiar contraseña",
+    "noMatchPass": "Las contraseñas no coinciden.",
+    "desarrollado": "Este proyecto ha sido desarrollado por",
+    "about": "Acerca de",
+    "help": "Ayuda"
 }

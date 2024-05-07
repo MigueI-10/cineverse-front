@@ -5,11 +5,12 @@ import { MessageService } from 'primeng/api';
 import { AuthService } from '../../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-confirm-password',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, PrimeNgModule, CommonModule],
+  imports: [ReactiveFormsModule, FormsModule, PrimeNgModule, CommonModule, TranslateModule],
   providers: [MessageService],
   templateUrl: './confirm-password.component.html',
   styleUrl: './confirm-password.component.css'

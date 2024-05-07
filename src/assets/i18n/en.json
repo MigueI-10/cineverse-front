@@ -64,10 +64,16 @@
     "haveAccount": "¿Have you got an account? Log in",
     "changePass": "Password Change",
     "sendEmail": "Send Email",
-    "confirmPass": "Confirm the password",
+    "confirmPass": "Confirm Password",
     "activeNow": "Your account has just been activated",
     "redirect": "Redirecting to login...",
     "activating": "Your account is being activated...",
-    "wait": "Please wait a few seconds"
+    "wait": "Please wait a few seconds",
+    "cambiarPass": "Change password",
+    "noMatchPass": "Both passwords do not match.",
+    "desarrollado": "This app has been developed by",
+    "about": "About",
+    "help": "Help"
+
     
 }
