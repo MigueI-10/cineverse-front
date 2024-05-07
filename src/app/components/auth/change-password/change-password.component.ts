@@ -5,11 +5,12 @@ import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-change-password',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, PrimeNgModule, CommonModule],
+  imports: [ReactiveFormsModule, FormsModule, PrimeNgModule, CommonModule, TranslateModule],
   providers: [MessageService],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.css'
@@ -52,24 +53,34 @@ export class ChangePasswordComponent implements OnInit{
   submitChange(){
     if(this.form.valid){
       
+      let lang = localStorage.getItem('selectedLang')
 
       const {email} = this.form.value
 
       this.authService.sendEmailChangePassword(email).subscribe({
         next:(res) => {
           if(res === true){
-            this.success(`Comprueba la direccion ${email} para acceder al cambio de contraseña.`) 
+            if(lang === "en"){
+              this.success(`Check the email ${email} to change your password.`) 
+            }else{
+              this.success(`Comprueba la direccion ${email} para cambiar tu contraseña.`) 
+            }
             
             setTimeout(() => {
               this.router.navigateByUrl('/login')
-            }, 2500);
+            }, 1200);
           }
         },
         error:(message) =>{
           if(message !== undefined){
             this.errorToast(message)
           }else{
-            this.errorToast('El servidor no está disponible')
+            if(lang === "en"){
+              this.errorToast('The server isnt available. Try again later')
+            }else{
+              this.errorToast('El servidor no está disponible. Pruebe de nuevo más tarde')
+              
+            }
           }
         }  
       })

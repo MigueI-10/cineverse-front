@@ -1,10 +1,10 @@
 <div class="container">
     <p-toast></p-toast>
     @if (accActivated) {
-        <h1>Tu cuenta se acaba de activar</h1>
-        <h3>Redirigiendo al login...</h3>
+        <h1>{{ 'activeNow' | translate}}</h1>
+        <h3>{{ 'redirect' | translate}}</h3>
     }@else{
-        <h1>Tu cuenta se está activando...</h1>
-        <h3>Espera unos segundos</h3>
+        <h1>{{ 'activating' | translate}}</h1>
+        <h3>{{ 'wait' | translate}}</h3>
     }
 </div>

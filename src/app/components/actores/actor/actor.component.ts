@@ -37,10 +37,10 @@ export class ActorComponent implements OnInit{
     
     const lang = localStorage.getItem('selectedLang')
 
-    if(lang === "es"){
-      this.mensaje = [{ severity: 'error', summary: 'Error', detail: `No hay respuesta del servidor, compruebe su conexión` }];
-    }else{
+    if(lang === "en"){
       this.mensaje = [{ severity: 'error', summary: 'Error', detail: `There is not response from the server. Check your connection` }];
+    }else{
+      this.mensaje = [{ severity: 'error', summary: 'Error', detail: `No hay respuesta del servidor, compruebe su conexión` }];
     }
 
     this._activatedRouter.params.subscribe(

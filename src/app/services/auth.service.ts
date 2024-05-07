@@ -63,7 +63,7 @@ export class AuthService {
     return this.http.post<LoginResponse>(url, body)
       .pipe(
         map(res => { //si todo es correcto
-          console.log(res);
+          // console.log(res);
           return true;
         }),
         catchError(error => {

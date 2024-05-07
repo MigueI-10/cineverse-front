@@ -4,11 +4,12 @@ import { AuthService } from '../../../services/auth.service';
 import { MessageService } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-activate-account',
   standalone: true,
-  imports: [PrimeNgModule, CommonModule],
+  imports: [PrimeNgModule, CommonModule, TranslateModule],
   providers: [MessageService],
   templateUrl: './activate-account.component.html',
   styleUrl: './activate-account.component.css'

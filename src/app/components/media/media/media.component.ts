@@ -124,19 +124,19 @@ export class MediaComponent implements OnInit {
 
     const lang = localStorage.getItem('selectedLang')
 
-    if(lang === "es"){
-      this.mensaje = [{ severity: 'error', summary: 'Error', detail: `No hay respuesta del servidor compruebe su conexión` }];
-      this.noComentMessage = [{ severity: 'info', summary: '', detail: `Esta ${this.objMedia.tipo} no tiene comentarios` }];
-    }else{
+    if (lang === "en") {
       this.mensaje = [{ severity: 'error', summary: 'Error', detail: `There is not response from the server` }];
       this.noComentMessage = [{ severity: 'info', summary: '', detail: `This media/series has no comments` }];
+    } else {
+      this.mensaje = [{ severity: 'error', summary: 'Error', detail: `No hay respuesta del servidor compruebe su conexión` }];
+      this.noComentMessage = [{ severity: 'info', summary: '', detail: `Esta ${this.objMedia.tipo} no tiene comentarios` }];
     }
   }
 
   cargarMedia() {
     this._mediaService.getMediaById(this.idMedia).subscribe(
       res => {
-       
+
         if (Object.keys(res).length > 0) {
           this.objMedia = res
           this.setearMensajes()
@@ -276,7 +276,7 @@ export class MediaComponent implements OnInit {
       if (this.objFavorite !== undefined) {
         console.log("actualizar");
 
-       
+
 
         if (this.idFavorite !== undefined) {
           this.objFavorite.notaUsuario = this.notaPelicula
@@ -289,7 +289,7 @@ export class MediaComponent implements OnInit {
                 this.success('Favorito actualizado con éxito')
 
                 console.log(this.objFavorite);
-                
+
               } else {
                 this.errorToast('Fallo al actualizar el favorito')
                 this.notaPelicula = 0

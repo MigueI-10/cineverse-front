@@ -7,11 +7,12 @@ import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
 import { CommonModule } from '@angular/common';
 import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha';
 import { environment } from '../../../../environments/environments';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, PrimeNgModule, CommonModule, RecaptchaV3Module],
+  imports: [ReactiveFormsModule, FormsModule, PrimeNgModule, CommonModule, RecaptchaV3Module, TranslateModule],
   providers: [
     {
     provide: RECAPTCHA_V3_SITE_KEY,
@@ -37,10 +38,10 @@ export class RegisterComponent implements OnInit {
 
     //validaciones
     this.registerForm = this.fb.group({
-      name: ['Killer', [Validators.required]],
-      email: ['killerkong950@gmail.com', [Validators.required, Validators.email]],
-      confirmEmail: ['killerkong950@gmail.com', [Validators.required, Validators.email]],
-      password: ['killerkong950', [Validators.required, Validators.minLength(8)]],
+      name: ['Max', [Validators.required]],
+      email: ['acineverse@gmail.com', [Validators.required, Validators.email]],
+      confirmEmail: ['acineverse@gmail.com', [Validators.required, Validators.email]],
+      password: ['12341234', [Validators.required, Validators.minLength(8)]],
     }, { validators: this.checkBothEmailSame })
   }
 
@@ -62,38 +63,50 @@ export class RegisterComponent implements OnInit {
   //metodo de register
   register() {
 
+    let lang = localStorage.getItem('selectedLang')
    
-
     if (this.registerForm.valid) {
 
       this.recaptchaV3Service.execute('importantAction')
       .subscribe((token: string) => {
         this.tokenCaptcha = token
+
+        if(this.tokenCaptcha !== ""){
+
+          const {email, name, password} = this.registerForm.value
+
+          this.authService.register(this.tokenCaptcha, email, name, password).subscribe({
+            next:(res) => {
+              if(res === true){
+    
+                if(lang === "en"){
+                  this.success(`Check the email ${email} to verify your account.`) 
+                }else{
+                  this.success(`Comprueba la direccion ${email} para activar tu cuenta.`) 
+                }
+                
+                setTimeout(() => {
+                  this.router.navigateByUrl('/login')
+                }, 2500);
+              }
+            },
+            error:(message) =>{
+              if(message !== undefined){
+                this.errorToast(message)
+              }else{
+                if(lang === "en"){
+                  this.errorToast('The server isnt available. Try again later')
+                }else{
+                  this.errorToast('El servidor no está disponible. Pruebe de nuevo más tarde')
+                  
+                }
+              }
+            }  
+          })
+
+        }
+
       });
-
-      
-      const {email, name, password} = this.registerForm.value
-
-      this.authService.register(this.tokenCaptcha, email, name, password).subscribe({
-        next:(res) => {
-          if(res === true){
-            this.success(`Comprueba la direccion ${email} para activar tu cuenta.`) 
-            
-            setTimeout(() => {
-              this.router.navigateByUrl('/login')
-            }, 2500);
-          }
-        },
-        error:(message) =>{
-          if(message !== undefined){
-            this.errorToast(message)
-          }else{
-            this.errorToast('El servidor no está disponible')
-          }
-        }  
-      })
-
-
     }
   }
 

@@ -5,11 +5,12 @@ import { AuthService } from '../../../services/auth.service';
 import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
 import { MessageService } from 'primeng/api';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, PrimeNgModule, CommonModule],
+  imports: [ReactiveFormsModule, FormsModule, PrimeNgModule, CommonModule, TranslateModule],
   providers: [MessageService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -18,7 +19,6 @@ export class LoginComponent {
 
   //declaramos formgroup
   public form !: FormGroup 
-
 
   //constructor con los servicios necesarios
   constructor(
@@ -30,7 +30,7 @@ export class LoginComponent {
 
 
   ngOnInit() {
-
+    
     //validaciones del formulario
     this.form = this.fb.group({
 
@@ -42,6 +42,8 @@ export class LoginComponent {
 
   //metodo para hacer login si el formulario es valido, si falla salta una alerta
   login() {
+    let lang = localStorage.getItem('selectedLang')
+
     if (this.form.valid) {
       
       const {email, password} = this.form.value
@@ -52,7 +54,12 @@ export class LoginComponent {
           if(message !== undefined){
             this.errorToast(message)
           }else{
-            this.errorToast('El servidor no está disponible')
+            if(lang === "en"){
+              this.errorToast('The server isnt available. Try again later')
+            }else{
+              
+              this.errorToast('El servidor no está disponible. Pruebe de nuevo más tarde')
+            }
           }
         }  
       })

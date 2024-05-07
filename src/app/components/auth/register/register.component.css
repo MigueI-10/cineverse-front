@@ -10,12 +10,12 @@
   }
   
   .form-container {
-    max-width: 400px; /* Ancho máximo del formulario */
-    width: 100%;
+    /* max-width: 400px; */
+    width: 85%;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente para el formulario */
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombra para el formulario */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
   }
 
   .form-group{
@@ -42,7 +42,7 @@
   /* Estilos para hacer el formulario responsive */
   @media (min-width: 500px) and (max-width: 899px){
     .form-container {
-        width: 70%; /* Ancho máximo del formulario en pantallas pequeñas */
+        width: 60%; /* Ancho máximo del formulario en pantallas pequeñas */
     }
   
     .background-image{
@@ -60,7 +60,7 @@
   
   @media (min-width: 900px) and (max-width: 1400px) {
     .form-container {
-        width: 60%; /* Ancho máximo del formulario en pantallas pequeñas */
+      width: 30%; /* Ancho máximo del formulario en pantallas pequeñas */
     }
     .background-image{
       background-size: cover;
@@ -70,6 +70,7 @@
   
     .cuadroRegis{
       display: flex;
+      /* flex-direction: column; */
       gap: 10px;
       place-items: center;
     }
@@ -88,6 +89,7 @@
   
     .cuadroRegis{
       display: flex;
+      /* flex-direction: column; */
       gap: 10px;
       place-items: center;
     }
