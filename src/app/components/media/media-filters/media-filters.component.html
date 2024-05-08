@@ -76,7 +76,8 @@
   (scrolled)="onScrolled()">
       @for (media of aMedia; track $index) {
           <div class="cartaImagen">
-              <a [routerLink]="'/media/' + media._id"><img [src]="media.imagen" [alt]="media.titulo" class="imagenMedia"></a>
+              <a [routerLink]="'/media/' + media._id"><img [src]="media.imagen" [alt]="media.titulo" class="imagenMedia"
+                (error)="media.imagen = noFoundImage"></a>
           </div>
       }
   </div>

@@ -2,29 +2,42 @@ import { inject } from "@angular/core";
 import { CanActivateFn, Router } from "@angular/router";
 import { AuthService } from "../services/auth.service";
 import { AuthStatus } from "../interfaces";
+import { map } from "rxjs";
 
 export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
 
-    // const url = state.url
-    // localStorage.setItem('url', url)
+
   
     const authService = inject(AuthService)
     const router      = inject(Router)
    
   
-    const status = authService.authStatus();
+    return authService.checkAuthStatus().pipe(
+      map(isAuthenticated => {
+        if (isAuthenticated) {
+          // Si el usuario está autenticado y es un administrador, permitir el acceso
+          return true
+        } else {
+          // Si el usuario no está autenticado, redirigirlo a la página de inicio de sesión
+          router.navigateByUrl('/home');
+          return false;
+        }
+      })
+    );
 
-    if(status === AuthStatus.authenticated){
+    // const status = authService.authStatus();
+
+    // if(status === AuthStatus.authenticated){
      
-      return true;
-    }
+    //   return true;
+    // }
   
-    if(status === AuthStatus.checking){
-      router.navigateByUrl('/home')
-      return false;
-    }
-    router.navigateByUrl('/login')
+    // if(status === AuthStatus.checking){
+    //   router.navigateByUrl('/home')
+    //   return false;
+    // }
+    // router.navigateByUrl('/login')
   
-    return false;
+    // return false;
   };
   

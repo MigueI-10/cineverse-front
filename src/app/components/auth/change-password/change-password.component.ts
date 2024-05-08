@@ -29,8 +29,8 @@ export class ChangePasswordComponent implements OnInit{
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      email: ['killerkong950@gmail.com', [Validators.required, Validators.email]],
-      confirmEmail: ['killerkong950@gmail.com', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
+      confirmEmail: ['', [Validators.required, Validators.email]],
     }, { validators: this.checkBothEmailSame })
   }
 

@@ -33,7 +33,7 @@ export const routes: Routes = [
             },
             {
                 path: 'ratings/:id',
-                // canActivate: [isAuthenticatedGuard],
+                canActivate: [isAuthenticatedGuard],
                 loadComponent: () => import('./components/ratings/ratings.component').then(c => c.RatingsComponent)
             },
             {

@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../material/material/material.module';
 import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { MediaService } from '../../../services/media.service';
 
 @Component({
   selector: 'app-actor',
@@ -23,18 +24,21 @@ export class ActorComponent implements OnInit{
   public objActor ?:Actor
   public showMessage: boolean = false
   public mensaje: Message[] = []
+  public noFoundImage = ""
 
   constructor(
     private _activatedRouter: ActivatedRoute,
     private _actorService: ActorService,
     private _authService: AuthService,
     private messageService: MessageService,
+    private _mediaService: MediaService
   ){
 
   }
 
   ngOnInit(): void {
     
+    this.noFoundImage = this._mediaService.getNoFound()
     const lang = localStorage.getItem('selectedLang')
 
     if(lang === "en"){
@@ -58,7 +62,6 @@ export class ActorComponent implements OnInit{
       res => {
 
         if(Object.keys(res).length > 0){
-          console.log(res);
           this.objActor = res
         }else {
           this.showMessage = true;

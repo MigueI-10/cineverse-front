@@ -4,7 +4,7 @@
 
     <div class="mainContent">
         <div class="imagenPoster mx-auto">
-                <img [src]="objActor.imagen" [alt]="objActor.nombre" class="img-fluid poster">
+                <img [src]="objActor.imagen" [alt]="objActor.nombre" class="img-fluid poster"  (error)="objActor.imagen = noFoundImage"> 
         </div>
 
         <div class="actorData container">
@@ -47,18 +47,9 @@
             </div>  
         </div>
 
-
-
-
-
     </div>
 
 
-
-
-
-
-    <!-- <img [src]="objActor.imagen" alt=""> -->
 }@else {
     @if (showMessage) {
         <p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages>

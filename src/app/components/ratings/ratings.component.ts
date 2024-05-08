@@ -9,11 +9,13 @@ import { PrimeNgModule } from '../../prime-ng/prime-ng/prime-ng.module';
 import { FavoriteResponse } from '../../interfaces/favorite-response.interface';
 import { AuthService } from '../../services/auth.service';
 import { FavoriteService } from '../../services/favorite.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { MediaService } from '../../services/media.service';
 
 @Component({
   selector: 'app-ratings',
   standalone: true,
-  imports: [CommonModule, PrimeNgModule, MaterialModule, ReactiveFormsModule, InfiniteScrollModule,  RouterLink, RouterLinkActive],
+  imports: [CommonModule, PrimeNgModule, MaterialModule, ReactiveFormsModule, InfiniteScrollModule,  RouterLink, RouterLinkActive, TranslateModule],
   providers: [MessageService, ConfirmationService],
   templateUrl: './ratings.component.html',
   styleUrl: './ratings.component.css'
@@ -23,10 +25,21 @@ export class RatingsComponent implements OnInit{
   private idUser: string = ""
   public ratingList: FavoriteResponse[] = []
   public showMessage = false
-  public mensaje : Message[] = []
+  
+  public noFoundImage = ""
+
+  public messageTitle: string = "¿Seguro que quieres borrar la valoración?"
+  public messageHeader: string = "Acción Importante"
+  public mensajeBienRem = "Valoración eliminada correctamente"
+  public mensajeMalRem = "Fallo al eliminar la valoración"
+  public yes = "Si"
+  public no = "No"
+  public mensajeNo = "La valoración no ha sido eliminada"
+
 
   constructor(
     private _favService: FavoriteService,
+    private _mediaService : MediaService,
     private _authService: AuthService,
     private _router: Router,
     private confirmationService: ConfirmationService,
@@ -36,7 +49,19 @@ export class RatingsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.mensaje = [{ severity: 'info', summary: 'Info', detail: 'No hay resultados para este término de búsqueda' }];
+    this.noFoundImage = this._mediaService.getNoFound()
+
+
+    let lang = localStorage.getItem('selectedLang')
+    if(lang === "en"){
+      this.messageTitle = "Confirm delete rating"
+      this.messageHeader = "Are you sure you want to delete the rating?"
+      this.mensajeBienRem = "Rating removed correctly"
+      this.mensajeMalRem = "Failed to remove rating"
+      this.yes = "Yes"
+      this.mensajeNo = "The rating hasn't been deleted"
+    }
+
     this._authService.checkAuthStatus().subscribe(
       res => {
         
@@ -55,21 +80,21 @@ export class RatingsComponent implements OnInit{
     if (id !== "") {
       this.confirmationService.confirm({
         target: event.target as EventTarget,
-        message: 'Seguro que quieres borrarlo de tus valoraciones?',
-        header: 'Accion Importante',
+        message: this.messageTitle,
+        header: this.messageHeader,
         icon: 'pi pi-exclamation-triangle',
         acceptIcon: "none",
         rejectIcon: "none",
         rejectButtonStyleClass: "p-button-text",
-        acceptLabel: "Si",
-        rejectLabel: "No",
+        acceptLabel: this.yes,
+        rejectLabel: this.no,
         accept: () => {
-          this._favService.deleteFavorite(id).subscribe(
+          this._favService.removeFromRatings(id).subscribe(
             res => {
               if (res) {
-                this.success('Favorito eliminado correctamente')
+                this.success(this.mensajeBienRem)
               } else {
-                this.errorToast('Error al eliminar el favorito')
+                this.errorToast(this.mensajeMalRem)
               }
               
                 if(this.idUser){
@@ -82,7 +107,7 @@ export class RatingsComponent implements OnInit{
           
         },
         reject: () => {
-          this.messageService.add({ severity: 'info', summary: 'Informacion', detail: 'No se ha borrado el favorito', life: 3000 });
+          this.messageService.add({ severity: 'info', summary: 'Informacion', detail: this.mensajeNo, life: 3000 });
         }
       });
    

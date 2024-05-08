@@ -1,8 +1,8 @@
 <h1>
     @if (!idActor) {
-        Añadir Actor
+        {{ 'addAct' | translate}}
     }@else {
-        Actualizar Actor
+        {{ 'updAct' | translate}}
     }
 </h1>
 
@@ -18,86 +18,86 @@
             </mat-form-field>
 
             <mat-form-field class="m-2 col-12">
-                <mat-label>Nombre y Apellidos</mat-label>
+                <mat-label>{{ 'nomape' | translate}}</mat-label>
                 <input type="text" matInput placeholder="Introduzca nombre y apellidos" formControlName="nombre" required>
                 @if (nombre.errors?.['required']) {
-                    <mat-error class="text-danger font-italic">El nombre es obligatorio</mat-error>
+                    <mat-error class="text-danger font-italic">{{ 'nombreRequired' | translate}}</mat-error>
                 }@else if(nombre.errors?.['minlength']){
-                    <mat-error class="text-danger font-italic">Minimo 7 letras</mat-error>
+                    <mat-error class="text-danger font-italic">{{ 'nomMin' | translate}}</mat-error>
                 }
                 
             </mat-form-field>
 
             <mat-form-field class="m-2 col-12">
-                <mat-label>Biografia</mat-label>
+                <mat-label>{{ 'biografia' | translate}}</mat-label>
                 <input type="text" matInput placeholder="Introduzca su biografia" formControlName="biografia" required>
                 @if (biografia.errors?.['required']) {
-                    <mat-error class="text-danger font-italic">La biografia es obligatoria</mat-error>
+                    <mat-error class="text-danger font-italic">{{ 'biografiaRequired' | translate}}</mat-error>
                 }@else if(biografia.errors?.['minlength']){
-                    <mat-error class="text-danger font-italic">Minimo 20 caracteres</mat-error>
+                    <mat-error class="text-danger font-italic">{{ 'biografiaMin' | translate}}</mat-error>
                 }
             </mat-form-field>
             <mat-form-field class="m-2 col-12">
-                <mat-label>Introduzca la imagen</mat-label>
+                <mat-label>{{ 'imagen' | translate}}</mat-label>
                 <input type="text" matInput placeholder="Imagen del Actor" formControlName="imagen" required>
 
                 @if (imagen.errors?.['required'] && imagen.dirty) {
-                    <mat-error class="text-danger font-italic">La imagen es obligatoria</mat-error>
+                    <mat-error class="text-danger font-italic">{{ 'imagenRequired' | translate}}</mat-error>
                 }
                 
             </mat-form-field>
             <mat-form-field class="m-2 col-12">
-                <mat-label>Introduce la nacionalidad</mat-label>
+                <mat-label>{{ 'pais' | translate}}</mat-label>
                 <input type="text" matInput placeholder="Nacionalidad" formControlName="nacionalidad" required>
                 
                 @if (nacionalidad.errors?.['required'] && nacionalidad.dirty) {
-                    <mat-error class="text-danger font-italic">La nacionalidad es requerida</mat-error>
+                    <mat-error class="text-danger font-italic">{{ 'paisRequired' | translate}}</mat-error>
                 }
 
             </mat-form-field>
 
             <div class="mb-3 row">
-                <label class="col-sm-3 col-form-label">Agrega 3 películas</label>
+                <label class="col-sm-3 col-form-label">{{ 'add3Films' | translate}}</label>
                 <div class="col-sm-9">
                   <div class="mb-1">
                     <div class="input-group">
-                      <input class="form-control" placeholder="Agregar película" [formControl]="moviesActor">
-                      <button class="btn btn-outline-primary" type="button" (click)="onAddMovie()">Agregar película</button>
+                      <input class="form-control" placeholder="{{ 'addFilms' | translate}}" [formControl]="moviesActor">
+                      <button class="btn btn-outline-primary" type="button" (click)="onAddMovie()">{{ 'addFilms' | translate}}</button>
                     </div>
                   </div>
                 </div>
               </div>
               
               <div class="mb-3 row">
-                <label class="col-sm-3 col-form-label">Películas</label>
+                <label class="col-sm-3 col-form-label">{{ 'mediaSerie' | translate}}</label>
                 <div class="col-sm-9" formArrayName="actuaciones">
                   <div class="mb-1" *ngFor="let item of actuaciones.controls | keyvalue; let i = index">
                     <div class="input-group">
                       <input class="form-control" [formControlName]="i" [disabled]="true">
-                      <button class="btn btn-outline-danger" type="button" (click)="onDeleteMovie(i)">Eliminar</button>
+                      <button class="btn btn-outline-danger" type="button" (click)="onDeleteMovie(i)">{{ 'eliminar' | translate}}</button>
                     </div>
                     @if(isValidFieldInArray(actuaciones, i)){
-                      <span class="form-text text-danger">Este campo es requerido</span>
+                      <span class="form-text text-danger">{{ 'fieldRequired' | translate}}</span>
                     }
                   </div>
                 </div>
               </div>
 
             <mat-form-field class="m-2 col-12">
-                <mat-label>Introduce la fecha de nacimiento</mat-label>
+                <mat-label>{{ 'fecha' | translate}}</mat-label>
                 <input type="date" matInput placeholder="fechaNacimiento" formControlName="fechaNacimiento" required>
                 
                 @if (fechaNacimiento.errors?.['required']) {
-                    <mat-error class="text-danger font-italic">La fecha de nacimiento es obligatoria</mat-error>
+                    <mat-error class="text-danger font-italic">{{ 'fechaRequired' | translate}}</mat-error>
                 }@else if(fechaNacimiento.errors?.['fechaNacimientoFutura']){
-                    <mat-error class="text-danger font-italic">Formato invalido</mat-error>
+                    <mat-error class="text-danger font-italic">{{ 'invalidFormat' | translate}}</mat-error>
                 }
 
             </mat-form-field>
 
             <button mat-flat-button color="primary" [disabled]="frmCrud.invalid">
                 <mat-icon>save</mat-icon> 
-                Grabar
+                {{ 'save' | translate}}
             </button>
       
         </form>

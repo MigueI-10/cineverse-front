@@ -27,6 +27,8 @@ export class HomeComponent implements OnInit {
 
   swiperElement: SwiperContainer | null = null
 
+  public noFoundImage = ""
+
   public swiperOptions: SwiperOptions = {
     slidesPerView: 2,
     breakpoints: {
@@ -44,6 +46,7 @@ export class HomeComponent implements OnInit {
 
   //oninit
   ngOnInit(): void {
+    this.noFoundImage = this._mediaService.getNoFound()
     this.getFilmsList()
     this.getSeriesList()
     this.getAllMedia()

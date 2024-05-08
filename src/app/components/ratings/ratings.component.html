@@ -1,4 +1,4 @@
-<h2>Consulta todas tus valoraciones hechas</h2>
+<h2>{{ 'ratingsTitle'| translate}}</h2>
 <hr>
 <p-toast></p-toast>
 <p-confirmDialog></p-confirmDialog>
@@ -8,36 +8,27 @@
     @for (fav of ratingList; track $index) {
         <div class="card">
           <div class="left">
-            <img class="card-image" src="{{ fav.imagen }}" alt="{{ fav.titulo }}" />
+            <img class="card-image" src="{{ fav.imagen }}" alt="{{ fav.titulo }}" (error)="fav.imagen = noFoundImage" />
           </div>
           <div class="right">
             <h2 class="card-title">{{fav.titulo}}</h2>
             @if (fav.notaUsuario) {
-              <span class="rating" >Nota Personal: {{fav.notaUsuario}}</span>
+              <span class="rating" >{{ 'personalRating' | translate}}: {{fav.notaUsuario}}</span>
             }@else {
-              <span class="rating" >Aun no has votado esta película</span>
+              <span class="rating" ></span>
             }
               
-              <button class="btn-delete delete" (click)="deleteFavorite(fav._id, $event)">Eliminar de Valoraciones</button>
+              <button class="btn-delete delete" (click)="deleteFavorite(fav._id, $event)">{{'removeRating' | translate}}</button>
           </div>
-          <!-- <div class="card-content">
-            
-          </div> -->
-          <!-- <h3 class="card-title">{{ fav.titulo }}</h3>
-            <div class="card-details">
-              <span class="rating" >Rating:</span>
-              
-              <button class="btn-delete" (click)="deleteFavorite(fav._id)">Eliminar</button>
-            </div> -->
+
         </div>
     }
   }@else {
     @if (showMessage) {
-    <p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages>
+      <div class="alert alert-info w-100" role="alert">
+        {{ 'noRatings' | translate}}
+      </div>
     }
   }
-
-
-
 
 </div>

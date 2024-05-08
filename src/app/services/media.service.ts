@@ -15,6 +15,10 @@ export class MediaService {
 
   }
 
+  getNoFound():string{
+    return 'https://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/noFoto.png'
+  }
+
   getAllMedia(): Observable<Media[]> {
     return this.http.get<Media[]>(this.urlBackEnd + "/media").pipe(
       catchError(error => {

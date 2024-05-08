@@ -29,6 +29,7 @@ export class MediaFiltersComponent implements OnInit {
   filtros!: Filter;
 
   isCollapsed: boolean = true;
+  public noFoundImage = ""
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
@@ -38,7 +39,7 @@ export class MediaFiltersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.noFoundImage = this._mediaService.getNoFound()
     this.resetFilters()
     this.cargarGeneros()
     //this.cargarMedia()

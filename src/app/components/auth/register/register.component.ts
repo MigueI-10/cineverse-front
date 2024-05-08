@@ -38,10 +38,10 @@ export class RegisterComponent implements OnInit {
 
     //validaciones
     this.registerForm = this.fb.group({
-      name: ['Max', [Validators.required]],
-      email: ['acineverse@gmail.com', [Validators.required, Validators.email]],
-      confirmEmail: ['acineverse@gmail.com', [Validators.required, Validators.email]],
-      password: ['12341234', [Validators.required, Validators.minLength(8)]],
+      name: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      confirmEmail: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     }, { validators: this.checkBothEmailSame })
   }
 

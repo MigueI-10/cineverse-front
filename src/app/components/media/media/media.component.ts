@@ -17,6 +17,7 @@ import { FavoriteService } from '../../../services/favorite.service';
 import { catchError, of } from 'rxjs';
 import { Favorite } from '../../../interfaces/create-favorite.interface';
 import { TranslateModule } from '@ngx-translate/core';
+import { ActorService } from '../../../services/actor.service';
 
 @Component({
   selector: 'app-media',
@@ -49,13 +50,20 @@ export class MediaComponent implements OnInit {
   public objFavorite?: Favorite
   public isFavorite?: boolean
   private idFavorite?: string = ""
+  public noFoundImage = ""
+
+  public comentarioBien = "El comentario fue añadido exitosamente"
+  public comentarioMal = "El comentario no fue añadido"
+  public favoritoBien = "Favorito actualizado con éxito"
+  public favoritoMal = "Fallo al actualizar el favorito"
 
   constructor(
     private _activatedRouter: ActivatedRoute,
     private _mediaService: MediaService,
     private _authService: AuthService,
     private messageService: MessageService,
-    private _favoriteService: FavoriteService
+    private _favoriteService: FavoriteService,
+    public _actorService: ActorService
   ) {
 
   }
@@ -104,6 +112,7 @@ export class MediaComponent implements OnInit {
       }
     );
 
+    this.noFoundImage = this._mediaService.getNoFound()
 
     this._authService.checkAuthStatus().subscribe(
       res => {
@@ -127,6 +136,10 @@ export class MediaComponent implements OnInit {
     if (lang === "en") {
       this.mensaje = [{ severity: 'error', summary: 'Error', detail: `There is not response from the server` }];
       this.noComentMessage = [{ severity: 'info', summary: '', detail: `This media/series has no comments` }];
+      this.comentarioBien = "The comment was added correctly"
+      this.comentarioMal = "The comment wasn't added"
+      this.favoritoBien = "Favorite updated successfully"
+      this.favoritoMal = "Failed to update the favorite"
     } else {
       this.mensaje = [{ severity: 'error', summary: 'Error', detail: `No hay respuesta del servidor compruebe su conexión` }];
       this.noComentMessage = [{ severity: 'info', summary: '', detail: `Esta ${this.objMedia.tipo} no tiene comentarios` }];
@@ -178,31 +191,27 @@ export class MediaComponent implements OnInit {
   }
 
   checkAddedComment($event: boolean) {
-    console.log($event);
 
     if ($event) {
-      this.success('El comentario fue añadido exitosamente')
+      this.success(this.comentarioBien)
 
       this.aComments = []
       this.cargarComentarios(this.idMedia)
     } else {
-      this.errorToast('El comentario no fue añadido')
+      this.errorToast(this.comentarioMal)
     }
 
   }
 
   addFavoriteMedia() {
+
     if (this.isLoggedIn) {
 
-      console.log(this.isFavorite);
-
-      //caso de actualizar
       if (this.objFavorite !== undefined) {
 
         this.isFavorite = !this.isFavorite
         //guardamos el result
         this.objFavorite.esFavorito = this.isFavorite
-        console.log("actualizado a " + this.isFavorite);
 
         if (this.idFavorite !== undefined) {
 
@@ -212,21 +221,21 @@ export class MediaComponent implements OnInit {
           this._favoriteService.updateFavorite(this.idFavorite, this.objFavorite).subscribe(
             res => {
               if (res) {
-                this.success('Favorito actualizado con éxito')
-
-                console.log(this.objFavorite);
+                this.success(this.favoritoBien)
+                this.checkExistanceFavorite(this.idUser, this.idMedia)
 
               } else {
-                this.errorToast('Fallo al actualizar el favorito')
+                this.errorToast(this.favoritoMal)
                 this.isFavorite = !this.isFavorite
 
               }
+
             }
           )
         }
 
       } else {
-        console.log("añadir");
+
         this.isFavorite = !this.isFavorite
         this.objFavorite = {
           idPelicula: this.idMedia,
@@ -237,19 +246,19 @@ export class MediaComponent implements OnInit {
         this._favoriteService.addFavorite(this.objFavorite).subscribe(
           res => {
             if (Object.keys(res).length > 0) {
-              this.success('Favorito actualizado con éxito')
+              this.success(this.favoritoBien)
               this.objFavorite = res
+
+              this.checkExistanceFavorite(this.idUser, this.idMedia)
             } else {
-              this.errorToast('Fallo al actualizar el favorito')
+              this.errorToast(this.favoritoMal)
               this.isFavorite = !this.isFavorite
 
             }
           }
         )
 
-
       }
-
 
     } else {
       this.messageService.add({ severity: 'info', summary: 'Info', detail: `Para añadir esta película a favoritos, debes estar logueado` });
@@ -267,16 +276,11 @@ export class MediaComponent implements OnInit {
   }
 
   savePuntuacion() {
-    console.log("la puntuacion puesta es " + this.notaPelicula);
 
     if (this.notaPelicula !== undefined) {
 
-
       //caso de actualizar
       if (this.objFavorite !== undefined) {
-        console.log("actualizar");
-
-
 
         if (this.idFavorite !== undefined) {
           this.objFavorite.notaUsuario = this.notaPelicula
@@ -286,12 +290,11 @@ export class MediaComponent implements OnInit {
           this._favoriteService.updateFavorite(this.idFavorite, this.objFavorite).subscribe(
             res => {
               if (res) {
-                this.success('Favorito actualizado con éxito')
-
-                console.log(this.objFavorite);
+                this.success(this.favoritoBien)
+                this.checkExistanceFavorite(this.idUser, this.idMedia)
 
               } else {
-                this.errorToast('Fallo al actualizar el favorito')
+                this.errorToast(this.favoritoMal)
                 this.notaPelicula = 0
 
               }
@@ -299,12 +302,7 @@ export class MediaComponent implements OnInit {
           )
         }
 
-
-
-
-
       } else {
-        console.log("añadir");
 
         this.objFavorite = {
           idPelicula: this.idMedia,
@@ -315,15 +313,19 @@ export class MediaComponent implements OnInit {
         this._favoriteService.addFavorite(this.objFavorite).subscribe(
           res => {
             if (Object.keys(res).length > 0) {
-              this.success('Favorito actualizado con éxito')
+              this.success(this.favoritoBien)
               this.objFavorite = res
 
               this.notaPelicula = res.notaUsuario
 
+              this.checkExistanceFavorite(this.idUser, this.idMedia)
+
             } else {
-              this.errorToast('Fallo al actualizar el favorito')
+              this.errorToast(this.favoritoMal)
               this.notaPelicula = 0
             }
+
+
           }
         )
 

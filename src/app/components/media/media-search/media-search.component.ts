@@ -34,6 +34,7 @@ export class MediaSearchComponent implements OnInit, OnDestroy {
   public maxSkip: number | null = null;
   // public mensaje : Message[] = []
   public showMessage = false
+  public noFoundImage = ""
 
   constructor(private _mediaService: MediaService) {
 
@@ -42,6 +43,7 @@ export class MediaSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this.mensaje = [{ severity: 'info', summary: 'Info', detail: 'No hay resultados para este término de búsqueda' }];
+    this.noFoundImage = this._mediaService.getNoFound()
 
     this.debouncerSubscription = this.debouncer
       .pipe(

@@ -2,7 +2,7 @@
 <div class="mainContent">
     <p-toast></p-toast>
     <div class="imagenPoster mx-auto">
-        <img [src]="objMedia.imagen" [alt]="objMedia.titulo" class="img-fluid poster">
+        <img [src]="objMedia.imagen" [alt]="objMedia.titulo" class="img-fluid poster"  (error)="objMedia.imagen = noFoundImage">
     </div>
 
     <div class="mediaData container">
@@ -76,7 +76,9 @@
                         <!-- Aplicamos la clase "actor-image" a la imagen -->
                         <div class="actor-image-container">
                             <a [routerLink]="'/actor/' + actor._id"><img [src]="actor.imagen" alt=""
-                                    class="actor-image"></a>
+                                    class="actor-image"
+                                    (error)="actor.imagen = noFoundImage"
+                                    ></a>
                             <!-- Mostramos el nombre del actor en el footer de la imagen -->
                             <div class="actor-name">{{ actor.nombre }}</div>
                         </div>

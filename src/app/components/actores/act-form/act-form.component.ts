@@ -7,11 +7,12 @@ import { MessageService } from 'primeng/api';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Actor } from '../../../interfaces';
 import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-act-form',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MaterialModule, CommonModule, PrimeNgModule, DatePipe],
+  imports: [FormsModule, ReactiveFormsModule, MaterialModule, CommonModule, PrimeNgModule, DatePipe, TranslateModule],
   providers: [MessageService, DatePipe],
   templateUrl: './act-form.component.html',
   styleUrl: './act-form.component.css'
@@ -21,8 +22,14 @@ export class ActFormComponent implements OnInit {
   public frmCrud!: FormGroup
   public idActor!: string
 
+  public mensajeBienAdd = "Actor añadido correctamente"
+  public mensajeMalAdd = "Fallo al añadir al actor"
+  public mensajeBienUpd = "Actor actualizado correctamente"
+  public mensajeMalUpd = "Fallo al actualizar al actor"
+  public mensajeNo = "Este actor no existe"
+
   constructor(private fb: FormBuilder,
-    private _actorService: ActorService,
+    public _actorService: ActorService,
     private _router: Router,
     private _activeRouter: ActivatedRoute,
     private messageService: MessageService,
@@ -51,6 +58,15 @@ export class ActFormComponent implements OnInit {
         }
       }
     );
+
+    let lang = localStorage.getItem('selectedLang')
+    if(lang === "en"){
+      this.mensajeBienAdd = "Actor added correctly"
+      this.mensajeMalAdd = "Failed to add actor"
+      this.mensajeBienUpd = "Actor updated correctly"
+      this.mensajeMalUpd = "Failed to update actor"
+      this.mensajeNo = "This actor does not exists"
+    }
   }
 
   minSelectedCheckboxes(min = 1) {
@@ -117,9 +133,9 @@ export class ActFormComponent implements OnInit {
       this._actorService.addActor(this.frmCrud.value).subscribe(
         res => {
           if(res){
-            this.success('Actor añadido correctamente')
+            this.success(this.mensajeBienAdd)
           }else{
-            this.errorToast('Fallo al añadir el actor')
+            this.errorToast(this.mensajeMalAdd)
           }
 
           setTimeout(() => {
@@ -157,7 +173,7 @@ export class ActFormComponent implements OnInit {
           });
 
         } else {
-          this.errorToast('El actor no existe')
+          this.errorToast(this.mensajeNo)
           this._router.navigate(['/actores-crud']);
         }
       }
@@ -171,12 +187,12 @@ export class ActFormComponent implements OnInit {
     this._actorService.updateActor(this.frmCrud.value, id).subscribe(
       res => {
 
-        console.log(res);
+      
         if (res) {
-          this.success('El cliente ha sido actualizado');
+          this.success(this.mensajeBienUpd);
           
         } else {
-          this.errorToast('El cliente no ha sido actualizado');
+          this.errorToast(this.mensajeMalUpd);
         }
 
         setTimeout(() => {

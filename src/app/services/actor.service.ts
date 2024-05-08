@@ -13,7 +13,6 @@ export class ActorService {
   constructor(private http :HttpClient){
 
   }
-
   getAllActors(): Observable<Actor[]> {
     return this.http.get<Actor[]>(this.urlBackEnd + "/actor").pipe(
       catchError(error => {

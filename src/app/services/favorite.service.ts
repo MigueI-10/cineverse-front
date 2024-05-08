@@ -88,6 +88,32 @@ export class FavoriteService {
     );
   }
 
+  removeFromFavorite(idFavorite: string): Observable<boolean> {
+
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.patch(`${this.urlBackEnd}/favorite/removeFromFavorite/${idFavorite}`, null, { headers }).pipe(
+      map(() => true),
+      catchError(error => {
+        console.log(error);
+        return of(false)
+      })
+    );
+  }
+
+  removeFromRatings(idFavorite: string): Observable<boolean> {
+
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.patch(`${this.urlBackEnd}/favorite/removeFromRatings/${idFavorite}`, null, { headers }).pipe(
+      map(() => true),
+      catchError(error => {
+        console.log(error);
+        return of(false)
+      })
+    );
+  }
+
 
   deleteFavorite(id: string): Observable<boolean> {//va a devolver un boolean
 
