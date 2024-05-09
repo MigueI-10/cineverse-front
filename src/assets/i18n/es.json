@@ -105,6 +105,12 @@
     "removeRating": "Eliminar de Valoraciones",
     "favoriteTitle": "Consulta tus peliculas y series favoritas",
     "removeFavorite": "Eliminar de Favoritos",
-    "noFavorites": "No tienes series y películas favoritas"
-    
+    "noFavorites": "No tienes series y películas favoritas",
+    "listaUser": "Lista de Usuarios",
+    "nobanUser": "Usuarios sin Baneo",
+    "banUser": "Usuarios Baneados",
+    "ban": "Banear Usuario",
+    "unban": "Desbanear Usuario",
+    "noData": "No hay registros",
+    "searchData": "Busca registros"
 }

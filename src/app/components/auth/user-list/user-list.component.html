@@ -1,8 +1,8 @@
-<h1>Lista de Usuarios</h1>
+<h1>{{ 'listaUser'| translate}}</h1>
 
 <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color">
-    <mat-button-toggle (click)="getBanned(true)">Usuarios Sin Baneo</mat-button-toggle>
-    <mat-button-toggle (click)="getBanned(false)">Usuarios Baneados</mat-button-toggle>
+    <mat-button-toggle (click)="getBanned(true)">{{ 'nobanUser'| translate}}</mat-button-toggle>
+    <mat-button-toggle (click)="getBanned(false)">{{ 'banUser'| translate}}</mat-button-toggle>
   </mat-button-toggle-group>
 
   <p-toast></p-toast>
@@ -13,7 +13,7 @@
  <div class="mat-elevation-z18">
   <mat-form-field>
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Introduzca una búsqueda" #input>
+    <input matInput (keyup)="applyFilter($event)" placeholder="{{'searchData' | translate}}" #input>
   </mat-form-field>
 
   <table mat-table [dataSource]="dataSource" matSort>
@@ -26,26 +26,26 @@
     
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'nombre'| translate}} </th>
         <td mat-cell *matCellDef="let element"> {{element.name | titlecase}} </td>
       </ng-container>
     
       <!-- Symbol Column -->
       <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'correo' | translate}} </th>
         <td mat-cell *matCellDef="let element"> {{element.email }} </td>
       </ng-container>
 
       <ng-container matColumnDef="acciones">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'actions'| translate}}</th>
           <td mat-cell *matCellDef="let element">
               @if(estadoBan){
-                <a [ngStyle]="{'color': '#e15639'}" matTooltip="Banear Usuario"
+                <a [ngStyle]="{'color': '#e15639'}" matTooltip="{{'ban' | translate}}"
               class="pointer" (click)="banearUsuario(element._id, $event)">
                   <mat-icon>block</mat-icon>
               </a>
               }@else {
-                <a [ngStyle]="{'color': 'green'}" matTooltip="Desbanear Usuario"
+                <a [ngStyle]="{'color': 'green'}" matTooltip="{{'unban' | translate}}"
                 class="pointer" (click)="desbanearUsuario(element._id, $event)">
                     <mat-icon>lock_open_right</mat-icon>
                 </a>
@@ -57,7 +57,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     @if(!this.dataSource || this.dataSource.data.length == 0){
-      <p class="text-center">No hay registros</p>
+      <p class="text-center">{{ 'noData '| translate}}</p>
     }
     <mat-paginator [pageSizeOptions]="[5, 10, 20]"
            showFirstLastButtons

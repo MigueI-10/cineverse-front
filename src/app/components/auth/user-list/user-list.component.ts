@@ -11,12 +11,13 @@ import { AuthService } from '../../../services/auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, CommonModule,
+  imports: [RouterLink, RouterLinkActive, CommonModule, TranslateModule,
     PrimeNgModule, MaterialModule, FormsModule, ReactiveFormsModule, AddCommentComponent],
   providers: [MessageService, ConfirmationService],
   templateUrl: './user-list.component.html',
@@ -27,7 +28,7 @@ export class UserListComponent implements OnInit {
   public aUsers: User[] = []
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  public estadoBan!:boolean
+  public estadoBan!: boolean
 
   constructor(
     private _activatedRouter: ActivatedRoute,
@@ -40,7 +41,39 @@ export class UserListComponent implements OnInit {
   public displayedColumns: string[] = ['id', 'name', 'email', 'acciones'];
   public dataSource = new MatTableDataSource<User>;
 
+  public noUsers = "No hay usuarios disponibles"
+  public noUsersFilter = "No hay usuarios por este filtro"
+  public title = "¿Seguro que quieres banear al Usuario?"
+  public accion = "Acción Importante"
+  public banBien = "Usuario baneado correctamente"
+  public banMal = "Error al banear al usuario"
+  public yes = "Si"
+  public no = "No"
+  public unbanBien = "Usuario desbaneado correctamente"
+  public unbanMal = "Error al desbanear al usuario"
+  public noBan = "No se ha baneado al usuario"
+  public nounBan = "No se ha desbaneado al usuario"
+  public titleUn = "¿Seguro que quieres desbanear al Usuario?"
+
   ngOnInit(): void {
+    let lang = localStorage.getItem('selectedLang')
+
+    if (lang === "en") {
+      this.noUsers = "No users available"
+      this.noUsersFilter = "No users by this filter"
+      this.title = "Are you sure you want to ban the User?";
+      this.accion = "Important Action";
+      this.banBien = "User banned successfully";
+      this.banMal = "Error banning the user";
+      this.yes = "Yes";
+      this.no = "No";
+      this.unbanBien = "User unbanned successfully";
+      this.unbanMal = "Error unbanning the user";
+      this.noBan = "User has not been banned";
+      this.nounBan = "User has not been unbanned";
+      this.titleUn = "Are you sure you want to unban the User?";
+    }
+
 
     //obtenemos los activos
     this.getBanned(true)
@@ -58,7 +91,7 @@ export class UserListComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
         } else {
-          this.errorToast('No hay usuarios disponibles')
+          this.errorToast(this.noUsers)
         }
 
         // console.log(this.aUsers);
@@ -73,14 +106,14 @@ export class UserListComponent implements OnInit {
       res => {
         console.log(res);
         if (res.length > 0) {
-          
+
           this.aUsers = res
           this.dataSource = new MatTableDataSource(res)
           this.dataSource.paginator = this.paginator;
           this.dataSource.sort = this.sort;
           this.estadoBan != ban
         } else {
-          this.errorToast('No hay usuarios por este filtro')
+          this.errorToast(this.noUsersFilter)
           this.resetLists()
         }
       }
@@ -88,74 +121,74 @@ export class UserListComponent implements OnInit {
 
   }
 
-  banearUsuario(id: string,  event: Event) {
+  banearUsuario(id: string, event: Event) {
     if (id !== "") {
       this.confirmationService.confirm({
         target: event.target as EventTarget,
-        message: 'Seguro que quieres banear al Usuario?',
-        header: 'Accion Importante',
+        message: this.title,
+        header: this.accion,
         icon: 'pi pi-exclamation-triangle',
         acceptIcon: "none",
         rejectIcon: "none",
         rejectButtonStyleClass: "p-button-text",
-        acceptLabel: "Si",
-        rejectLabel: "No",
+        acceptLabel: this.yes,
+        rejectLabel: this.no,
         accept: () => {
           this._authService.banUser(id).subscribe(
             res => {
               if (res) {
-                this.success('Usuario baneado correctamente')
+                this.success(this.banBien)
 
               } else {
-                this.errorToast('Error al banear el comentario')
+                this.errorToast(this.banMal)
               }
 
               this.resetLists()
               this.getBanned(true)
             }
           )
-          
+
         },
         reject: () => {
-          this.messageService.add({ severity: 'info', summary: 'Informacion', detail: 'No se ha podido banear al usuario', life: 3000 });
+          this.messageService.add({ severity: 'info', summary: 'Informacion', detail: this.noBan, life: 3000 });
         }
-      }); 
+      });
     }
   }
 
-  desbanearUsuario(id: string,  event: Event) {
-    
+  desbanearUsuario(id: string, event: Event) {
+
     if (id !== "") {
       this.confirmationService.confirm({
         target: event.target as EventTarget,
-        message: 'Seguro que quieres desbanear al Usuario?',
-        header: 'Accion Importante',
+        message: this.titleUn,
+        header: this.accion,
         icon: 'pi pi-exclamation-triangle',
         acceptIcon: "none",
         rejectIcon: "none",
         rejectButtonStyleClass: "p-button-text",
-        acceptLabel: "Si",
-        rejectLabel: "No",
+        acceptLabel: this.yes,
+        rejectLabel: this.no,
         accept: () => {
           this._authService.unBanUser(id).subscribe(
             res => {
               if (res) {
-                this.success('Usuario desbaneado correctamente')
+                this.success(this.unbanBien)
 
               } else {
-                this.errorToast('Error al desbanear el comentario')
+                this.errorToast(this.unbanMal)
               }
 
               this.resetLists()
               this.getBanned(true)
             }
           )
-          
+
         },
         reject: () => {
-          this.messageService.add({ severity: 'info', summary: 'Informacion', detail: 'No se ha podido desbanear al usuario', life: 3000 });
+          this.messageService.add({ severity: 'info', summary: 'Informacion', detail: this.nounBan, life: 3000 });
         }
-      }); 
+      });
     }
   }
 
@@ -173,7 +206,7 @@ export class UserListComponent implements OnInit {
   errorToast(message: string) {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
-  resetLists(){
+  resetLists() {
     this.aUsers = []
     this.dataSource = new MatTableDataSource(([] as User[]))
   }

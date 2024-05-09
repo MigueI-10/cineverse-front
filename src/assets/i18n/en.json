@@ -105,7 +105,13 @@
     "removeRating": "Remove from my ratings",
     "favoriteTitle": "Check your favorites films and series",
     "removeFavorite": "Remove from my favorites",
-    "noFavorites": "You don't have any series and films added to favorites"
-
+    "noFavorites": "You don't have any series and films added to favorites",
+    "listaUser": "List of Users",
+    "nobanUser": "Users without ban",
+    "banUser": "Banned Users",
+    "ban": "Ban User",
+    "unban": "Unban User",
+    "noData": "There is no data",
+    "searchData": "Search data"
     
 }
