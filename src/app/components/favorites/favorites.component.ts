@@ -54,7 +54,7 @@ export class FavoritesComponent implements OnInit{
     this.noFoundImage = this._mediaService.getNoFound()
 
 
-    let lang = localStorage.getItem('selectedLang')
+    let lang = this._mediaService.getSelectedLanguage()
     if(lang === "en"){
       this.messageTitle = "Confirm delete favorite"
       this.messageHeader = "Are you sure you want to delete the favorite?"

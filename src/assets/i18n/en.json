@@ -112,6 +112,8 @@
     "ban": "Ban User",
     "unban": "Unban User",
     "noData": "There is no data",
-    "searchData": "Search data"
+    "searchData": "Search data",
+    "selecciona": "Select one of the list",
+    "borrarCom": "Delete comment"
     
 }

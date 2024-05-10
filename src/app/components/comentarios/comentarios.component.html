@@ -1,10 +1,10 @@
-<h1>Peliculas / Series</h1>
+<h1>{{ 'mediaSerie' | translate}}</h1>
 
 <p-toast></p-toast>
 <p-confirmDialog></p-confirmDialog>
 
 <p-dropdown [options]="aMedia" [(ngModel)]="selectedMedia" optionLabel="titulo" [filter]="true" filterBy="titulo"
-    [showClear]="true" placeholder="Selecciona uno de la lista" (onChange)="onMediaChange()">
+    [showClear]="true" placeholder="{{ 'selecciona' | translate}}" (onChange)="onMediaChange()">
     <ng-template pTemplate="selectedItem" let-media>
         <div class="flex align-items-center gap-2">
 
@@ -30,10 +30,7 @@
         </p>
 
         <ng-template pTemplate="footer">
-            <p-button label="Borrar" icon="pi pi-trash" severity="danger" (onClick)="borrarComentario(comment._id, $event)"></p-button>
-            <!-- <p-button label="Banear Usuario" icon="pi pi-ban" severity="help" 
-            (onClick)="banearUsuario(comment.idUsuario._id, comment._id, $event)"
-            [style]="{ 'margin-left': '.5em' }"></p-button> -->
+            <p-button label="{{ 'borrarCom' | translate}}" icon="pi pi-trash" severity="danger" (onClick)="borrarComentario(comment._id, $event)"></p-button>
         </ng-template>
     </p-card>
     }

@@ -12,6 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TranslateModule } from '@ngx-translate/core';
+import { MediaService } from '../../../services/media.service';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class UserListComponent implements OnInit {
     private _authService: AuthService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private _mediaService : MediaService
   ) {
 
   }
@@ -56,7 +58,7 @@ export class UserListComponent implements OnInit {
   public titleUn = "¿Seguro que quieres desbanear al Usuario?"
 
   ngOnInit(): void {
-    let lang = localStorage.getItem('selectedLang')
+    let lang = this._mediaService.getSelectedLanguage()
 
     if (lang === "en") {
       this.noUsers = "No users available"

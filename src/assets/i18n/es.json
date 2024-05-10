@@ -112,5 +112,7 @@
     "ban": "Banear Usuario",
     "unban": "Desbanear Usuario",
     "noData": "No hay registros",
-    "searchData": "Busca registros"
+    "searchData": "Busca registros",
+    "selecciona": "Selecciona uno de la lista",
+    "borrarCom": "Borrar comentario"
 }

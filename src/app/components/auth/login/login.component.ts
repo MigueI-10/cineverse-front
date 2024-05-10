@@ -6,6 +6,7 @@ import { PrimeNgModule } from '../../../prime-ng/prime-ng/prime-ng.module';
 import { MessageService } from 'primeng/api';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
+import { MediaService } from '../../../services/media.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private _mediaService: MediaService
   ) { }
 
 
@@ -42,7 +44,7 @@ export class LoginComponent {
 
   //metodo para hacer login si el formulario es valido, si falla salta una alerta
   login() {
-    let lang = localStorage.getItem('selectedLang')
+    let lang = this._mediaService.getSelectedLanguage()
 
     if (this.form.valid) {
       

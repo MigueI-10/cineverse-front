@@ -11,11 +11,12 @@ import { MediaService } from '../../services/media.service';
 import { FormsModule } from '@angular/forms';
 import { CommentResponse } from '../../interfaces/comments-response.interface';
 import { CommentService } from '../../services/comment.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-comentarios',
   standalone: true,
-  imports: [MaterialModule, NgStyle, DatePipe, PrimeNgModule, MatSelectModule, FormsModule],
+  imports: [MaterialModule, NgStyle, DatePipe, PrimeNgModule, MatSelectModule, FormsModule, TranslateModule],
   providers: [MessageService, ConfirmationService],
   templateUrl: './comentarios.component.html',
   styleUrl: './comentarios.component.css'
@@ -25,7 +26,15 @@ export class ComentariosComponent implements OnInit {
   public aMedia: Media[] = [];
   public aComments: CommentResponse[] = []
   public selectedMedia?: Media
-  
+
+  public noComments = "Esta Pelicula / Serie no tiene comentarios"
+  public messageTitle: string = "Confirmar Borrado"
+  public messageHeader: string = "¿Estás seguro de que quieres borrar el comentario?"
+  public yes = "Si"
+  public no = "No"
+  public borradoBien = "Comentario eliminado correctamente"
+  public borradoMal = "Error al eliminar el comentario"
+  public noBorrado = "No se ha borrado el comentario"
 
   constructor(
     private _authService: AuthService,
@@ -40,6 +49,18 @@ export class ComentariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarMedia()
+     let lang = this._mediaService.getSelectedLanguage();
+    if(lang === "en"){
+      this.noComments = "This Movie / Series has no comments";
+      this.messageTitle = "Confirm Deletion";
+      this.messageHeader = "Are you sure you want to delete the comment?";
+      this.yes = "Yes";
+      this.no = "No";
+      this.borradoBien = "Comment deleted successfully";
+      this.borradoMal = "Error deleting the comment";
+      this.noBorrado = "Comment has not been deleted";
+  }
+
   }
 
   cargarMedia() {
@@ -69,7 +90,7 @@ export class ComentariosComponent implements OnInit {
         this._mediaService.getCommentsOfAFilm(idMedia).subscribe(
           res => {
             console.log(res);
-            if (res.length <= 0) return this.errorToast('Esta Pelicula / Serie no tiene comentarios')
+            if (res.length <= 0) return this.errorToast(this.noComments)
 
             this.aComments = res
           }
@@ -84,21 +105,21 @@ export class ComentariosComponent implements OnInit {
     if (id !== "") {
       this.confirmationService.confirm({
         target: event.target as EventTarget,
-        message: 'Seguro que quieres borrar el comentario?',
-        header: 'Accion Importante',
+        message: this.messageTitle,
+        header: this.messageHeader,
         icon: 'pi pi-exclamation-triangle',
         acceptIcon: "none",
         rejectIcon: "none",
         rejectButtonStyleClass: "p-button-text",
-        acceptLabel: "Si",
-        rejectLabel: "No",
+        acceptLabel: this.yes,
+      rejectLabel: this.no,
         accept: () => {
           this._commentService.delComment(id).subscribe(
             res => {
               if (res) {
-                this.success('Comentario eliminado correctamente')
+                this.success(this.borradoBien)
               } else {
-                this.errorToast('Error al eliminar el comentario')
+                this.errorToast(this.borradoMal)
               }
               
     
@@ -108,7 +129,7 @@ export class ComentariosComponent implements OnInit {
           
         },
         reject: () => {
-          this.messageService.add({ severity: 'info', summary: 'Informacion', detail: 'No se ha borrado el comentario', life: 3000 });
+          this.messageService.add({ severity: 'info', summary: 'Informacion', detail: this.noBorrado, life: 3000 });
         }
       });
    

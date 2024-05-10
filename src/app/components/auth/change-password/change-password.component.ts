@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { MediaService } from '../../../services/media.service';
 
 @Component({
   selector: 'app-change-password',
@@ -23,8 +24,8 @@ export class ChangePasswordComponent implements OnInit{
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private messageService: MessageService
-    
+    private messageService: MessageService,
+    private _mediaService: MediaService
   ) { }
 
   ngOnInit(): void {
@@ -53,7 +54,7 @@ export class ChangePasswordComponent implements OnInit{
   submitChange(){
     if(this.form.valid){
       
-      let lang = localStorage.getItem('selectedLang')
+      let lang = this._mediaService.getSelectedLanguage()
 
       const {email} = this.form.value
 

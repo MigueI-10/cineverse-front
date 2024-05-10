@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha';
 import { environment } from '../../../../environments/environments';
 import { TranslateModule } from '@ngx-translate/core';
+import { MediaService } from '../../../services/media.service';
 
 @Component({
   selector: 'app-register',
@@ -31,7 +32,8 @@ export class RegisterComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private messageService: MessageService,
-    private recaptchaV3Service: ReCaptchaV3Service
+    private recaptchaV3Service: ReCaptchaV3Service,
+    private _mediaService: MediaService
   ) { }
 
   ngOnInit() {
@@ -63,7 +65,7 @@ export class RegisterComponent implements OnInit {
   //metodo de register
   register() {
 
-    let lang = localStorage.getItem('selectedLang')
+    let lang = this._mediaService.getSelectedLanguage()
    
     if (this.registerForm.valid) {
 

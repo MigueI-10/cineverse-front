@@ -131,7 +131,7 @@ export class MediaComponent implements OnInit {
 
   setearMensajes() {
 
-    const lang = localStorage.getItem('selectedLang')
+    const lang = this._mediaService.getSelectedLanguage()
 
     if (lang === "en") {
       this.mensaje = [{ severity: 'error', summary: 'Error', detail: `There is not response from the server` }];

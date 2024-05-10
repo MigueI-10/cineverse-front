@@ -19,6 +19,10 @@ export class MediaService {
     return 'https://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/noFoto.png'
   }
 
+  getSelectedLanguage(){
+    return localStorage.getItem('selectedLang') || 'en'
+  }
+
   getAllMedia(): Observable<Media[]> {
     return this.http.get<Media[]>(this.urlBackEnd + "/media").pipe(
       catchError(error => {
