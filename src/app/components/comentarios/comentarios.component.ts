@@ -112,7 +112,7 @@ export class ComentariosComponent implements OnInit {
         rejectIcon: "none",
         rejectButtonStyleClass: "p-button-text",
         acceptLabel: this.yes,
-      rejectLabel: this.no,
+        rejectLabel: this.no,
         accept: () => {
           this._commentService.delComment(id).subscribe(
             res => {

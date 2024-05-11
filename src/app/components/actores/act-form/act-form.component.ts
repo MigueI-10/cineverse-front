@@ -152,7 +152,7 @@ export class ActFormComponent implements OnInit {
     this._actorService.getActorById(this.idActor).subscribe(
       res => {
 
-        if (res) {
+        if (Object.keys(res).length > 0) {
           console.log(res);
           //seteamos los campos del form que vengan del objeto
           this.frmCrud.controls['id'].setValue(res._id);

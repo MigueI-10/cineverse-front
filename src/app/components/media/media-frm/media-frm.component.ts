@@ -10,11 +10,12 @@ import { of, switchMap } from 'rxjs';
 import { MatSelectModule } from '@angular/material/select';
 import { Actor } from '../../../interfaces';
 import { ActorService } from '../../../services/actor.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-media-frm',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, MaterialModule, CommonModule, PrimeNgModule, MatSelectModule],
+  imports: [FormsModule, ReactiveFormsModule, MaterialModule, CommonModule, PrimeNgModule, MatSelectModule, TranslateModule],
   providers: [MessageService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './media-frm.component.html',
@@ -30,6 +31,15 @@ export class MediaFrmComponent implements OnInit {
 
   public actLocal!: Actor[]
 
+  public mensajeBienAdd = "Película/Serie añadida correctamente"
+  public mensajeMalAdd = "Fallo al añadir la película/serie"
+  public mensajeBienUpd = "Película/Serie actualizada correctamente"
+  public mensajeMalUpd = "Fallo al actualizar la película/serie"
+  public mensajeNoExiste = "Esta película/serie no existe"
+  public mensajeMin3 = "Debes seleccionar minimo 3 actores"
+
+
+
   constructor(private fb: FormBuilder,
     private _mediaService: MediaService,
     private _router: Router,
@@ -44,7 +54,15 @@ export class MediaFrmComponent implements OnInit {
   ngOnInit(): void {
 
     this.cargarActoresBD()
-
+    let lang = this._mediaService.getSelectedLanguage()
+    if(lang === "en") {
+      this.mensajeBienAdd = "Media added successfully";
+      this.mensajeMalAdd = "Failed to add the media";
+      this.mensajeBienUpd = "Media updated successfully";
+      this.mensajeMalUpd = "Failed to update the media";
+      this.mensajeNoExiste = "This media does not exist";
+      this.mensajeMin3 = "You must select at least 3 actors";
+  }
 
     this.frmMedia = this.fb.group({
       id: new FormControl({ value: '', disabled: true }),
@@ -74,8 +92,8 @@ export class MediaFrmComponent implements OnInit {
   cargarMedia() {
     this._mediaService.getMediaById(this.idMedia).subscribe(
       res => {
-
-        if (res) {
+        console.log(res);
+        if (Object.keys(res).length > 0) {
           console.log(res);
           // //seteamos los campos del form que vengan del objeto
           this.frmMedia.controls['id'].setValue(res._id);
@@ -108,8 +126,8 @@ export class MediaFrmComponent implements OnInit {
           });
 
         } else {
-          this.errorToast('El actor no existe')
-          this._router.navigate(['/actores-crud']);
+          this.errorToast(this.mensajeNoExiste)
+          this._router.navigate(['/media-crud']);
         }
       }
     )
@@ -147,7 +165,7 @@ export class MediaFrmComponent implements OnInit {
         this.frmMedia.removeControl('duracion');
       }
 
-      this.frmMedia.addControl('episodios', new FormControl('', [Validators.required, Validators.min(0), Validators.max(5000)]));
+      this.frmMedia.addControl('episodios', new FormControl('', [Validators.required, Validators.min(1), Validators.max(5000)]));
 
     } else if (cadena == "pelicula") {
       this.isSerie = false
@@ -156,7 +174,7 @@ export class MediaFrmComponent implements OnInit {
       if (this.frmMedia.contains('episodios')) {
         this.frmMedia.removeControl('episodios');
       }
-      this.frmMedia.addControl('duracion', new FormControl('', [Validators.required, Validators.min(0), Validators.max(500)]));
+      this.frmMedia.addControl('duracion', new FormControl('', [Validators.required, Validators.min(1), Validators.max(500)]));
 
     }
   }
@@ -201,9 +219,9 @@ export class MediaFrmComponent implements OnInit {
         this._mediaService.addMedia(formData).subscribe(
           res => {
             if (res) {
-              this.success(`${formData.tipo} añadida correctamente`)
+              this.success(this.mensajeBienAdd)
             } else {
-              this.errorToast(`Fallo al añadir ${formData.tipo}`)
+              this.errorToast(this.mensajeMalAdd)
             }
 
             setTimeout(() => {
@@ -216,7 +234,7 @@ export class MediaFrmComponent implements OnInit {
 
 
       } else {
-        this.errorToast('Debes seleccionar minimo 3 actores')
+        this.errorToast(this.mensajeMin3)
       }
 
 
@@ -243,9 +261,9 @@ export class MediaFrmComponent implements OnInit {
         this._mediaService.updateMedia(formData, id).subscribe(
           res => {
             if (res) {
-              this.success(`${formData.tipo} actualizada correctamente`)
+              this.success(this.mensajeBienUpd)
             } else {
-              this.errorToast(`Fallo al actualizar ${formData.tipo}`)
+              this.errorToast(this.mensajeMalUpd)
             }
 
             setTimeout(() => {
@@ -255,7 +273,7 @@ export class MediaFrmComponent implements OnInit {
           }
         )
       } else {
-        this.errorToast('Debes seleccionar minimo 3 actores')
+        this.errorToast(this.mensajeMin3)
       }
 
 

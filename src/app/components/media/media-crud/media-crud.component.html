@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col">
-        <h1>Crud Media</h1>
+        <h1>{{ 'crudMedia' | translate}}</h1>
         <hr>
         <div class="agregar">
-          <button mat-raised-button color="primary" (click)="cargarFormulario()">Añadir</button>
+          <button mat-raised-button color="primary" (click)="cargarFormulario()">{{ 'add' | translate}}</button>
         </div>
 
         <p-toast></p-toast>
@@ -12,7 +12,7 @@
         <div class="mat-elevation-z18">
         <mat-form-field>
           <mat-label>Filter</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Introduzca una búsqueda" #input>
+          <input matInput (keyup)="applyFilter($event)" placeholder="{{ 'mediaSearch' | translate}}" #input>
         </mat-form-field>
 
         <table mat-table [dataSource]="dataSource" matSort>
@@ -21,40 +21,40 @@
           
             <!-- Position Column -->
             <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
               <td mat-cell *matCellDef="let element"> {{element._id}} </td>
             </ng-container>
           
             <!-- Name Column -->
             <ng-container matColumnDef="titulo">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Titulo </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'titulo' | translate}} </th>
               <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
             </ng-container>
           
             <!-- Symbol Column -->
             <ng-container matColumnDef="tipo">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'tipo' | translate}} </th>
               <td mat-cell *matCellDef="let element"> {{element.tipo | titlecase}} </td>
             </ng-container>
 
             <ng-container matColumnDef="anyo">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Año </th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'year' | translate}} </th>
               <td mat-cell *matCellDef="let element"> {{element.anyo}} </td>
             </ng-container>
 
             <ng-container matColumnDef="puntuacion">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Puntuacion </th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'puntuacion' | translate}} </th>
                 <td mat-cell *matCellDef="let element"> {{element.puntuacion}} </td>
               </ng-container>
 
             <ng-container matColumnDef="acciones">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'actions' | translate}}</th>
                 <td mat-cell *matCellDef="let element">
-                    <a [ngStyle]="{'color': '#1f516f'}" matTooltip="Editar Media" class="pointer"
+                    <a [ngStyle]="{'color': '#1f516f'}" matTooltip="{{ 'editarMedia' | translate}}" class="pointer"
                     (click)="updateMedia(element._id)">
                         <mat-icon>edit</mat-icon>
                     </a>
-                    <a [ngStyle]="{'color': '#e15639'}" matTooltip="Borrar Media"
+                    <a [ngStyle]="{'color': '#e15639'}" matTooltip="{{ 'borrarMedia' | translate}}"
                     class="pointer" (click)="borrarMedia(element._id, $event)">
                         <mat-icon>delete</mat-icon>
                     </a>
@@ -65,7 +65,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
           @if(!this.dataSource || this.dataSource.data.length == 0){
-            <p class="text-center">No hay registros</p>
+            <p class="text-center">{{ 'noDataMedia' | translate}}</p>
           }
           <mat-paginator [pageSizeOptions]="[5, 10, 20]"
                  showFirstLastButtons

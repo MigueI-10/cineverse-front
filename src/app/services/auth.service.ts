@@ -39,7 +39,6 @@ export class AuthService {
     return this.http.post<LoginResponse>(url, body)
       .pipe(
         map(res => { //si todo es correcto
-          console.log(res.user);
           this._usrActual.set(res.user);
           this._authStatus.set(AuthStatus.authenticated);
           //almacenar el token en localStorage
