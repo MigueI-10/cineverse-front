@@ -67,6 +67,10 @@
     padding-top: 0.5em;
 }
 
+.anyo{
+    background-color: #007bff !important;
+}
+
 .puntuarMedia {
     display: flex;
     flex-direction: column;

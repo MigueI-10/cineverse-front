@@ -161,5 +161,7 @@
     "duracionSelec": "Enter the duration of the movie",
     "duracionRequired": "Duration is required",
     "selecEpi": "Enter the episodes of the series",
-    "epiRequired": "The number of episodes is required"
+    "epiRequired": "The number of episodes is required",
+    "puntuarMedia": "Rate the media",
+    "guardar": "Save"
 }
