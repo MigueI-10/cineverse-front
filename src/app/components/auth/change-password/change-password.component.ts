@@ -69,7 +69,7 @@ export class ChangePasswordComponent implements OnInit{
             
             setTimeout(() => {
               this.router.navigateByUrl('/login')
-            }, 1200);
+            }, 1000);
           }
         },
         error:(message) =>{

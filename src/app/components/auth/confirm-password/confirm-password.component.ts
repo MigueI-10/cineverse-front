@@ -71,7 +71,7 @@ export class ConfirmPasswordComponent implements OnInit {
            
             setTimeout(() => {
               this.router.navigateByUrl('/login')
-            }, 3000);
+            }, 1000);
 
           } else if (cadena === this.badCheck) {
             this.errorToast(cadena)
@@ -79,7 +79,7 @@ export class ConfirmPasswordComponent implements OnInit {
 
             setTimeout(() => {
               this.router.navigateByUrl('/login')
-            }, 3000);
+            }, 1000);
           }
         },
         error: (message) => {

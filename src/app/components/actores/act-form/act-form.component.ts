@@ -141,7 +141,7 @@ export class ActFormComponent implements OnInit {
           setTimeout(() => {
             this.frmCrud.reset(); //se resetea el formulario
            this._router.navigate(['/actores-crud']);//cargar el crud
-          }, 2500);
+          }, 1000);
 
           
         }
@@ -197,7 +197,7 @@ export class ActFormComponent implements OnInit {
         setTimeout(() => {
           this.frmCrud.reset(); //se resetea el formulario
          this._router.navigate(['/actores-crud']);//cargar el crud
-        }, 1500);
+        }, 1000);
       }
     );
     

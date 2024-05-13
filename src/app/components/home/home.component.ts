@@ -56,7 +56,6 @@ export class HomeComponent implements OnInit {
   getFilmsList() {
 
     const saveFilms = localStorage.getItem('films')
-
     if (saveFilms) {
 
       this.aFilms = JSON.parse(saveFilms);
@@ -71,9 +70,9 @@ export class HomeComponent implements OnInit {
         res => {
           this.aFilms = res
 
-          localStorage.setItem('films', JSON.stringify(res));
+          
           if (this.aFilms.length > 0) {
-
+            localStorage.setItem('films', JSON.stringify(res));
             this.listAvailable = true;
             this.inicializarSwiper();
           }
@@ -85,7 +84,6 @@ export class HomeComponent implements OnInit {
   getSeriesList() {
 
     const saveSeries = localStorage.getItem('series')
-
     if (saveSeries) {
 
       this.aSeries = JSON.parse(saveSeries);
@@ -100,9 +98,9 @@ export class HomeComponent implements OnInit {
         res => {
           this.aSeries = res
 
-          localStorage.setItem('series', JSON.stringify(res));
+          
           if (this.aSeries.length > 0) {
-
+            localStorage.setItem('series', JSON.stringify(res));
             this.listAvailable = true;
             this.carruselSeries();
           }
@@ -127,9 +125,9 @@ export class HomeComponent implements OnInit {
         res => {
           this.aMedia = res;
 
-          localStorage.setItem('media', JSON.stringify(res));
+          
           if (this.aMedia.length > 0) {
-            
+            localStorage.setItem('media', JSON.stringify(res));
             this.listAvailable = true;
             this.carruselActual();
           }

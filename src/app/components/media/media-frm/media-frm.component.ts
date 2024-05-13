@@ -221,7 +221,7 @@ export class MediaFrmComponent implements OnInit {
             setTimeout(() => {
               this.frmMedia.reset(); //se resetea el formulario
               this._router.navigate(['/media-crud']);//cargar el crud
-            }, 2500);
+            }, 1000);
           }
         )
 
@@ -261,7 +261,7 @@ export class MediaFrmComponent implements OnInit {
             setTimeout(() => {
               this.frmMedia.reset(); //se resetea el formulario
               this._router.navigate(['/media-crud']);//cargar el crud
-            }, 2500);
+            }, 1000);
           }
         )
       } else {

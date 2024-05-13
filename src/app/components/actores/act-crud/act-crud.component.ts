@@ -74,7 +74,7 @@ export class ActCrudComponent implements OnInit {
     this._actorService.getAllActors().subscribe(
       res => {
        
-        if (!localStorage.getItem('actores')) {
+        if (!localStorage.getItem('actores') && res.length > 0) {
          
           localStorage.setItem('actores', JSON.stringify(res));
         }

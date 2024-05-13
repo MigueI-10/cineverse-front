@@ -89,7 +89,7 @@ export class RegisterComponent implements OnInit {
                 
                 setTimeout(() => {
                   this.router.navigateByUrl('/login')
-                }, 2500);
+                }, 1500);
               }
             },
             error:(message) =>{
