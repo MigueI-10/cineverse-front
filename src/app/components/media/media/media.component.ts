@@ -56,6 +56,7 @@ export class MediaComponent implements OnInit {
   public comentarioMal = "El comentario no fue añadido"
   public favoritoBien = "Favorito actualizado con éxito"
   public favoritoMal = "Fallo al actualizar el favorito"
+  public noLogin = "Para añadir esta película a favoritos, debes estar logueado"
 
   constructor(
     private _activatedRouter: ActivatedRoute,
@@ -140,6 +141,7 @@ export class MediaComponent implements OnInit {
       this.comentarioMal = "The comment wasn't added"
       this.favoritoBien = "Favorite updated successfully"
       this.favoritoMal = "Failed to update the favorite"
+      this.noLogin = "To vote this film or add to favorites you have to be logged in."
     } else {
       this.mensaje = [{ severity: 'error', summary: 'Error', detail: `No hay respuesta del servidor compruebe su conexión` }];
       this.noComentMessage = [{ severity: 'info', summary: '', detail: `Esta ${this.objMedia.tipo} no tiene comentarios` }];
@@ -261,7 +263,7 @@ export class MediaComponent implements OnInit {
       }
 
     } else {
-      this.messageService.add({ severity: 'info', summary: 'Info', detail: `Para añadir esta película a favoritos, debes estar logueado` });
+      this.messageService.add({ severity: 'info', summary: 'Info', detail: this.noLogin });
     }
   }
 
@@ -270,7 +272,7 @@ export class MediaComponent implements OnInit {
       this.visiblePuntuacion = true
 
     } else {
-      this.messageService.add({ severity: 'info', summary: 'Info', detail: `Para añadir esta película a favoritos, debes estar logueado` });
+      this.messageService.add({ severity: 'info', summary: 'Info', detail: this.noLogin });
     }
 
   }

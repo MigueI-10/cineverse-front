@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthStatus, CheckTokenResponse, LoginResponse, RegisterUser, User } from '../interfaces';
 import { BehaviorSubject, Observable, catchError, map, of, throwError } from 'rxjs';
 import { environment } from '../../environments/environments';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -27,8 +28,16 @@ export class AuthService {
   private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
 
-  constructor() {
+  constructor(private router: Router) {
     this.checkAuthStatus().subscribe(); //verificar el estado del servicio
+
+    window.addEventListener('storage', (event) => {
+      if(event.newValue === null){
+        this.logout()
+        this.router.navigateByUrl('/')
+        window.location.reload()
+      }
+    });
   }
 
   login(email: string, password: string): Observable<boolean> {

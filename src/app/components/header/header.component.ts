@@ -36,15 +36,6 @@ export class HeaderComponent {
   public isLoggedIn: boolean = false;
 
   ngOnInit() {
-    // this.authService.isLoggedIn$.subscribe(isLoggedIn => {
-
-    //   const { ...user } = this.authService.usrActual();
-
-    //   this.nomUsuario = user.name
-    //   this.idUser = user._id
-
-    //   this.isLoggedIn = isLoggedIn;
-    // });
 
     //chequeamos el status, porque al hacer reload de la pagina se pierden esos dtatos
     this.authService.checkAuthStatus().subscribe(

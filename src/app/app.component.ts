@@ -21,8 +21,9 @@ export class AppComponent {
     if (savedLanguage) {
       this.translate.use(savedLanguage);
     } else {
-      // Si no hay un idioma guardado en el localStorage, utiliza el idioma por defecto
+      
       this.translate.setDefaultLang('es');
+      localStorage.setItem('selectedLang', 'es');
     }
   }
 }
