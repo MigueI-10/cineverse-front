@@ -95,8 +95,6 @@ export class UserListComponent implements OnInit {
         } else {
           this.errorToast(this.noUsers)
         }
-
-        // console.log(this.aUsers);
       }
     )
   }
@@ -106,7 +104,6 @@ export class UserListComponent implements OnInit {
     this.estadoBan = ban
     this._authService.getUsersByBan(ban).subscribe(
       res => {
-        console.log(res);
         if (res.length > 0) {
 
           this.aUsers = res

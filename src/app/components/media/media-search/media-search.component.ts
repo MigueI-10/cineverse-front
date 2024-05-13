@@ -51,7 +51,6 @@ export class MediaSearchComponent implements OnInit, OnDestroy {
         switchMap(value => this.sendValueBackend(value))
       )
       .subscribe(value => {
-        console.log(value);
         if (value !== null) {
           if(value.length === 0) this.showMessage = true
           this.aMedia = this.aMedia.concat(value)

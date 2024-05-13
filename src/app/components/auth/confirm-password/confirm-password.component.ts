@@ -61,15 +61,10 @@ export class ConfirmPasswordComponent implements OnInit {
 
   submitChange() {
     if (this.form.valid) {
-      console.log(this.form.value);
-
       const { password } = this.form.value
-      console.log(this.token);
       this.authService.confirmChangePassword(this.token, password).subscribe({
         next: (res) => {
-          // console.log(res.message);
           let cadena = res.message
-          console.log(cadena);
           if (cadena === this.goodCheck) {
 
             this.success(cadena)

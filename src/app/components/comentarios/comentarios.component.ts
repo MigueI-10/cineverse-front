@@ -89,7 +89,6 @@ export class ComentariosComponent implements OnInit {
       if (idMedia !== undefined) {
         this._mediaService.getCommentsOfAFilm(idMedia).subscribe(
           res => {
-            console.log(res);
             if (res.length <= 0) return this.errorToast(this.noComments)
 
             this.aComments = res

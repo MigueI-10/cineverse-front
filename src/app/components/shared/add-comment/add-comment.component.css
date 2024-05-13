@@ -1,14 +1,14 @@
 .rounded-button {
-    border-radius: 10px; /* Ajusta este valor según el radio deseado */
-    background-color: #007bff; /* Azul predeterminado de Bootstrap */
-    color: white; /* Color del texto */
-    padding: 10px 15px; /* Espaciado interno del botón */
-    border: none; /* Sin borde */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    font-size: 16px; /* Tamaño de la fuente */
-    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+    border-radius: 10px; 
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: background-color 0.3s ease;
 }
 
 .rounded-button:hover {
-    background-color: #0056b3; /* Color de fondo al pasar el ratón sobre el botón */
+    background-color: #0056b3;
 }

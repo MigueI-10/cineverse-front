@@ -31,13 +31,12 @@ mat-panel-title{
 }
 .custom-button.mat-button-toggle-checked {
     background-color: #1976d2;
-    color: white
-    /* Cambia el color de fondo cuando se selecciona */
+    color: white;
 }
 
 .tipo p-multiselect .ui-multiselect-panel {
-    max-height: 200px; /* Ajusta la altura máxima del panel desplegable */
-    overflow-y: auto; /* Añade desplazamiento vertical si es necesario */
+    max-height: 200px;
+    overflow-y: auto; 
   }
 
 ::ng-deep.mat-button-toggle .mat-pseudo-checkbox{
@@ -48,11 +47,8 @@ mat-panel-title{
     padding-bottom: 0.3em;
 }
 
-/* padding-top: 0.3em;
-    padding-bottom: 0.3em; */
-
 .filter-section {
-    margin-bottom: 20px; /* Espacio entre secciones de filtro */
+    margin-bottom: 20px; 
   }
   
   .filter-section-title {
@@ -69,8 +65,8 @@ mat-panel-title{
   .filter-section-content {
     padding: 10px;
     border: 1px solid #ccc;
-    border-top: none; /* Eliminar borde superior */
-    border-radius: 0 0 5px 5px; /* Redondear solo la parte inferior */
+    border-top: none; 
+    border-radius: 0 0 5px 5px; 
   }
   
   .toggle-icon {

@@ -50,7 +50,6 @@ export class HeaderComponent {
     this.authService.checkAuthStatus().subscribe(
       res => {
         this.isLoggedIn = res
-        console.log(this.isLoggedIn);
         if (this.isLoggedIn) {
           const { ...user } = this.authService.usrActual();
 
@@ -58,9 +57,6 @@ export class HeaderComponent {
 
           this.mainRole = user.roles[0]
           this.idUser = user._id
-
-          // console.log(this.authService.authStatus());
-          // console.log(this.authService.usrActual());
         }
 
       }

@@ -1,16 +1,15 @@
 .background-image {
-    background-image: url('https://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/register-min.jpg'); /* Ruta de tu imagen de fondo */
+    background-image: url('https://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/register-min.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh; /* Ajusta la altura como desees */
+    height: 100vh; 
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
   .form-container {
-    /* max-width: 400px; */
     width: 85%;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8);
@@ -39,10 +38,10 @@
   }
   
   
-  /* Estilos para hacer el formulario responsive */
+ 
   @media (min-width: 500px) and (max-width: 899px){
     .form-container {
-        width: 60%; /* Ancho máximo del formulario en pantallas pequeñas */
+        width: 60%; 
     }
   
     .background-image{
@@ -60,7 +59,7 @@
   
   @media (min-width: 900px) and (max-width: 1400px) {
     .form-container {
-      width: 30%; /* Ancho máximo del formulario en pantallas pequeñas */
+      width: 30%; 
     }
     .background-image{
       background-size: cover;
@@ -70,7 +69,6 @@
   
     .cuadroRegis{
       display: flex;
-      /* flex-direction: column; */
       gap: 10px;
       place-items: center;
     }
@@ -78,7 +76,7 @@
   
   @media (min-width: 1401px) {
     .form-container {
-        width: 100%; /* Ancho máximo del formulario en pantallas pequeñas */
+        width: 100%; 
         max-width: 30%;
     }
     .background-image{
@@ -89,7 +87,6 @@
   
     .cuadroRegis{
       display: flex;
-      /* flex-direction: column; */
       gap: 10px;
       place-items: center;
     }

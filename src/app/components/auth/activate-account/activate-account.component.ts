@@ -43,7 +43,6 @@ export class ActivateAccountComponent implements OnInit{
     this.authService.activateAccount(this.token).subscribe({
       next:(res) => {
         let cadena = res.message
-        console.log(cadena);
         if(cadena === this.goodCheck){
 
           this.success(`Cuenta activada correctamente.`) 

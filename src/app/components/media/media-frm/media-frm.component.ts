@@ -82,7 +82,6 @@ export class MediaFrmComponent implements OnInit {
       params => {
         this.idMedia = params['id'];
         if (this.idMedia) {
-          console.log(this.idMedia);
           this.cargarMedia();
         }
       }
@@ -92,9 +91,7 @@ export class MediaFrmComponent implements OnInit {
   cargarMedia() {
     this._mediaService.getMediaById(this.idMedia).subscribe(
       res => {
-        console.log(res);
         if (Object.keys(res).length > 0) {
-          console.log(res);
           // //seteamos los campos del form que vengan del objeto
           this.frmMedia.controls['id'].setValue(res._id);
           this.frmMedia.controls['titulo'].setValue(res.titulo);
@@ -105,7 +102,6 @@ export class MediaFrmComponent implements OnInit {
           this.frmMedia.controls['genero'].setValue(res.genero);
           this.frmMedia.controls['puntuacion'].setValue(res.puntuacion);
 
-          console.log(res.duracion);
 
           if (res.duracion) {
 
@@ -156,7 +152,6 @@ export class MediaFrmComponent implements OnInit {
 
   clickTipo(cadena: string) {
 
-    console.log(cadena);
     if (cadena == "serie") {
       this.isPelicula = false
       this.isSerie = true
@@ -215,7 +210,6 @@ export class MediaFrmComponent implements OnInit {
         formData.puntuacion = Number.parseInt(formData.puntuacion);
         formData.actores = this.actores.value;
 
-        console.log(formData);
         this._mediaService.addMedia(formData).subscribe(
           res => {
             if (res) {
@@ -253,8 +247,6 @@ export class MediaFrmComponent implements OnInit {
         formData.anyo = Number.parseInt(formData.anyo)
         formData.puntuacion = Number.parseInt(formData.puntuacion);
         formData.actores = this.actores.value;
-
-        console.log(formData);
 
         const id = this.frmMedia.controls['id'].value;
 

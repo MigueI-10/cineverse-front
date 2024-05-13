@@ -42,7 +42,6 @@
 .generalPunt i {
     font-size: 1em;
     color: #ffd700;
-    /* Color de fondo amarillo */
     background-color: transparent;
 }
 
@@ -81,7 +80,6 @@
 .puntuarMedia i {
     font-size: 1em;
     color: #5799EF;
-    /* Color de fondo amarillo */
     background-color: transparent;
 }
 
@@ -111,13 +109,13 @@
 }
 
 .actor-carousel .actor-item {
-    display: inline-block; /* Para que los elementos estén en una fila */
-    margin-right: 10px; /* Espacio entre las imágenes */
+    display: inline-block; 
+    margin-right: 10px; 
   }
   
   .actor-carousel .actor-image {
-    width: 100px; /* Ancho de la imagen */
-    height: auto; /* Altura automática para mantener la proporción */
+    width: 100px; 
+    height: auto; 
   }
 
   .seeMore{
@@ -158,8 +156,6 @@
 .restoAct{
     display: flex;
     flex-wrap: wrap;
-    /* grid-template-columns: 1fr 1fr; */
-    /* grid-template-rows: 1fr; */
     gap: 1em;
 
 }
@@ -170,7 +166,7 @@
 }
 
 .actorImage img{
-    width: 100px; /* Ancho de la imagen */
+    width: 100px; 
     height: auto;
 }
 
@@ -207,18 +203,18 @@
 }
 
 .rounded-button {
-    border-radius: 10px; /* Ajusta este valor según el radio deseado */
-    background-color: #007bff; /* Azul predeterminado de Bootstrap */
-    color: white; /* Color del texto */
-    padding: 10px 15px; /* Espaciado interno del botón */
-    border: none; /* Sin borde */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    font-size: 16px; /* Tamaño de la fuente */
-    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+    border-radius: 10px; 
+    background-color: #007bff; 
+    color: white; 
+    padding: 10px 15px; 
+    border: none; 
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: background-color 0.3s ease; 
 }
 
 .rounded-button:hover {
-    background-color: #0056b3; /* Color de fondo al pasar el ratón sobre el botón */
+    background-color: #0056b3; 
 }
 
 

@@ -153,7 +153,6 @@ export class ActFormComponent implements OnInit {
       res => {
 
         if (Object.keys(res).length > 0) {
-          console.log(res);
           //seteamos los campos del form que vengan del objeto
           this.frmCrud.controls['id'].setValue(res._id);
            this.frmCrud.controls['nombre'].setValue(res.nombre);

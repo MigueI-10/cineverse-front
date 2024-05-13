@@ -12,7 +12,7 @@
   .imagenCont {
     margin-top: 20px;
     width: 200px; 
-    margin-bottom: 20px;/* Espacio entre el texto y la imagen */
+    margin-bottom: 20px;
   }
   .img-fluid {
     max-width: 100%;
@@ -20,7 +20,7 @@
   }
   @media (max-width: 768px) {
     .col-md-8 {
-      width: 100%; /* Ajuste del ancho para dispositivos móviles */
+      width: 100%;
     }
   }
   

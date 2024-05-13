@@ -15,18 +15,6 @@ export class CommentService {
 
   }
 
-  // getFavoritesAndMarks(filters: {search: string[], limit: number, skip: number}): Observable<Media[]> {
-
-  //   return this.http.get<Media[]>(`${this.urlBackEnd}/favorite/filter`, {params: filters}).pipe(
-  //     catchError(error => {
-  //       console.log("Error al obtener la lista de favoritos. " + error);
-  //       return of([])
-  //     })
-  //   );
-  // }
-
-  
-
   addComment(comment:Comment):Observable<boolean>{
     
     const token = localStorage.getItem('token');

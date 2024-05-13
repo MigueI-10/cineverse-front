@@ -62,7 +62,6 @@ export class AuthService {
     return this.http.post<LoginResponse>(url, body)
       .pipe(
         map(res => { //si todo es correcto
-          // console.log(res);
           return true;
         }),
         catchError(error => {
@@ -98,7 +97,6 @@ export class AuthService {
     return this.http.patch<LoginResponse>(url, body)
       .pipe(
         map(res => { //si todo es correcto
-          console.log(res);
           return res;
         }),
         catchError(error => {
@@ -116,7 +114,6 @@ export class AuthService {
     return this.http.post<any>(url, body)
       .pipe(
         map(res => { //si todo es correcto
-          console.log(res);
           return res;
         }),
         catchError(error => {
@@ -131,7 +128,6 @@ export class AuthService {
     const url = `${this.baseUrl}/auth/check-token`;
     //Leer el token en la cookie
     const token = localStorage.getItem('token');
-    // console.log({ token });
     if (!token) {
       this.logout(); //reestablecer el estado
       return of(false);
@@ -146,7 +142,6 @@ export class AuthService {
         map(res => { //si todo es correcto
           this._usrActual.set(res.user); //asignar el usuario
           this._authStatus.set(AuthStatus.authenticated); //establecer el valor autenticado
-          //console.log(this._usrActual());
           //almacenar el token en localStorage
           localStorage.setItem('token', res.token);
           return true;
@@ -162,14 +157,11 @@ export class AuthService {
   banUser(id:string):Observable<boolean>{
 
     const token = localStorage.getItem('token');
-    // console.log(token);
-    // console.log(id);
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     
     return this.http.patch(`${this.baseUrl}/auth/ban-user/${id}`, null, { headers }).pipe(
       map(()=>true),
       catchError(error=>{
-        console.log(error);
         return of (false)
       })
     );
@@ -178,14 +170,11 @@ export class AuthService {
   unBanUser(id:string):Observable<boolean>{
 
     const token = localStorage.getItem('token');
-    // console.log(token);
-    // console.log(id);
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     
     return this.http.patch(`${this.baseUrl}/auth/unban-user/${id}`, null, { headers }).pipe(
       map(()=>true),
       catchError(error=>{
-        console.log(error);
         return of (false)
       })
     );
@@ -194,8 +183,7 @@ export class AuthService {
   listAllUsers():Observable<User[]>{
 
     const token = localStorage.getItem('token');
-    // console.log(token);
-    // console.log(id);
+
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return this.http.get<User[]>(`${this.baseUrl}/auth`, { headers }).pipe(
@@ -212,8 +200,6 @@ export class AuthService {
   getUsersByBan(ban:boolean):Observable<User[]>{
 
     const token = localStorage.getItem('token');
-    // console.log(token);
-    // console.log(id);
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return this.http.get<User[]>(`${this.baseUrl}/auth/user-list/${ban}`, { headers }).pipe(
