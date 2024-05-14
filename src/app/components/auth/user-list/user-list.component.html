@@ -1,6 +1,6 @@
 <h1>{{ 'listaUser'| translate}}</h1>
 
-<mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color">
+<mat-button-toggle-group>
     <mat-button-toggle (click)="getBanned(true)">{{ 'nobanUser'| translate}}</mat-button-toggle>
     <mat-button-toggle (click)="getBanned(false)">{{ 'banUser'| translate}}</mat-button-toggle>
   </mat-button-toggle-group>
@@ -57,7 +57,7 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
     @if(!this.dataSource || this.dataSource.data.length == 0){
-      <p class="text-center">{{ 'noData '| translate}}</p>
+      <p class="text-center">{{ 'noData'| translate}}</p>
     }
     <mat-paginator [pageSizeOptions]="[5, 10, 20]"
            showFirstLastButtons

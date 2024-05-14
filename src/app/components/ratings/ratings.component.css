@@ -44,18 +44,21 @@
   .card-content {
     padding: 1rem;
   }
-  
-  .card-title {
+
+
+  .card-title>a:hover{
+    color: #007bff;
+    cursor: pointer;
+    text-shadow: 0 0 8px #007bff; 
+  }
+
+  .card-title > a{
+    text-decoration: none;
+    color: black;
     color: black;
     margin-bottom: 0.5rem;
     font-size: 1rem; 
     transition: color 0.3s ease, text-shadow 0.3s ease;
-  }
-
-  .card-title:hover{
-    color: #007bff;
-    cursor: pointer;
-    text-shadow: 0 0 8px #007bff; 
   }
   
   .card-details {
@@ -81,4 +84,17 @@
   
   .btn-delete:hover {
     background-color: #c82333;
+  }
+
+  
+
+  @media (max-width: 500px){
+
+
+    .botonesSort{
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
   }

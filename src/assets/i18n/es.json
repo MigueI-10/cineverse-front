@@ -163,6 +163,9 @@
     "selecEpi": "Introduzca los episodios de la serie",
     "epiRequired": "El número de episodios es obligatorio rellenarlo",
     "puntuarMedia": "Ponle una valoración",
-    "guardar": "Guardar"
+    "guardar": "Guardar",
+    "moreAbout": "Además ha sido desarrollada durante el periodo de prácticas de 2024 como trabajo de fin de grado, del grado superior de desarrollo de aplicaciones web en el instituto",
+    "sortTitle": "Ordenar por título",
+    "sortNota": "Ordenar por nota"
 
 }

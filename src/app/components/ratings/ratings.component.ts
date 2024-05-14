@@ -118,12 +118,20 @@ export class RatingsComponent implements OnInit{
     this._favService.findRatingsFromUser(this.idUser).subscribe(
       res => {
         if(res.length > 0){
-          this.ratingList = res
+          this.ratingList = res    
         }else{      
             this.showMessage = true
         }
       }
     )
+  }
+
+  sortRating(word: string){
+    if(word === "titulo"){
+      this.ratingList.sort((a, b) => a.titulo.localeCompare(b.titulo));
+    }else if( word === "notaUsuario"){
+      this.ratingList.sort((a, b) => (b?.notaUsuario ?? 0) - (a?.notaUsuario ?? 0));
+    }
   }
 
   success(message: string) {

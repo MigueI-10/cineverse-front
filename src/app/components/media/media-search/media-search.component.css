@@ -18,6 +18,13 @@
     
 }
 
+.loaderIcon{
+    
+    padding: auto;
+    width: 100%;
+    height: 30px;
+}
+
 @media (min-width: 500px) and (max-width: 800px){
     .resultados{
         grid-template-columns: 1fr 1fr 1fr 1fr;

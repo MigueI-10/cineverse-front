@@ -1,8 +1,15 @@
 <h2>{{ 'ratingsTitle'| translate}}</h2>
 <hr>
+
+<div class="botonesSort">
+  <mat-button-toggle-group>
+    <mat-button-toggle (click)="sortRating('titulo')">{{ 'sortTitle'| translate}}</mat-button-toggle>
+    <mat-button-toggle (click)="sortRating('notaUsuario')">{{ 'sortNota'| translate}}</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
 <p-toast></p-toast>
 <p-confirmDialog></p-confirmDialog>
-<div class="favoritos">
+<div class="favoritos mt-4">
 
   @if (ratingList.length > 0) {
     @for (fav of ratingList; track $index) {
@@ -11,7 +18,7 @@
             <img class="card-image" src="{{ fav.imagen }}" alt="{{ fav.titulo }}" (error)="fav.imagen = noFoundImage" />
           </div>
           <div class="right">
-            <h2 class="card-title">{{fav.titulo}}</h2>
+            <h2 class="card-title"><a [routerLink]="'/media/' + fav.idPelicula">{{fav.titulo}}</a></h2>
             @if (fav.notaUsuario) {
               <span class="rating" >{{ 'personalRating' | translate}}: {{fav.notaUsuario}}</span>
             }@else {

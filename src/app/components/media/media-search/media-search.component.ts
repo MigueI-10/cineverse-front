@@ -30,6 +30,10 @@ export class MediaSearchComponent implements OnInit, OnDestroy {
     limit: 10,
     skip: 0
   }
+
+  public imgLoader = "https://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/loader.svg"
+
+  public hasLoaded: boolean = false;
   public aMedia: Media[] = []
   public maxSkip: number | null = null;
   // public mensaje : Message[] = []
@@ -100,6 +104,12 @@ export class MediaSearchComponent implements OnInit, OnDestroy {
 
     this.filters.search = value
     return this._mediaService.getSearchResults(this.filters)
+  }
+
+  onLoad(){
+    setTimeout(() =>{
+      this.hasLoaded = true;
+    }, 500)
   }
 
 

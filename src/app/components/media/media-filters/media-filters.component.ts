@@ -31,6 +31,10 @@ export class MediaFiltersComponent implements OnInit {
   isCollapsed: boolean = true;
   public noFoundImage = ""
 
+  public imgLoader = "https://www.iestrassierra.net/alumnado/curso2324/DAW/daw2324a02/images/loader.svg"
+
+  public hasLoaded: boolean = false;
+
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
   }
@@ -122,5 +126,11 @@ export class MediaFiltersComponent implements OnInit {
 
      this.resetFilters()
      this.cargarMedia()
+  }
+
+  onLoad(){
+    setTimeout(() =>{
+      this.hasLoaded = true;
+    }, 500)
   }
 }

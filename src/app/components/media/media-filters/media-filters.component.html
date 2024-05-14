@@ -77,7 +77,12 @@
       @for (media of aMedia; track $index) {
           <div class="cartaImagen">
               <a [routerLink]="'/media/' + media._id"><img [src]="media.imagen" [alt]="media.titulo" class="imagenMedia"
-                (error)="media.imagen = noFoundImage"></a>
+                (error)="media.imagen = noFoundImage" (load)="onLoad()" [ngStyle]="{display: hasLoaded ? '' : 'none'}"></a>
+
+                @if(!hasLoaded){
+                  <img [src]="imgLoader" alt=""
+                   class="loaderIcon mx-auto">
+              }
           </div>
       }
   </div>

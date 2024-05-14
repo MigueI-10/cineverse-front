@@ -163,5 +163,8 @@
     "selecEpi": "Enter the episodes of the series",
     "epiRequired": "The number of episodes is required",
     "puntuarMedia": "Rate the media",
-    "guardar": "Save"
+    "guardar": "Save",
+    "moreAbout": "It has also been developed during the 2024 internship as an end-of-degree work, from the higher degree of web application development at the institute",
+    "sortTitle": "Sort by media title",
+    "sortNota": "Sort by user rating"
 }
