@@ -66,13 +66,13 @@ export class MediaFrmComponent implements OnInit {
 
     this.frmMedia = this.fb.group({
       id: new FormControl({ value: '', disabled: true }),
-      titulo: ['Uncharted', [Validators.required, Validators.minLength(3)]],
+      titulo: ['', [Validators.required, Validators.minLength(3)]],
       tipo: ['', Validators.required],
-      imagen: ['https://image.tmdb.org/t/p/w500//6hlI9Ea1O4IeJ2cj7OiNinqg8Qd.jpg', [Validators.required]],
-      director: ['Ridley Scott', [Validators.required, Validators.minLength(5)]],
-      anyo: ['2024', [Validators.required, Validators.min(1920), Validators.max(2028)]],
-      genero: ['Accion', [Validators.required]],
-      descripcion: ['La saga se enfoca en un personaje llamado Nathan Drake un aventurero caza tesoros que, a lo largo de los juegos, se embarca en diferentes aventuras junto a su fiel amigo y socio Victor Sullivan y sus intereses amorosos Elena Fisher y Chloe Frazer.', [Validators.required, Validators.minLength(30)]],
+      imagen: ['', [Validators.required]],
+      director: ['', [Validators.required, Validators.minLength(5)]],
+      anyo: ['', [Validators.required, Validators.min(1920), Validators.max(2028)]],
+      genero: ['', [Validators.required]],
+      descripcion: ['', [Validators.required, Validators.minLength(30)]],
       puntuacion: ['', [Validators.required, Validators.min(0), Validators.max(10)]],
       actores: this.fb.array([], [Validators.required, Validators.minLength(3)]),
     })

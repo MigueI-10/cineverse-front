@@ -42,13 +42,15 @@ export class ActFormComponent implements OnInit {
 
     this.frmCrud = this.fb.group({
       id: new FormControl({ value: '', disabled: true }),
-      nombre: ['Bryan Cranston', [Validators.required, Validators.minLength(7)]],
-      biografia: ['Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final', [Validators.required, Validators.minLength(20)]],
-      imagen: ['https://image.tmdb.org/t/p/w500//kNyTXGkiSP8W4Gs60hF7UoxZnWN.jpg', [Validators.required]],
-      nacionalidad: ['Inglaterra', Validators.required],
-      fechaNacimiento: ['1982-09-19', [Validators.required, this.fechaNacimientoValidator]],
+      nombre: ['', [Validators.required, Validators.minLength(7)]],
+      biografia: ['', [Validators.required, Validators.minLength(20)]],
+      imagen: ['', [Validators.required]],
+      nacionalidad: ['', Validators.required],
+      fechaNacimiento: ['', [Validators.required, this.fechaNacimientoValidator]],
       actuaciones: this.fb.array([], [Validators.required, Validators.minLength(3)]),
     })
+
+    // 1982-09-19
 
     this._activeRouter.params.subscribe(
       params => {
