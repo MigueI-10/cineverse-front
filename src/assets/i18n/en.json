@@ -48,8 +48,8 @@
     "otherFilms": "Other appearances",
     "correo": "Email",
     "password": "Password",
-    "forgotPass": "¿You forgot your password?",
-    "noAccount": "¿Don't have an account? Register",
+    "forgotPass": "You forgot your password?",
+    "noAccount": "Don't have an account? Register",
     "emailRequired": "The email is required",
     "emailInvalidFormat": "The email has an invalid format",
     "passRequired": "The password is required",
@@ -61,7 +61,7 @@
     "noConfirmaEm": "The email confirmation is required",
     "registrarse": "Sign up",
     "noMatchEmail": "Both emails do not match.",
-    "haveAccount": "¿Have you got an account? Log in",
+    "haveAccount": "Have you got an account? Log in",
     "changePass": "Password Change",
     "sendEmail": "Send Email",
     "confirmPass": "Confirm Password",
@@ -166,5 +166,8 @@
     "guardar": "Save",
     "moreAbout": "It has also been developed during the 2024 internship as an end-of-degree work, from the higher degree of web application development at the institute",
     "sortTitle": "Sort by media title",
-    "sortNota": "Sort by user rating"
+    "sortNota": "Sort by user rating",
+    "irHome": "Go to Home",
+    "noFoundPage": "The page you are looking for doesn't exists.",
+    "videoWeb": "Video in order to know to use the Cineverse App"
 }

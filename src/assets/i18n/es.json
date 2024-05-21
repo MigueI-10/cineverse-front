@@ -166,6 +166,9 @@
     "guardar": "Guardar",
     "moreAbout": "Además ha sido desarrollada durante el periodo de prácticas de 2024 como trabajo de fin de grado, del grado superior de desarrollo de aplicaciones web en el instituto",
     "sortTitle": "Ordenar por título",
-    "sortNota": "Ordenar por nota"
+    "sortNota": "Ordenar por nota",
+    "irHome": "Ir a Inicio",
+    "noFoundPage": "La página que estás buscando no se pudo encontrar.",
+    "videoWeb": "Video Explicativo de cómo usar Cineverse"
 
 }
