@@ -89,7 +89,7 @@ export class ComentariosComponent implements OnInit {
       if (idMedia !== undefined) {
         this._mediaService.getCommentsOfAFilm(idMedia).subscribe(
           res => {
-            if (res.length <= 0) return this.errorToast(this.noComments)
+            if (res.length <= 0) return this.infoMsg(this.noComments)
 
             this.aComments = res
           }
@@ -141,5 +141,9 @@ export class ComentariosComponent implements OnInit {
 
   errorToast(message: string) {
     this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
+  }
+
+  infoMsg(message: string) {
+    this.messageService.add({ severity: 'info', summary: 'Info', detail: message });
   }
 }

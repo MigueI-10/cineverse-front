@@ -86,6 +86,13 @@
     background-color: #c82333;
   }
 
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px; /* Ajusta la altura según tu diseño */
+  }
+
   
 
   @media (max-width: 500px){

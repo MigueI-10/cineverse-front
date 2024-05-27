@@ -83,7 +83,7 @@
     "noDataCrud": "No registers of actors",
     "selectAct": "Select page of actors",
     "addAct": "Add Actor",
-    "udpAct": "Update Actor",
+    "updAct": "Update Actor",
     "nomape": "Name and Surname",
     "nomMin": "Minimum 7 letters",
     "biografiaRequired": "Biography is required",

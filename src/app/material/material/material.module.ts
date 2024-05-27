@@ -12,6 +12,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [],
@@ -21,6 +23,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
   exports: [MatFormFieldModule, MatInputModule, 
     MatIconModule, MatButtonModule, MatCardModule,
     MatTableModule, MatPaginatorModule, MatSortModule,
-    MatTooltipModule,MatTableModule, MatChipsModule, MatButtonToggleModule, MatExpansionModule ]
+    MatTooltipModule,MatTableModule, MatChipsModule, MatButtonToggleModule, MatExpansionModule,
+    MatProgressSpinnerModule ]
 })
 export class MaterialModule { }

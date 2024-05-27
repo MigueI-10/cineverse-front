@@ -25,6 +25,11 @@
   }@else {
     @if (showMessage) {
       {{ 'noFavorites' | translate}}
+    }@else{
+      <div class="spinner-container">
+        <mat-spinner></mat-spinner>
+      </div>
+      
     }
   }
 

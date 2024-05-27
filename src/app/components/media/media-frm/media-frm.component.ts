@@ -101,6 +101,7 @@ export class MediaFrmComponent implements OnInit {
           this.frmMedia.controls['anyo'].setValue(res.anyo);
           this.frmMedia.controls['genero'].setValue(res.genero);
           this.frmMedia.controls['puntuacion'].setValue(res.puntuacion);
+          this.frmMedia.controls['descripcion'].setValue(res.descripcion);
 
 
           if (res.duracion) {
