@@ -87,5 +87,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 200px; /* Ajusta la altura según tu diseño */
+    height: 200px; 
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 500px){
+    .spinner-container{
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  @media (min-width: 1200px){
+    .spinner-container{
+      margin-left: 550px;
+      margin-right: auto;
+    }
   }
