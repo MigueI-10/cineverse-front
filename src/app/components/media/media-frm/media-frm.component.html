@@ -142,7 +142,7 @@
             @if(isPelicula){
                 <mat-form-field class="m-2 col-12">
                     <mat-label>{{ 'duracion' | translate}}</mat-label>
-                    <input type="number" matInput placeholder="{{ 'selecDuracion' | translate}}" formControlName="duracion" required>
+                    <input type="number" matInput placeholder="{{ 'duracionSelec' | translate}}" formControlName="duracion" required>
                     @if (duracion.errors?.['required']) {
                         <mat-error class="text-danger font-italic">{{ 'duracionRequired' | translate}}</mat-error>
                     }@else if(duracion.errors?.['min']){

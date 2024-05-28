@@ -176,17 +176,17 @@ export class MediaFrmComponent implements OnInit {
   }
 
   cargarActoresBD() {
-    const actRecover = localStorage.getItem('actores')
-    if (actRecover !== null) {
-      this.actLocal = JSON.parse(actRecover);
-    } else {
+    // const actRecover = localStorage.getItem('actores')
+    // if (actRecover !== null) {
+    //   this.actLocal = JSON.parse(actRecover);
+    // } else {
       this._actorService.getAllActors().subscribe(
         res => {
           if (res.length <= 0) return
           this.actLocal = res
         }
       )
-    }
+    // }
   }
 
   saveMedia() {
