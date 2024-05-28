@@ -24,7 +24,9 @@
     }
   }@else {
     @if (showMessage) {
-      {{ 'noFavorites' | translate}}
+      <div class="alert alert-info w-100" role="alert">
+        {{ 'noFavorites' | translate}}
+      </div>
     }@else{
       <div class="spinner-container">
         <mat-spinner></mat-spinner>
