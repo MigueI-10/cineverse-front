@@ -27,6 +27,8 @@ export class RegisterComponent implements OnInit {
   public registerForm !: FormGroup
   private tokenCaptcha :string = ""
 
+  public showPassword: boolean = false
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -36,6 +38,12 @@ export class RegisterComponent implements OnInit {
     private _mediaService: MediaService
   ) { }
 
+  togglePassword(){
+    console.log("a");
+    alert('a')
+    this.showPassword = !this.showPassword
+  }
+
   ngOnInit() {
 
     //validaciones
@@ -43,8 +51,15 @@ export class RegisterComponent implements OnInit {
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       confirmEmail: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(
+        '^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*])[a-zA-Z\\d\\S]{8,}$'
+      )]],
     }, { validators: this.checkBothEmailSame })
+
+
+    this.registerForm.valueChanges.subscribe(values => {
+      console.log('Form changes:', values);
+    });
   }
 
   //metodo para comprobar ambos emails
@@ -68,7 +83,7 @@ export class RegisterComponent implements OnInit {
     let lang = this._mediaService.getSelectedLanguage()
    
     if (this.registerForm.valid) {
-
+      // console.log(this.registerForm.value);
       this.recaptchaV3Service.execute('importantAction')
       .subscribe((token: string) => {
         this.tokenCaptcha = token

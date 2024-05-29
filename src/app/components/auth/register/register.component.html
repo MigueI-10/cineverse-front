@@ -38,12 +38,18 @@
             </div>
             <div class="form-group">
                 <label for="password">{{'password' | translate}}:</label>
-                <input type="password" id="password" name="password" class="form-control" formControlName="password">
+                <input type="{{showPassword ? 'text' : 'password'}}" id="password" name="password" class="form-control" formControlName="password">
+
                 @if (password.errors?.['required'] && password.dirty) {
-                <small class="text-danger font-italic">{{'passRequired' | translate}}</small>
+                    <small class="text-danger font-italic">{{'passRequired' | translate}}</small>
                 }@else if(password.errors?.['minlength']){
-                <small class="text-danger font-italic">{{'passMin' | translate}}</small>
+                    <small class="text-danger font-italic">{{'passMin' | translate}}</small>
+                }@else if(password.errors?.['pattern']){
+                    <small class="text-danger font-italic">{{'regexPass' | translate}}</small>
                 }
+
+
+                 
             </div>
             
             <div class="cuadroRegis">

@@ -37,9 +37,13 @@ export class LoginComponent {
     this.form = this.fb.group({
 
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(
+        '^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*])[a-zA-Z\\d\\S]{8,}$'
+      )]],
 
     })
+
+    
   }
 
   //metodo para hacer login si el formulario es valido, si falla salta una alerta

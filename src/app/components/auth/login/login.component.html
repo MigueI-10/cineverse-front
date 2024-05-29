@@ -19,6 +19,8 @@
                     <small class="text-danger font-italic">{{'passRequired' | translate}}</small>
                 }@else if(password.errors?.['minlength']){
                     <small class="text-danger font-italic">{{'passMin' | translate}}</small>
+                }@else if(password.errors?.['pattern']){
+                    <small class="text-danger font-italic">{{'regexPass' | translate}}</small>
                 }
                 <a class="forgot-password" routerLink="/change-password">{{'forgotPass' | translate}}</a>
             </div>

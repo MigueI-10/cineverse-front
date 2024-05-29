@@ -169,6 +169,7 @@
     "sortNota": "Ordenar por nota",
     "irHome": "Ir a Inicio",
     "noFoundPage": "La página que estás buscando no se pudo encontrar.",
-    "videoWeb": "Video Explicativo de cómo usar Cineverse"
+    "videoWeb": "Video Explicativo de cómo usar Cineverse",
+    "regexPass": "La contraseña debe contener al menos 1 minúscula, 1 mayúscula, 1 número y 1 símbolo especial."
 
 }

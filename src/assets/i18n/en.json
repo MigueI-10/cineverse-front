@@ -169,5 +169,6 @@
     "sortNota": "Sort by user rating",
     "irHome": "Go to Home",
     "noFoundPage": "The page you are looking for doesn't exists.",
-    "videoWeb": "Video in order to know to use the Cineverse App"
+    "videoWeb": "Video in order to know to use the Cineverse App",
+    "regexPass": "The password must contain at least 1 lower case, 1 upper case, 1 number and 1 special symbol."
 }
