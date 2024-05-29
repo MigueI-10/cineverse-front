@@ -56,11 +56,14 @@ export class MediaFiltersComponent implements OnInit {
 
     if (saveGenres) {
       this.aGeneros = JSON.parse(saveGenres);
-    }else{
+
+    } else {
       this._mediaService.getGenres().subscribe(
         res => {
-          this.aGeneros = res
-          localStorage.setItem('genres', JSON.stringify(res));
+          if (res.length > 0) {
+            this.aGeneros = res
+            localStorage.setItem('genres', JSON.stringify(res));
+          }
         }
       )
     }
@@ -69,11 +72,11 @@ export class MediaFiltersComponent implements OnInit {
   cargarMedia() {
     this._mediaService.filterByQuery(this.filtros).subscribe(
       res => {
-        if(res.length > 0){
+        if (res.length > 0) {
           this.aMedia = this.aMedia.concat(res)
-        }else{
+        } else {
           this.showMessage = true
-        }   
+        }
       }
     )
   }
@@ -95,12 +98,12 @@ export class MediaFiltersComponent implements OnInit {
     this.aMedia = []
   }
 
-  resetFull(){
+  resetFull() {
     this.filtros = {
       limit: this.filtros?.limit ?? 10,
       skip: this.filtros?.skip ?? 0,
       tipo: [],
-      nota:  0,
+      nota: 0,
       generos: [],
       anyo: [],
       episodios: [],
@@ -114,9 +117,9 @@ export class MediaFiltersComponent implements OnInit {
   onScrolled() {
     if (this.isMaxSkip) return
 
-		this.filtros.skip += this.filtros.limit
+    this.filtros.skip += this.filtros.limit
 
-		this.cargarMedia()
+    this.cargarMedia()
 
   }
 
@@ -124,12 +127,12 @@ export class MediaFiltersComponent implements OnInit {
 
     this.filtros.skip = 0
 
-     this.resetFilters()
-     this.cargarMedia()
+    this.resetFilters()
+    this.cargarMedia()
   }
 
-  onLoad(){
-    setTimeout(() =>{
+  onLoad() {
+    setTimeout(() => {
       this.hasLoaded = true;
     }, 500)
   }
