@@ -49,8 +49,8 @@ export class ComentariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarMedia()
-     let lang = this._mediaService.getSelectedLanguage();
-    if(lang === "en"){
+    let lang = this._mediaService.getSelectedLanguage();
+    if (lang === "en") {
       this.noComments = "This Movie / Series has no comments";
       this.messageTitle = "Confirm Deletion";
       this.messageHeader = "Are you sure you want to delete the comment?";
@@ -59,7 +59,7 @@ export class ComentariosComponent implements OnInit {
       this.borradoBien = "Comment deleted successfully";
       this.borradoMal = "Error deleting the comment";
       this.noBorrado = "Comment has not been deleted";
-  }
+    }
 
   }
 
@@ -72,9 +72,12 @@ export class ComentariosComponent implements OnInit {
     } else {
       this._mediaService.getAllMedia().subscribe(
         res => {
-          this.aMedia = res;
 
-          localStorage.setItem('media', JSON.stringify(res));
+          if (res.length > 0) {
+
+            this.aMedia = res;
+            localStorage.setItem('media', JSON.stringify(res));
+          }
 
         }
       );
@@ -83,7 +86,7 @@ export class ComentariosComponent implements OnInit {
 
   onMediaChange() {
     this.aComments = []
-    if (this.selectedMedia !== undefined) {
+    if (this.selectedMedia !== null && this.selectedMedia !== undefined ) {
       let idMedia = this.selectedMedia._id
 
       if (idMedia !== undefined) {
@@ -95,7 +98,6 @@ export class ComentariosComponent implements OnInit {
           }
         )
       }
-
     }
 
   }
@@ -120,21 +122,21 @@ export class ComentariosComponent implements OnInit {
               } else {
                 this.errorToast(this.borradoMal)
               }
-              
-    
+
+
               this.onMediaChange()
             }
           )
-          
+
         },
         reject: () => {
           this.messageService.add({ severity: 'info', summary: 'Informacion', detail: this.noBorrado, life: 3000 });
         }
       });
-   
+
     }
   }
-  
+
   success(message: string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }

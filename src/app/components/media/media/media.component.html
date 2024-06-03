@@ -134,9 +134,10 @@
     <p-messages [(value)]="noComentMessage" [enableService]="false" [closable]="false"></p-messages>
     }
 
-    <hr>
+    
 
     @if (isLoggedIn) {
+        <hr>
     <app-add-comment [idUsuario]="idUser" [userName]="userName" [idPelicula]="idMedia"
         (addedComment)="checkAddedComment($event)"></app-add-comment>
     }

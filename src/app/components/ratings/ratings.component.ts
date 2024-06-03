@@ -107,7 +107,7 @@ export class RatingsComponent implements OnInit{
           
         },
         reject: () => {
-          this.messageService.add({ severity: 'info', summary: 'Informacion', detail: this.mensajeNo, life: 3000 });
+          this.messageService.add({ severity: 'info', summary: 'Información', detail: this.mensajeNo, life: 3000 });
         }
       });
    
