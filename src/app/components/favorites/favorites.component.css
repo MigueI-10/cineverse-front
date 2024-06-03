@@ -52,10 +52,21 @@
     transition: color 0.3s ease, text-shadow 0.3s ease;
   }
 
-  .card-title:hover{
+  
+  .card-title>a:hover{
     color: #007bff;
     cursor: pointer;
     text-shadow: 0 0 8px #007bff; 
+    
+  }
+
+  .card-title > a{
+    text-decoration: none;
+    color: black;
+
+    margin-bottom: 0.5rem;
+    font-size: 1rem; 
+    transition: color 0.3s ease, text-shadow 0.3s ease;
   }
   
   .card-details {
