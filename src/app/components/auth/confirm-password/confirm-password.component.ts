@@ -33,8 +33,12 @@ export class ConfirmPasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.pattern(
+        '^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*])[a-zA-Z\\d\\S]{8,}$'
+      )]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.pattern(
+        '^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*])[a-zA-Z\\d\\S]{8,}$'
+      )]],
     }, { validators: this.checkBothEmailSame })
 
     this.activeRouter.params.subscribe(
