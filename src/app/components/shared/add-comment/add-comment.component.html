@@ -5,10 +5,12 @@
             <textarea matInput placeholder="{{'leaveComment' | translate}}" formControlName="contenido"></textarea>
             @if (contenido.errors?.['required']) {
                 <mat-error class="text-danger font-italic">{{'requiredComment' | translate}}</mat-error>
+            }@else if(contenido.errors?.['minlength']){
+                <mat-error class="text-danger font-italic">{{ 'minTitulo' | translate}}</mat-error>
             }
         </mat-form-field>
 
-        <button (click)="addComentario()" class="rounded-button">
+        <button (click)="addComentario()" [disabled]="formComment.invalid" class="rounded-button">
             <i class="pi pi-send" style="font-size: 1rem"></i>
             {{'enviar' | translate}}
         </button>

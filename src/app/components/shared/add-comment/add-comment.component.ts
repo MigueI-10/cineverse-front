@@ -36,35 +36,35 @@ export class AddCommentComponent implements OnInit{
 
   ngOnInit(): void {
     this.formComment = this.fb.group({
-      contenido: ['', Validators.required],
+      contenido: ['', [Validators.required, Validators.minLength(3)]],
     })
   }
 
   addComentario() {
 
-    if(this.formComment.valid){
-
-
-      this.objComentario = {
-        idUsuario: this.idUsuario,
-        idPelicula: this.idPelicula,
-        contenido: this.contenido.value,
-        fecha: new Date()
-      };
-
-      this._commentService.addComment(this.objComentario).subscribe(
-        res => {
-          if(res){
-            this.addedComment.emit(true)
-          }else{
-            this.addedComment.emit(false)
+    if(this.contenido.value.trim() !== ''){
+      if(this.formComment.valid){
+        this.objComentario = {
+          idUsuario: this.idUsuario,
+          idPelicula: this.idPelicula,
+          contenido: this.contenido.value,
+          fecha: new Date()
+        };
+  
+        this._commentService.addComment(this.objComentario).subscribe(
+          res => {
+            if(res){
+              this.addedComment.emit(true)
+            }else{
+              this.addedComment.emit(false)
+            }
+            
+            this.formComment.reset()
           }
-          this.contenido.setValue(' ')
-        }
-      )
-
-
-
+        )
+      }
+    }else{
+      this.addedComment.emit(false)
     }
   }
 
