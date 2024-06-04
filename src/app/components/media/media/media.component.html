@@ -148,8 +148,11 @@
 
 
 }@else {
-@if (showMessage) {
-<p-messages [(value)]="mensaje" [enableService]="false" [closable]="false"></p-messages>
-}
+    @if (showMessage) {
+        <div class="alert alert-warning" role="alert">
+            {{'noFoundPage' | translate}}
+        </div>
+        
+    }
 
 }

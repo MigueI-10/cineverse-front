@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Media } from '../../../interfaces';
 import { MediaService } from '../../../services/media.service';
 import { CommonModule } from '@angular/common';
@@ -64,7 +64,8 @@ export class MediaComponent implements OnInit {
     private _authService: AuthService,
     private messageService: MessageService,
     private _favoriteService: FavoriteService,
-    public _actorService: ActorService
+    public _actorService: ActorService,
+    private router: Router
   ) {
 
   }
@@ -157,7 +158,11 @@ export class MediaComponent implements OnInit {
           this.setearMensajes()
           this.cargarComentarios(this.idMedia)
         } else {
+          
           this.showMessage = true;
+          setTimeout(() => {
+            this.router.navigateByUrl('/home')
+          }, 1500);
         }
       }
     )

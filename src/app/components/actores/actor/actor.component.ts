@@ -60,10 +60,13 @@ export class ActorComponent implements OnInit{
   cargarActor(){
     this._actorService.getActorById(this.idActor).subscribe(
       res => {
-
-        if(Object.keys(res).length > 0){
-          this.objActor = res
-        }else {
+        if(res != null){
+          if(Object.keys(res).length > 0){
+            this.objActor = res
+          }else {
+            this.showMessage = true;
+          }
+        }else{
           this.showMessage = true;
         }
 
