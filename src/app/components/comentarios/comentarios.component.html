@@ -24,7 +24,7 @@
 <div class="comentarios">
     @for (comment of aComments; track $index) {
 
-    <p-card header="{{comment.idUsuario.name}} - {{comment.fecha | date: 'dd/MM/yyyy' }}">
+    <p-card header="{{ comment.idUsuario && comment.idUsuario.name ? (comment.idUsuario.name | titlecase) : 'Testing' }}  - {{comment.fecha | date: 'dd/MM/yyyy' }}">
         <p class="m-0">
             {{comment.contenido}}
         </p>

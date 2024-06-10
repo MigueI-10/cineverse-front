@@ -32,7 +32,7 @@ export class AuthService {
     this.checkAuthStatus().subscribe(); //verificar el estado del servicio
 
     window.addEventListener('storage', (event) => {
-      console.log(event);
+      // console.log(event);
       if(event.newValue === null && event.key === 'token'){
         this.logout()
         this.router.navigateByUrl('/')
