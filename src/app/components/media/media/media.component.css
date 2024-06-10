@@ -222,6 +222,17 @@
     margin-right: auto;
 }
 
+.dataMedia {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6em;
+}
+
+.otrosDatos{
+    display: flex;
+    flex-direction: column;
+}
+
 
 @media (min-width: 900px) {
     .mainContent {
@@ -230,6 +241,16 @@
 
     .peliculaModal{
         width: 80vh;
+    }
+
+    .dataMedia {
+        flex-direction: row;
+    }
+
+    .otrosDatos{
+        display: flex;
+        flex-direction: row;
+        gap: 5em
     }
     
 }

@@ -91,6 +91,7 @@
 
         </div>
 
+    
         @if (objMedia.actores.length > 3) {
         <button *ngIf="objMedia.actores.length > 3" class="seeMore mx-auto" (click)="seeMoreActors()">Ver más</button>
 
@@ -115,23 +116,33 @@
 
     </div>
 
+    <h1 class="mt-2 text-left">{{'otherData' | translate}}</h1>
+        <div class="otrosDatos">
+            <h3>{{'director' | translate}}: {{objMedia.director}}</h3>
+
+            @if (objMedia.tipo === "serie") {
+                    <h3>{{'numberEpisodes' | translate}}: {{objMedia.episodios }}</h3>
+            
+            }
+
+        </div>
 
     <h1 class="mt-2 text-left">{{'comments' | translate}}</h1>
 
     @if (aComments.length > 0) {
-    <div class="comentarios">
-        @for (comment of aComments; track $index) {
+        <div class="comentarios">
+            @for (comment of aComments; track $index) {
 
-        <p-card header="{{comment.idUsuario.name | titlecase}} - {{comment.fecha | date: 'dd/MM/yyyy' }}">
-            <p class="m-0">
-                {{comment.contenido}}
-            </p>
+            <p-card header="{{comment.idUsuario.name | titlecase}} - {{comment.fecha | date: 'dd/MM/yyyy' }}">
+                <p class="m-0">
+                    {{comment.contenido}}
+                </p>
 
-        </p-card>
-        }
-    </div>
+            </p-card>
+            }
+        </div>
     }@else {
-    <p-messages [(value)]="noComentMessage" [enableService]="false" [closable]="false"></p-messages>
+        <p-messages [(value)]="noComentMessage" [enableService]="false" [closable]="false"></p-messages>
     }
 
     
